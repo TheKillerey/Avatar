@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>icon_mapeditor.ico</ApplicationIcon>
+    <Company>KillerSkins</Company>
+    <Authors>TheKillerey</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="icon_mapeditor.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CSharpImageLibrary" Version="4.2.0" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.0.2" />
+    <PackageReference Include="HelixToolkit.Wpf" Version="2.16.1" />
+    <PackageReference Include="LeagueToolkit" Version="2.3.2" />
+    <PackageReference Include="LeagueToolkit.Meta.Classes" Version="11.10.374.3777" />
+    <PackageReference Include="MaterialDesignColors" Version="2.0.0" />
+    <PackageReference Include="MaterialDesignExtensions" Version="3.3.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
+    <PackageReference Include="Microsoft-WindowsAPICodePack-Core" Version="1.1.4" />
+    <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.4" />
+    <PackageReference Include="Microsoft.Windows.CsWinRT" Version="1.2.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Octokit" Version="0.50.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="icon_mapeditor.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Tools\MapLightDat.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="MapFile\base_srx.mapgeo">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Tools\MapLightDat.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>

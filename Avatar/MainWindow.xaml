@@ -1,0 +1,320 @@
+﻿<MaterialDesignExtensions:MaterialWindow
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:MaterialDesignExtensions="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"                                 
+        xmlns:local="clr-namespace:Avatar"
+        xmlns:VisualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core" x:Class="Avatar.MainWindow"
+        mc:Ignorable="d"
+        Title="Avatar - MapEditor" Height="720" Width="1280" Background="#FF151C27" Icon="/icon_mapeditor.png" WindowStartupLocation="CenterScreen">
+    <Grid>
+
+        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="10,376,10,10" Background="#FF151C27" VerticalAlignment="Bottom">
+            <DockPanel>
+                <Image Source="/icon_mapeditor.png" DockPanel.Dock="Right" RenderTransformOrigin="0.5,0.521" Width="48" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+            </DockPanel>
+        </MaterialDesign:ColorZone>
+        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3">
+            <Menu Background="#FF151C27">
+                <MenuItem x:Name="FileButton" Header="File" Click="MenuItem_Click">
+                    <MenuItem.Icon>
+                        <MaterialDesign:PackIcon Kind="File"/>
+                    </MenuItem.Icon>
+                    <MenuItem x:Name="OBJOpenButton" Header="Open OBJ Files" Click="OnOBJFileOpen_Click">
+                        <MenuItem.Icon>
+                            <MaterialDesign:PackIcon Kind="FileCodeOutline"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="MAPGEOSaveButton" Header="Save MAPGEO" Click="OnMapgeoFileSave_Click">
+                        <MenuItem.Icon>
+                            <MaterialDesign:PackIcon Kind="ContentSave"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+
+                <MenuItem x:Name="ToolsButton" Header="Tools">
+                    <MenuItem.Icon>
+                        <MaterialDesign:PackIcon Kind="Tools"/>
+                    </MenuItem.Icon>
+                    <MenuItem x:Name="MapParticlesButton" Header="Map Particles">
+                        <MenuItem.Icon>
+                            <MaterialDesign:PackIcon Kind="AtomVariant"/>
+                        </MenuItem.Icon>
+
+                        <MenuItem x:Name="DATParticleButton" Header="Convert MapParticle .DAT Files" Click="DATParticleButton_Click">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="Atom"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem x:Name="TroyParticleButton" Header="Update TROY Files">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="Blur"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+
+                    <MenuItem x:Name="MapLightsButton" Header="Map Lights">
+                        <MenuItem.Icon>
+                            <MaterialDesign:PackIcon Kind="Lightbulb"/>
+                        </MenuItem.Icon>
+                        <MenuItem x:Name="DATLightButton" Header="Convert MapLight .DAT Files" Click="DATLightButton_Click">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="LightbulbGroup"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+
+                    </MenuItem>
+
+                </MenuItem>
+
+            </Menu>
+        </MaterialDesign:ColorZone>
+        <Grid x:Name="AssetFilesGrid" Margin="0,80,10,63" HorizontalAlignment="Right" Width="297">
+            <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Center" Width="297" VerticalAlignment="Stretch" Background="#FF151C27">
+                <ListBox x:Name="AssetBox_Map"/>
+            </MaterialDesign:ColorZone>
+        </Grid>
+        <Grid x:Name="MapEditorGrid" Margin="10,80,336,63">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Center" Width="467" VerticalAlignment="Stretch" Background="#FF151C27">
+                <Grid Margin="0,0,5,0">
+                    <Label x:Name="Map_Properties" Content="Map Properties:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <TextBox x:Name="Map_Name" HorizontalAlignment="Left" Margin="85,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Sets the name of your Map texture folder. Example: [assets\maps\kitpieces\srx\&quot;bildgewater&quot; ]"/>
+                    <Label Content="Map Name:" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Light Mode:" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="85,90,0,0" VerticalAlignment="Top" Width="120">
+                        <ComboBoxItem Content="Dynamic Light" ToolTip="Disables the bake mode and enables League Dynamic Sun Light. Set Lightmap Color Scale to a low number or 0."/>
+                        <ComboBoxItem Content="Baked Light" ToolTip="Uses the baked textures only. Sun Properties is not needed! "/>
+                    </ComboBox>
+                    <Label Content="FOG:" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="85,130,0,0" VerticalAlignment="Top" Width="120">
+                        <ComboBoxItem Content="Enable" ToolTip="Enables FOG for your League Map."/>
+                        <ComboBoxItem Content="Disable" ToolTip="Disables FOG for your League Map."/>
+                    </ComboBox>
+                    <Label Content="Layers:" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="85,169,0,0" VerticalAlignment="Top" Width="120">
+                        <ComboBoxItem Content="All Layers" ToolTip="Set all loaded models to All Layers. Perfect for testing on Elemental Rift."/>
+                        <ComboBoxItem Content="Auto Layers" ToolTip="Set automatically all layers based on their name for Elemental Rift. Perfect for release."/>
+                        <ComboBoxItem Content="1 Layer" ToolTip="Set all loaded models to 1 Layer. Best for TFT or ARAM."/>
+                    </ComboBox>
+                    <Separator HorizontalAlignment="Center" Margin="0,281,0,0" VerticalAlignment="Top" Height="13" Width="462"/>
+                    <Label Content="Layer" HorizontalAlignment="Left" Margin="10,299,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Content="Layer Name" HorizontalAlignment="Left" Margin="85,299,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Content="prefix_" HorizontalAlignment="Left" Margin="190,299,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Content="Layer 1" HorizontalAlignment="Left" Margin="10,345,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Base" HorizontalAlignment="Left" Margin="85,345,0,0" VerticalAlignment="Top"/>
+                    <TextBox HorizontalAlignment="Left" Margin="190,344,0,0" Text="_base" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Layer 2" HorizontalAlignment="Left" Margin="10,391,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Infernal" HorizontalAlignment="Left" Margin="85,391,0,0" VerticalAlignment="Top"/>
+                    <TextBox HorizontalAlignment="Left" Margin="190,390,0,0" Text="_infernal" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Layer 3" HorizontalAlignment="Left" Margin="10,432,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Mountain" HorizontalAlignment="Left" Margin="85,432,0,0" VerticalAlignment="Top"/>
+                    <TextBox HorizontalAlignment="Left" Margin="190,431,0,0" Text="_mountain" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Layer 4" HorizontalAlignment="Left" Margin="10,480,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Ocean" HorizontalAlignment="Left" Margin="85,480,0,0" VerticalAlignment="Top"/>
+                    <TextBox HorizontalAlignment="Left" Margin="190,479,0,0" Text="_ocean" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Layer 5" HorizontalAlignment="Left" Margin="10,521,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Cloud" HorizontalAlignment="Left" Margin="85,521,0,0" VerticalAlignment="Top"/>
+                    <TextBox HorizontalAlignment="Left" Margin="190,520,0,0" Text="_cloud" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Separator HorizontalAlignment="Left" Margin="53,418,0,0" VerticalAlignment="Top" Height="13" Width="240" RenderTransformOrigin="0.5,0.5">
+                        <Separator.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="90"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Separator.RenderTransform>
+                    </Separator>
+                    <Separator HorizontalAlignment="Left" Margin="-54,418,0,0" VerticalAlignment="Top" Height="13" Width="240" RenderTransformOrigin="0.5,0.5">
+                        <Separator.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="90"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Separator.RenderTransform>
+                    </Separator>
+                </Grid>
+            </MaterialDesign:ColorZone>
+            <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Center" Width="447" VerticalAlignment="Stretch" Background="#FF151C27" Grid.Column="1">
+                <Grid>
+                    <Label x:Name="Sun_Properties" Content="Sun Properties:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Grid Margin="0,39,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Sun Color:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                        <Label Content="Sun Direction:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="1"/>
+                        <Label Content="Skylight Color:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="2"/>
+                        <Label Content="Ground Color:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="5"/>
+                        <Label Content="Lightmap Color Scale:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="6"/>
+                        <Label Content="Fog Start:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="8"/>
+                        <Label Content="Fog alternate Color:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="11"/>
+                        <Label Content="Fog Color:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="10"/>
+                        <Label Content="Fog:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="7"/>
+                        <Label Content="Skylight Scale:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="3"/>
+                        <Label Content="Horizon Color:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="4"/>
+                        <Label Content="Bloom:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="12"/>
+                        <TextBox HorizontalAlignment="Left" Text="0.6" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" RenderTransformOrigin="0.5,0.5" Background="#FF990000" ToolTip="Red Color">
+                            <TextBox.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="0"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </TextBox.RenderTransform>
+                        </TextBox>
+                        <TextBox HorizontalAlignment="Left" Text="0.8" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="222,0,0,0" Background="#FF00CC00" ToolTip="Green Color"/>
+                        <TextBox HorizontalAlignment="Left" Text="0.67" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="281,0,0,0" Background="#FF0000AB" ToolTip="Blue Color"/>
+                        <TextBox HorizontalAlignment="Left" Text="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="339,0,0,0" Background="#FF2E2E2E" ToolTip="Alpha"/>
+                        <TextBox HorizontalAlignment="Left" Grid.Row="1" Text="-0.25" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0"/>
+                        <TextBox HorizontalAlignment="Left" Grid.Row="1" Text="0.75" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="222,0,0,0"/>
+                        <TextBox HorizontalAlignment="Left" Grid.Row="1" Text="-0.05" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="281,0,0,0"/>
+                        <TextBox HorizontalAlignment="Left" Text="0.6" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" RenderTransformOrigin="0.5,0.5" Background="#FF990000" ToolTip="Red Color" Grid.Row="2">
+                            <TextBox.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="0"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </TextBox.RenderTransform>
+                        </TextBox>
+                        <TextBox HorizontalAlignment="Left" Text="0.8" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="222,0,0,0" Background="#FF00CC00" ToolTip="Green Color" Grid.Row="2"/>
+                        <TextBox HorizontalAlignment="Left" Text="0.67" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="281,0,0,0" Background="#FF0000AB" ToolTip="Blue Color" Grid.Row="2"/>
+                        <TextBox HorizontalAlignment="Left" Text="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="339,0,0,0" Background="#FF2E2E2E" ToolTip="Alpha" Grid.Row="2"/>
+                        <TextBox HorizontalAlignment="Left" Text="0.6" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" RenderTransformOrigin="0.5,0.5" Background="#FF990000" ToolTip="Red Color" Grid.Row="4">
+                            <TextBox.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="0"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </TextBox.RenderTransform>
+                        </TextBox>
+                        <TextBox HorizontalAlignment="Left" Text="0.8" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="222,0,0,0" Background="#FF00CC00" ToolTip="Green Color" Grid.Row="4"/>
+                        <TextBox HorizontalAlignment="Left" Text="0.67" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="281,0,0,0" Background="#FF0000AB" ToolTip="Blue Color" Grid.Row="4"/>
+                        <TextBox HorizontalAlignment="Left" Text="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="339,0,0,0" Background="#FF2E2E2E" ToolTip="Alpha" Grid.Row="4"/>
+                        <TextBox HorizontalAlignment="Left" Text="0.6" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" RenderTransformOrigin="0.5,0.5" Background="#FF990000" ToolTip="Red Color" Grid.Row="5">
+                            <TextBox.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="0"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </TextBox.RenderTransform>
+                        </TextBox>
+                        <TextBox HorizontalAlignment="Left" Text="0.8" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="222,0,0,0" Background="#FF00CC00" ToolTip="Green Color" Grid.Row="5"/>
+                        <TextBox HorizontalAlignment="Left" Text="0.67" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="281,0,0,0" Background="#FF0000AB" ToolTip="Blue Color" Grid.Row="5"/>
+                        <TextBox HorizontalAlignment="Left" Text="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="339,0,0,0" Background="#FF2E2E2E" ToolTip="Alpha" Grid.Row="5"/>
+                        <TextBox HorizontalAlignment="Left" Text="0.6" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" RenderTransformOrigin="0.5,0.5" Background="#FF990000" ToolTip="Red Color" Grid.Row="10">
+                            <TextBox.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="0"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </TextBox.RenderTransform>
+                        </TextBox>
+                        <TextBox HorizontalAlignment="Left" Text="0.8" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="222,0,0,0" Background="#FF00CC00" ToolTip="Green Color" Grid.Row="10"/>
+                        <TextBox HorizontalAlignment="Left" Text="0.67" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="281,0,0,0" Background="#FF0000AB" ToolTip="Blue Color" Grid.Row="10"/>
+                        <TextBox HorizontalAlignment="Left" Text="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="339,0,0,0" Background="#FF2E2E2E" ToolTip="Alpha" Grid.Row="10"/>
+                        <TextBox HorizontalAlignment="Left" Text="0.6" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" RenderTransformOrigin="0.5,0.5" Background="#FF990000" ToolTip="Red Color" Grid.Row="11">
+                            <TextBox.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="0"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </TextBox.RenderTransform>
+                        </TextBox>
+                        <TextBox HorizontalAlignment="Left" Text="0.8" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="222,0,0,0" Background="#FF00CC00" ToolTip="Green Color" Grid.Row="11"/>
+                        <TextBox HorizontalAlignment="Left" Text="0.67" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="281,0,0,0" Background="#FF0000AB" ToolTip="Blue Color" Grid.Row="11"/>
+                        <TextBox HorizontalAlignment="Left" Text="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="339,0,0,0" Background="#FF2E2E2E" ToolTip="Alpha" Grid.Row="11"/>
+                        <TextBox HorizontalAlignment="Left" Grid.Row="3" Text="-0.25" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0"/>
+                        <TextBox HorizontalAlignment="Left" Grid.Row="6" Text="-0.25" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0"/>
+                        <ComboBox HorizontalAlignment="Left" Grid.Row="7" Width="55" Margin="164,0,0,0">
+                            <ComboBoxItem Content="True"/>
+                            <ComboBoxItem Content="False"/>
+                        </ComboBox>
+                        <StackPanel x:Name="FogStart"
+              Orientation="Horizontal"
+              Margin="102,0,0,4" Grid.RowSpan="2" Grid.Row="7">
+                            <TextBox
+                x:Name="sliderMaxH"
+                Text="100000"
+                Margin="4 0"
+                VerticalAlignment="Bottom" />
+                            <Slider
+                Value="50"
+                Width="280"
+                Minimum="-100000"
+                Maximum="{Binding Text, ElementName=sliderMaxH, Mode=OneWay}"
+                Style="{StaticResource MaterialDesignDiscreteSlider}"
+                ToolTip="MaterialDesignDiscreteSlider"
+                TickFrequency="5000"
+                TickPlacement="BottomRight" />
+                        </StackPanel>
+                        <ComboBox HorizontalAlignment="Left" Grid.Row="12" Width="55" Margin="164,0,0,0">
+                            <ComboBoxItem Content="True"/>
+                            <ComboBoxItem Content="False"/>
+                        </ComboBox>
+                        <StackPanel x:Name="FogEnd"
+                            Orientation="Horizontal"
+                            Margin="102,32,0,6" Grid.RowSpan="3" Grid.Row="7">
+                            <TextBox
+                                x:Name="sliderMaxH1"
+                                Text="100000"
+                                Margin="4 0"
+                                VerticalAlignment="Bottom" />
+                            <Slider
+                                Value="50"
+                                Width="280"
+                                Minimum="-100000"
+                                Maximum="{Binding Text, ElementName=sliderMaxH, Mode=OneWay}"
+                                Style="{StaticResource MaterialDesignDiscreteSlider}"
+                                ToolTip="MaterialDesignDiscreteSlider"
+                                TickFrequency="5000"
+                                TickPlacement="BottomRight" />
+                        </StackPanel>
+                        <Label Content="Fog End:" HorizontalAlignment="Left" Margin="8,0,0,0" VerticalAlignment="Center" Grid.Row="9"/>
+                    </Grid>
+                </Grid>
+            </MaterialDesign:ColorZone>
+
+        </Grid>
+        <MaterialDesign:ColorPicker HorizontalAlignment="Left" Margin="889,118,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.222,0.14" Color="#FF99CCAB"/>
+        <MaterialDesign:ColorPicker HorizontalAlignment="Left" Margin="889,188,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.222,0.14" Color="#FF99CCAB"/>
+        <MaterialDesign:ColorPicker HorizontalAlignment="Left" Margin="889,257,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.222,0.14" Color="#FF99CCAB"/>
+        <MaterialDesign:ColorPicker HorizontalAlignment="Left" Margin="889,293,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.222,0.14" Color="#FF99CCAB"/>
+        <MaterialDesign:ColorPicker HorizontalAlignment="Left" Margin="889,465,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.222,0.14" Color="#FF99CCAB"/>
+        <MaterialDesign:ColorPicker HorizontalAlignment="Left" Margin="889,501,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.222,0.14" Color="#FF99CCAB"/>
+    </Grid>
+
+</MaterialDesignExtensions:MaterialWindow>

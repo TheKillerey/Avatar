@@ -1,0 +1,50 @@
+﻿<MaterialDesignExtensions:MaterialWindow x:Name="DatLightWindow" x:Class="Avatar.Tools.MapLightDat"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:MaterialDesignExtensions="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
+        xmlns:local="clr-namespace:Avatar.Tools"
+        mc:Ignorable="d"
+        Title="Avatar - DAT Light Converter" Height="700" Width="1200" Background="#FF151C27" WindowStartupLocation="CenterScreen" Icon="/icon_mapeditor.png" WindowStyle="SingleBorderWindow" Topmost="True">
+    <Grid>
+        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3">
+            <Menu Background="#FF151C27">
+                <MenuItem x:Name="menuItem" Header="File">
+                    <MenuItem.Icon>
+                        <MaterialDesign:PackIcon Kind="File"/>
+                    </MenuItem.Icon>
+                    <MenuItem x:Name="LightLoad" Header="Load DAT Light" Click="LightLoad_Click" >
+                        <MenuItem.Icon>
+                            <MaterialDesign:PackIcon Kind="FileCodeOutline"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="LightSave" Header="Save as JSON">
+                        <MenuItem.Icon>
+                            <MaterialDesign:PackIcon Kind="ContentSave"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+        </MaterialDesign:ColorZone>
+        <TreeView x:Name="LightTreeView" Margin="0,53,600,0">
+            <MaterialDesign:TreeViewAssist.AdditionalTemplate>
+                <DataTemplate>
+                    <MaterialDesign:ColorZone
+              Mode="PrimaryLight"
+              CornerRadius="6">
+                    </MaterialDesign:ColorZone>
+                </DataTemplate>
+            </MaterialDesign:TreeViewAssist.AdditionalTemplate>
+            <TreeViewItem x:Name="Root"
+          Header="Light System"/>
+        </TreeView>
+
+
+
+
+
+    </Grid>
+
+</MaterialDesignExtensions:MaterialWindow>
