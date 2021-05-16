@@ -7,10 +7,17 @@
     <ApplicationIcon>icon_mapeditor.ico</ApplicationIcon>
     <Company>KillerSkins</Company>
     <Authors>TheKillerey</Authors>
+    <Version>0.0.1</Version>
+    <PackageIcon>icon_mapeditor.png</PackageIcon>
+    <PackageIconUrl />
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="icon_mapeditor.png" />
+    <None Include="C:\Users\theki\Pictures\icon_mapeditor.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
