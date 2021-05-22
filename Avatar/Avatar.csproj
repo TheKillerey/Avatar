@@ -14,6 +14,14 @@
 
   <ItemGroup>
     <None Remove="icon_mapeditor.png" />
+    <None Remove="Images\dragon_air_square.png" />
+    <None Remove="Images\dragon_square.png" />
+    <None Remove="Images\dragon_square_earth.png" />
+    <None Remove="Images\dragon_square_fire.png" />
+    <None Remove="Images\dragon_square_water.png" />
+    <Resource Include="Images\dragon_air_square.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <None Include="C:\Users\theki\Pictures\icon_mapeditor.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
@@ -22,22 +30,35 @@
 
   <ItemGroup>
     <PackageReference Include="CSharpImageLibrary" Version="4.2.0" />
-    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.0.2" />
+    <PackageReference Include="Egorozh.ColorPicker.WPF.Dialog.MahApps" Version="2.4.3.2" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.1.0" />
     <PackageReference Include="HelixToolkit.Wpf" Version="2.16.1" />
-    <PackageReference Include="LeagueToolkit" Version="2.3.2" />
+    <PackageReference Include="LeagueToolkit" Version="2.4.2" />
     <PackageReference Include="LeagueToolkit.Meta.Classes" Version="11.10.374.3777" />
     <PackageReference Include="MaterialDesignColors" Version="2.0.0" />
     <PackageReference Include="MaterialDesignExtensions" Version="3.3.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-Core" Version="1.1.4" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.4" />
-    <PackageReference Include="Microsoft.Windows.CsWinRT" Version="1.2.5" />
+    <PackageReference Include="Microsoft.Windows.CsWinRT" Version="1.2.6" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Octokit" Version="0.50.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="icon_mapeditor.png" />
+    <Resource Include="Images\dragon_square.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\dragon_square_earth.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\dragon_square_fire.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\dragon_square_water.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

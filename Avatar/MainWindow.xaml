@@ -8,15 +8,19 @@
         xmlns:local="clr-namespace:Avatar"
         xmlns:VisualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core" x:Class="Avatar.MainWindow"
         mc:Ignorable="d"
-        Title="Avatar - MapEditor" Height="720" Width="1280" Background="#FF151C27" Icon="/icon_mapeditor.png" WindowStartupLocation="CenterScreen">
+        Title="Avatar - MapEditor" Height="732" Width="1393" Background="#FF151C27" Icon="/icon_mapeditor.png" WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
-        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="10,376,10,10" Background="#FF151C27" VerticalAlignment="Bottom">
-            <DockPanel>
+        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="33,658,10,0" Background="#FF151C27" Height="48">
+            <DockPanel Margin="23,0,0,0">
                 <Image Source="/icon_mapeditor.png" DockPanel.Dock="Right" RenderTransformOrigin="0.5,0.521" Width="48" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                <TextBox x:Name="Selected_Path" TextWrapping="Wrap" Width="1200" IsReadOnly="True"/>
             </DockPanel>
         </MaterialDesign:ColorZone>
-        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3">
+        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Height="48">
             <Menu Background="#FF151C27">
                 <MenuItem x:Name="FileButton" Header="File" Click="MenuItem_Click">
                     <MenuItem.Icon>
@@ -73,54 +77,50 @@
         </MaterialDesign:ColorZone>
         <Grid x:Name="AssetFilesGrid" Margin="0,80,10,63" HorizontalAlignment="Right" Width="297">
             <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Center" Width="297" VerticalAlignment="Stretch" Background="#FF151C27">
-                <ListBox x:Name="AssetBox_Map"/>
+                <TreeView x:Name="AssetBox_Map"/>
+
             </MaterialDesign:ColorZone>
         </Grid>
-        <Grid x:Name="MapEditorGrid" Margin="10,80,336,63">
+        <Grid x:Name="MapEditorGrid" Margin="10,80,312,63" RenderTransformOrigin="0.502,0.504">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="470*"/>
+                <ColumnDefinition Width="509*"/>
             </Grid.ColumnDefinitions>
-            <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Center" Width="467" VerticalAlignment="Stretch" Background="#FF151C27">
+            <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Center" Width="468" VerticalAlignment="Stretch" Background="#FF151C27">
                 <Grid Margin="0,0,5,0">
                     <Label x:Name="Map_Properties" Content="Map Properties:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                     <TextBox x:Name="Map_Name" HorizontalAlignment="Left" Margin="85,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Sets the name of your Map texture folder. Example: [assets\maps\kitpieces\srx\&quot;bildgewater&quot; ]"/>
                     <Label Content="Map Name:" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top"/>
                     <Label Content="Light Mode:" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="85,90,0,0" VerticalAlignment="Top" Width="120">
-                        <ComboBoxItem Content="Dynamic Light" ToolTip="Disables the bake mode and enables League Dynamic Sun Light. Set Lightmap Color Scale to a low number or 0."/>
-                        <ComboBoxItem Content="Baked Light" ToolTip="Uses the baked textures only. Sun Properties is not needed! "/>
+                    <ComboBox x:Name="LightMode" HorizontalAlignment="Left" Margin="85,90,0,0" VerticalAlignment="Top" Width="120">
+                        <ComboBoxItem x:Name="DynamicLight" Content="Dynamic Light" ToolTip="Disables the bake mode and enables League Dynamic Sun Light. Set Lightmap Color Scale to a low number or 0."/>
+                        <ComboBoxItem x:Name="BakedLight" Content="Baked Light" ToolTip="Uses the baked textures only. Sun Properties is not needed! "/>
                     </ComboBox>
                     <Label Content="FOG:" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="85,130,0,0" VerticalAlignment="Top" Width="120">
-                        <ComboBoxItem Content="Enable" ToolTip="Enables FOG for your League Map."/>
-                        <ComboBoxItem Content="Disable" ToolTip="Disables FOG for your League Map."/>
+                    <ComboBox x:Name="FogSet" HorizontalAlignment="Left" Margin="85,130,0,0" VerticalAlignment="Top" Width="120">
+                        <ComboBoxItem x:Name="EnableFog" Content="Enable" ToolTip="Enables FOG for your League Map."/>
+                        <ComboBoxItem x:Name="DisableFog" Content="Disable" ToolTip="Disables FOG for your League Map."/>
                     </ComboBox>
                     <Label Content="Layers:" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="85,169,0,0" VerticalAlignment="Top" Width="120">
-                        <ComboBoxItem Content="All Layers" ToolTip="Set all loaded models to All Layers. Perfect for testing on Elemental Rift."/>
-                        <ComboBoxItem Content="Auto Layers" ToolTip="Set automatically all layers based on their name for Elemental Rift. Perfect for release."/>
-                        <ComboBoxItem Content="1 Layer" ToolTip="Set all loaded models to 1 Layer. Best for TFT or ARAM."/>
+                    <ComboBox x:Name="LayerMode" HorizontalAlignment="Left" Margin="85,169,0,0" VerticalAlignment="Top" Width="120">
+                        <ComboBoxItem x:Name="AllLayersMode" Content="All Layers" ToolTip="Set all loaded models to All Layers. Perfect for testing on Elemental Rift."/>
+                        <ComboBoxItem x:Name="AutoLayersMode" Content="Auto Layers" ToolTip="Set automatically all layers based on their name for Elemental Rift. Perfect for release."/>
+                        <ComboBoxItem x:Name="OneLayerMode" Content="1 Layer" ToolTip="Set all loaded models to 1 Layer. Best for TFT or ARAM."/>
                     </ComboBox>
                     <Separator HorizontalAlignment="Center" Margin="0,281,0,0" VerticalAlignment="Top" Height="13" Width="462"/>
                     <Label Content="Layer" HorizontalAlignment="Left" Margin="10,299,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <Label Content="Layer Name" HorizontalAlignment="Left" Margin="85,299,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <Label Content="prefix_" HorizontalAlignment="Left" Margin="190,299,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Content="Dragon" HorizontalAlignment="Left" Margin="97,299,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Content="_prefix" HorizontalAlignment="Left" Margin="190,299,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                     <Label Content="Layer 1" HorizontalAlignment="Left" Margin="10,345,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Base" HorizontalAlignment="Left" Margin="85,345,0,0" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Left" Margin="190,344,0,0" Text="_base" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="Layer 2" HorizontalAlignment="Left" Margin="10,391,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Infernal" HorizontalAlignment="Left" Margin="85,391,0,0" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Left" Margin="190,390,0,0" Text="_infernal" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="prefix_base" HorizontalAlignment="Left" Margin="190,344,0,0" Text="_base" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Layer 2" HorizontalAlignment="Left" Margin="10,389,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="prefix_infernal" HorizontalAlignment="Left" Margin="190,388,0,0" Text="_infernal" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <Label Content="Layer 3" HorizontalAlignment="Left" Margin="10,432,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Mountain" HorizontalAlignment="Left" Margin="85,432,0,0" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Left" Margin="190,431,0,0" Text="_mountain" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="Layer 4" HorizontalAlignment="Left" Margin="10,480,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Ocean" HorizontalAlignment="Left" Margin="85,480,0,0" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Left" Margin="190,479,0,0" Text="_ocean" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="Layer 5" HorizontalAlignment="Left" Margin="10,521,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Cloud" HorizontalAlignment="Left" Margin="85,521,0,0" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Left" Margin="190,520,0,0" Text="_cloud" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="prefix_mountain" HorizontalAlignment="Left" Margin="190,431,0,0" Text="_mountain" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Layer 4" HorizontalAlignment="Left" Margin="10,474,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="prefix_ocean" HorizontalAlignment="Left" Margin="190,474,0,0" Text="_ocean" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Layer 5" HorizontalAlignment="Left" Margin="10,516,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="prefix_cloud" HorizontalAlignment="Left" Margin="190,516,0,0" Text="_cloud" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <Separator HorizontalAlignment="Left" Margin="53,418,0,0" VerticalAlignment="Top" Height="13" Width="240" RenderTransformOrigin="0.5,0.5">
                         <Separator.RenderTransform>
                             <TransformGroup>
@@ -131,7 +131,7 @@
                             </TransformGroup>
                         </Separator.RenderTransform>
                     </Separator>
-                    <Separator HorizontalAlignment="Left" Margin="-54,418,0,0" VerticalAlignment="Top" Height="13" Width="240" RenderTransformOrigin="0.5,0.5">
+                    <Separator HorizontalAlignment="Left" Margin="-49,418,0,0" VerticalAlignment="Top" Height="13" Width="240" RenderTransformOrigin="0.5,0.5">
                         <Separator.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -141,12 +141,25 @@
                             </TransformGroup>
                         </Separator.RenderTransform>
                     </Separator>
+                    <Grid Margin="72,328,289,4">
+                        <Image Source="/Images/dragon_square.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center" Height="35" Width="35" Margin="0,14,0,0" ToolTip="Basic Map"/>
+                        <Image Source="/Images/dragon_square_fire.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center" Height="35" Width="35" Margin="0,56,0,0" ToolTip="Infernal Map"/>
+                        <Image Source="/Images/dragon_square_earth.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center" Height="35" Width="35" Margin="0,99,0,0" ToolTip="Mountain Map"/>
+                        <Image Source="/Images/dragon_square_water.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center" Height="35" Width="35" Margin="0,142,0,0" ToolTip="Ocean Map"/>
+                        <Image Source="/Images/dragon_air_square.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center" Height="35" Width="35" Margin="0,185,0,0" ToolTip="Cloud Map"/>
+                    </Grid>
+                    <TextBox x:Name="count_base" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="364,344,0,0" ToolTip="" IsReadOnly="True"/>
+                    <TextBox x:Name="count_infernal" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="364,388,0,0" ToolTip="" IsReadOnly="True"/>
+                    <TextBox x:Name="count_mountain" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="364,431,0,0" ToolTip="" IsReadOnly="True"/>
+                    <TextBox x:Name="count_ocean" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="364,474,0,0" ToolTip="" IsReadOnly="True"/>
+                    <TextBox x:Name="count_cloud" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="364,516,0,0" ToolTip="" IsReadOnly="True"/>
+                    <Label Content="Count" HorizontalAlignment="Left" Margin="364,299,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 </Grid>
             </MaterialDesign:ColorZone>
-            <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Center" Width="447" VerticalAlignment="Stretch" Background="#FF151C27" Grid.Column="1">
-                <Grid>
+            <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Center" Width="557" VerticalAlignment="Stretch" Background="#FF151C27" Grid.Column="1">
+                <Grid HorizontalAlignment="Center" Width="446">
                     <Label x:Name="Sun_Properties" Content="Sun Properties:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <Grid Margin="0,39,0,0">
+                    <Grid Margin="0,39,-51,0">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
@@ -175,8 +188,8 @@
                         <Label Content="Fog:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="7"/>
                         <Label Content="Skylight Scale:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="3"/>
                         <Label Content="Horizon Color:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="4"/>
-                        <Label Content="Bloom:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="12"/>
-                        <TextBox HorizontalAlignment="Left" Text="0.6" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" RenderTransformOrigin="0.5,0.5" Background="#FF990000" ToolTip="Red Color">
+                        <Label Content="Bloom:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="13"/>
+                        <TextBox x:Name="SunCR" HorizontalAlignment="Left" Text="0.549019635" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" RenderTransformOrigin="0.5,0.5" Background="#FF990000" ToolTip="Red Color" MaxLines="1">
                             <TextBox.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -186,13 +199,13 @@
                                 </TransformGroup>
                             </TextBox.RenderTransform>
                         </TextBox>
-                        <TextBox HorizontalAlignment="Left" Text="0.8" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="222,0,0,0" Background="#FF00CC00" ToolTip="Green Color"/>
-                        <TextBox HorizontalAlignment="Left" Text="0.67" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="281,0,0,0" Background="#FF0000AB" ToolTip="Blue Color"/>
-                        <TextBox HorizontalAlignment="Left" Text="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="339,0,0,0" Background="#FF2E2E2E" ToolTip="Alpha"/>
-                        <TextBox HorizontalAlignment="Left" Grid.Row="1" Text="-0.25" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0"/>
-                        <TextBox HorizontalAlignment="Left" Grid.Row="1" Text="0.75" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="222,0,0,0"/>
-                        <TextBox HorizontalAlignment="Left" Grid.Row="1" Text="-0.05" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="281,0,0,0"/>
-                        <TextBox HorizontalAlignment="Left" Text="0.6" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" RenderTransformOrigin="0.5,0.5" Background="#FF990000" ToolTip="Red Color" Grid.Row="2">
+                        <TextBox x:Name="SunCG" HorizontalAlignment="Left" Text="0.505882382" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="222,0,0,0" Background="#FF00CC00" ToolTip="Green Color" MaxLines="1"/>
+                        <TextBox x:Name="SunCB" HorizontalAlignment="Left" Text="0.431372553" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="281,0,0,0" Background="#FF0000AB" ToolTip="Blue Color" MaxLines="1"/>
+                        <TextBox x:Name="SunCA" HorizontalAlignment="Left" Text="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="339,0,0,0" Background="#FF2E2E2E" ToolTip="Alpha" MaxLines="1"/>
+                        <TextBox x:Name="SunDX" HorizontalAlignment="Left" Grid.Row="1" Text="-0.384805739" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" MaxLines="1" TextChanged="TextBox_TextChanged"/>
+                        <TextBox x:Name="SunDY" HorizontalAlignment="Left" Grid.Row="1" Text="0.827142715" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="222,0,0,0" MaxLines="1"/>
+                        <TextBox x:Name="SunDZ" HorizontalAlignment="Left" Grid.Row="1" Text="-0.409584463" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="281,0,0,0" MaxLines="1"/>
+                        <TextBox x:Name="SkyCR" HorizontalAlignment="Left" Text="0.741176486" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" RenderTransformOrigin="0.5,0.5" Background="#FF990000" ToolTip="Red Color" Grid.Row="2" MaxLines="1">
                             <TextBox.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -202,10 +215,10 @@
                                 </TransformGroup>
                             </TextBox.RenderTransform>
                         </TextBox>
-                        <TextBox HorizontalAlignment="Left" Text="0.8" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="222,0,0,0" Background="#FF00CC00" ToolTip="Green Color" Grid.Row="2"/>
-                        <TextBox HorizontalAlignment="Left" Text="0.67" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="281,0,0,0" Background="#FF0000AB" ToolTip="Blue Color" Grid.Row="2"/>
-                        <TextBox HorizontalAlignment="Left" Text="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="339,0,0,0" Background="#FF2E2E2E" ToolTip="Alpha" Grid.Row="2"/>
-                        <TextBox HorizontalAlignment="Left" Text="0.6" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" RenderTransformOrigin="0.5,0.5" Background="#FF990000" ToolTip="Red Color" Grid.Row="4">
+                        <TextBox x:Name="SkyCG" HorizontalAlignment="Left" Text="0.65882355" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="222,0,0,0" Background="#FF00CC00" ToolTip="Green Color" Grid.Row="2" MaxLines="1"/>
+                        <TextBox x:Name="SkyCB" HorizontalAlignment="Left" Text="0.474509805" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="281,0,0,0" Background="#FF0000AB" ToolTip="Blue Color" Grid.Row="2" MaxLines="1"/>
+                        <TextBox x:Name="SkyCA" HorizontalAlignment="Left" Text="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="339,0,0,0" Background="#FF2E2E2E" ToolTip="Alpha" Grid.Row="2" MaxLines="1"/>
+                        <TextBox x:Name="HorCR" HorizontalAlignment="Left" Text="0.509803951" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" RenderTransformOrigin="0.5,0.5" Background="#FF990000" ToolTip="Red Color" Grid.Row="4" MaxLines="1">
                             <TextBox.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -215,10 +228,10 @@
                                 </TransformGroup>
                             </TextBox.RenderTransform>
                         </TextBox>
-                        <TextBox HorizontalAlignment="Left" Text="0.8" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="222,0,0,0" Background="#FF00CC00" ToolTip="Green Color" Grid.Row="4"/>
-                        <TextBox HorizontalAlignment="Left" Text="0.67" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="281,0,0,0" Background="#FF0000AB" ToolTip="Blue Color" Grid.Row="4"/>
-                        <TextBox HorizontalAlignment="Left" Text="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="339,0,0,0" Background="#FF2E2E2E" ToolTip="Alpha" Grid.Row="4"/>
-                        <TextBox HorizontalAlignment="Left" Text="0.6" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" RenderTransformOrigin="0.5,0.5" Background="#FF990000" ToolTip="Red Color" Grid.Row="5">
+                        <TextBox x:Name="HorCG" HorizontalAlignment="Left" Text="0.368627459" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="222,0,0,0" Background="#FF00CC00" ToolTip="Green Color" Grid.Row="4" MaxLines="1"/>
+                        <TextBox x:Name="HorCB" HorizontalAlignment="Left" Text="0.298039228" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="281,0,0,0" Background="#FF0000AB" ToolTip="Blue Color" Grid.Row="4" MaxLines="1"/>
+                        <TextBox x:Name="HorCA" HorizontalAlignment="Left" Text="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="339,0,0,0" Background="#FF2E2E2E" ToolTip="Alpha" Grid.Row="4" MaxLines="1"/>
+                        <TextBox x:Name="GroundCR" HorizontalAlignment="Left" Text="0.368627459" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" RenderTransformOrigin="0.5,0.5" Background="#FF990000" ToolTip="Red Color" Grid.Row="5" MaxLines="1">
                             <TextBox.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -228,10 +241,10 @@
                                 </TransformGroup>
                             </TextBox.RenderTransform>
                         </TextBox>
-                        <TextBox HorizontalAlignment="Left" Text="0.8" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="222,0,0,0" Background="#FF00CC00" ToolTip="Green Color" Grid.Row="5"/>
-                        <TextBox HorizontalAlignment="Left" Text="0.67" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="281,0,0,0" Background="#FF0000AB" ToolTip="Blue Color" Grid.Row="5"/>
-                        <TextBox HorizontalAlignment="Left" Text="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="339,0,0,0" Background="#FF2E2E2E" ToolTip="Alpha" Grid.Row="5"/>
-                        <TextBox HorizontalAlignment="Left" Text="0.6" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" RenderTransformOrigin="0.5,0.5" Background="#FF990000" ToolTip="Red Color" Grid.Row="10">
+                        <TextBox x:Name="GroundCG" HorizontalAlignment="Left" Text="0.219607845" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="222,0,0,0" Background="#FF00CC00" ToolTip="Green Color" Grid.Row="5" MaxLines="1"/>
+                        <TextBox x:Name="GroundCB" HorizontalAlignment="Left" Text="0.392156869" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="281,0,0,0" Background="#FF0000AB" ToolTip="Blue Color" Grid.Row="5" MaxLines="1"/>
+                        <TextBox x:Name="GroundCA" HorizontalAlignment="Left" Text="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="339,0,0,0" Background="#FF2E2E2E" ToolTip="Alpha" Grid.Row="5" MaxLines="1"/>
+                        <TextBox x:Name="FogCR" HorizontalAlignment="Left" Text="0.100007631" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" RenderTransformOrigin="0.5,0.5" Background="#FF990000" ToolTip="Red Color" Grid.Row="10" MaxLines="1">
                             <TextBox.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -241,10 +254,10 @@
                                 </TransformGroup>
                             </TextBox.RenderTransform>
                         </TextBox>
-                        <TextBox HorizontalAlignment="Left" Text="0.8" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="222,0,0,0" Background="#FF00CC00" ToolTip="Green Color" Grid.Row="10"/>
-                        <TextBox HorizontalAlignment="Left" Text="0.67" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="281,0,0,0" Background="#FF0000AB" ToolTip="Blue Color" Grid.Row="10"/>
-                        <TextBox HorizontalAlignment="Left" Text="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="339,0,0,0" Background="#FF2E2E2E" ToolTip="Alpha" Grid.Row="10"/>
-                        <TextBox HorizontalAlignment="Left" Text="0.6" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" RenderTransformOrigin="0.5,0.5" Background="#FF990000" ToolTip="Red Color" Grid.Row="11">
+                        <TextBox x:Name="FogCG" HorizontalAlignment="Left" Text="0.059998475" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="222,0,0,0" Background="#FF00CC00" ToolTip="Green Color" Grid.Row="10" MaxLines="1"/>
+                        <TextBox x:Name="FogCB" HorizontalAlignment="Left" Text="0.110002287" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="281,0,0,0" Background="#FF0000AB" ToolTip="Blue Color" Grid.Row="10" MaxLines="1"/>
+                        <TextBox x:Name="FogCA" HorizontalAlignment="Left" Text="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="339,0,0,0" Background="#FF2E2E2E" ToolTip="Alpha" Grid.Row="10" MaxLines="1"/>
+                        <TextBox x:Name="aFogCR" HorizontalAlignment="Left" Text="0.420004576" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" RenderTransformOrigin="0.5,0.5" Background="#FF990000" ToolTip="Red Color" Grid.Row="11" MaxLines="1">
                             <TextBox.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -254,12 +267,12 @@
                                 </TransformGroup>
                             </TextBox.RenderTransform>
                         </TextBox>
-                        <TextBox HorizontalAlignment="Left" Text="0.8" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="222,0,0,0" Background="#FF00CC00" ToolTip="Green Color" Grid.Row="11"/>
-                        <TextBox HorizontalAlignment="Left" Text="0.67" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="281,0,0,0" Background="#FF0000AB" ToolTip="Blue Color" Grid.Row="11"/>
-                        <TextBox HorizontalAlignment="Left" Text="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="339,0,0,0" Background="#FF2E2E2E" ToolTip="Alpha" Grid.Row="11"/>
-                        <TextBox HorizontalAlignment="Left" Grid.Row="3" Text="-0.25" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0"/>
-                        <TextBox HorizontalAlignment="Left" Grid.Row="6" Text="-0.25" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0"/>
-                        <ComboBox HorizontalAlignment="Left" Grid.Row="7" Width="55" Margin="164,0,0,0">
+                        <TextBox x:Name="aFogCG" HorizontalAlignment="Left" Text="0.379995435" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="222,0,0,0" Background="#FF00CC00" ToolTip="Green Color" Grid.Row="11" MaxLines="1"/>
+                        <TextBox x:Name="aFogCB" HorizontalAlignment="Left" Text="0.420004576" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="281,0,0,0" Background="#FF0000AB" ToolTip="Blue Color" Grid.Row="11" MaxLines="1"/>
+                        <TextBox x:Name="aFogCA" HorizontalAlignment="Left" Text="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="339,0,0,0" Background="#FF2E2E2E" ToolTip="Alpha" Grid.Row="11" MaxLines="1"/>
+                        <TextBox x:Name="SkyS" HorizontalAlignment="Left" Grid.Row="3" Text="1.5" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" MaxLines="1"/>
+                        <TextBox x:Name="LMS" HorizontalAlignment="Left" Grid.Row="6" Text="1.6" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" MaxLines="1"/>
+                        <ComboBox x:Name="Fog" HorizontalAlignment="Left" Grid.Row="7" Width="55" Margin="164,0,0,0" SelectedIndex="1">
                             <ComboBoxItem Content="True"/>
                             <ComboBoxItem Content="False"/>
                         </ComboBox>
@@ -268,20 +281,20 @@
               Margin="102,0,0,4" Grid.RowSpan="2" Grid.Row="7">
                             <TextBox
                 x:Name="sliderMaxH"
-                Text="100000"
+                Text="50000"
                 Margin="4 0"
                 VerticalAlignment="Bottom" />
                             <Slider
-                Value="50"
+                Value="-1000"
                 Width="280"
-                Minimum="-100000"
+                Minimum="-50000"
                 Maximum="{Binding Text, ElementName=sliderMaxH, Mode=OneWay}"
                 Style="{StaticResource MaterialDesignDiscreteSlider}"
                 ToolTip="MaterialDesignDiscreteSlider"
                 TickFrequency="5000"
                 TickPlacement="BottomRight" />
                         </StackPanel>
-                        <ComboBox HorizontalAlignment="Left" Grid.Row="12" Width="55" Margin="164,0,0,0">
+                        <ComboBox x:Name="Bloom" HorizontalAlignment="Left" Grid.Row="13" Width="55" Margin="164,0,0,0" SelectedIndex="0">
                             <ComboBoxItem Content="True"/>
                             <ComboBoxItem Content="False"/>
                         </ComboBox>
@@ -290,31 +303,84 @@
                             Margin="102,32,0,6" Grid.RowSpan="3" Grid.Row="7">
                             <TextBox
                                 x:Name="sliderMaxH1"
-                                Text="100000"
+                                Text="50000"
                                 Margin="4 0"
                                 VerticalAlignment="Bottom" />
                             <Slider
-                                Value="50"
+                                Value="-20000"
                                 Width="280"
-                                Minimum="-100000"
+                                Minimum="-50000"
                                 Maximum="{Binding Text, ElementName=sliderMaxH, Mode=OneWay}"
                                 Style="{StaticResource MaterialDesignDiscreteSlider}"
                                 ToolTip="MaterialDesignDiscreteSlider"
                                 TickFrequency="5000"
-                                TickPlacement="BottomRight" />
+                                TickPlacement="BottomRight" SmallChange="0" />
                         </StackPanel>
                         <Label Content="Fog End:" HorizontalAlignment="Left" Margin="8,0,0,0" VerticalAlignment="Center" Grid.Row="9"/>
+                        <Button x:Name="CPSun" Content="" HorizontalAlignment="Left" Margin="408,0,0,0" VerticalAlignment="Center" Height="25" Width="24" Click="Button_Click" RenderTransformOrigin="50.646,30.632" Background="#FF8C816C" MaterialDesign:ShadowAssist.ShadowDepth="Depth3"
+  MaterialDesign:ShadowAssist.ShadowEdges="Bottom,Left"
+  Padding="32" BorderBrush="#FF8C816C"/>
+                        <Button x:Name="CPSky" Content="" HorizontalAlignment="Left" Margin="408,0,0,0" VerticalAlignment="Center" Height="25" Width="24" Click="CPSky_Click" RenderTransformOrigin="50.646,30.632" Background="#FFBDA876" MaterialDesign:ShadowAssist.ShadowDepth="Depth3"
+                            MaterialDesign:ShadowAssist.ShadowEdges="Bottom,Left"
+                            Padding="32" Grid.Row="2" BorderBrush="#FFBDA876"/>
+                        <Button x:Name="CPHor" Content="" HorizontalAlignment="Left" Margin="408,0,0,0" VerticalAlignment="Center" Height="25" Width="24" Click="CPHor_Click" RenderTransformOrigin="50.646,30.632" Background="#FF825E4C" MaterialDesign:ShadowAssist.ShadowDepth="Depth3"
+                            MaterialDesign:ShadowAssist.ShadowEdges="Bottom,Left"
+                            Padding="32" Grid.Row="4" BorderBrush="#FF825E4C"/>
+                        <Button x:Name="CPGround" Content="" HorizontalAlignment="Left" Margin="408,0,0,0" VerticalAlignment="Center" Height="25" Width="24" Click="CPGround_Click" RenderTransformOrigin="50.646,30.632" Background="#FF5E3864" MaterialDesign:ShadowAssist.ShadowDepth="Depth3"
+                            MaterialDesign:ShadowAssist.ShadowEdges="Bottom,Left"
+                            Padding="32" Grid.Row="5" BorderBrush="#FF5E3864"/>
+                        <Button x:Name="CPFog" Content="" HorizontalAlignment="Left" Margin="408,0,0,0" VerticalAlignment="Center" Height="25" Width="24" Click="CPFog_Click" RenderTransformOrigin="50.646,30.632" Background="#FF1A0F1C" MaterialDesign:ShadowAssist.ShadowDepth="Depth3"
+                            MaterialDesign:ShadowAssist.ShadowEdges="Bottom,Left"
+                            Padding="32" Grid.Row="10" BorderBrush="#FF1A0F1C"/>
+                        <Button x:Name="CPaFog" Content="" HorizontalAlignment="Left" Margin="408,0,0,0" VerticalAlignment="Center" Height="25" Width="24" Click="CPaFog_Click" RenderTransformOrigin="50.646,30.632" Background="#FF6B616B" MaterialDesign:ShadowAssist.ShadowDepth="Depth3"
+                            MaterialDesign:ShadowAssist.ShadowEdges="Bottom,Left"
+                            Padding="32" Grid.Row="11" BorderBrush="#FF6B616B"/>
+                        <Label Content="Fog Emissive Remap:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="12"/>
+                        <TextBox x:Name="FogEmRe" HorizontalAlignment="Left" Grid.Row="12" Text="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" MaxLines="1"/>
+                        <ToggleButton x:Name="ToggleSunC"
+                          Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                          ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleSunC_Checked" Unchecked="ToggleSunC_Unchecked" IsChecked="True"/>
+                        <ToggleButton x:Name="ToggleSunD"
+                            Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleSunD_Checked" Unchecked="ToggleSunD_Unchecked" IsChecked="True" Grid.Row="1"/>
+                        <ToggleButton x:Name="ToggleSkyC"
+                            Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleSkyC_Checked" Unchecked="ToggleSkyC_Unchecked" IsChecked="True" Grid.Row="2"/>
+                        <ToggleButton x:Name="ToogleSkyS"
+                            Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToogleSkyS_Checked" Unchecked="ToogleSkyS_Unchecked" IsChecked="True" Grid.Row="3"/>
+                        <ToggleButton x:Name="ToggleHorC"
+                            Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleHorC_Checked" Unchecked="ToggleHorC_Unchecked" IsChecked="True" Grid.Row="4"/>
+                        <ToggleButton x:Name="ToggleGroundC"
+                            Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleGroundC_Checked" Unchecked="ToggleGroundC_Unchecked" IsChecked="True" Grid.Row="5"/>
+                        <ToggleButton x:Name="ToggleLMS"
+                            Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleLMS_Checked" Unchecked="ToggleLMS_Unchecked" IsChecked="True" Grid.Row="6"/>
+                        <ToggleButton x:Name="ToggleFog"
+                            Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleFog_Checked" Unchecked="ToggleFog_Unchecked" IsChecked="True" Grid.Row="7"/>
+                        <ToggleButton x:Name="ToggleFogStartEnd"
+                            Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="69" VerticalAlignment="Top" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.499,0.56" Checked="ToggleFogStartEnd_Checked" Unchecked="ToggleFogStartEnd_Unchecked" Grid.Row="8" Grid.RowSpan="2" IsChecked="True"/>
+                        <ToggleButton x:Name="ToggleFogC"
+                            Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleFogC_Checked" Unchecked="ToggleFogC_Unchecked" IsChecked="True" Grid.Row="10"/>
+                        <ToggleButton x:Name="ToggleFogaC"
+                            Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleFogaC_Checked" Unchecked="ToggleFogaC_Unchecked" IsChecked="True" Grid.Row="11"/>
+                        <ToggleButton x:Name="ToggleFogEmRe"
+                            Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleFogEmRe_Checked" Unchecked="ToggleFogEmRe_Unchecked" IsChecked="True" Grid.Row="12"/>
+                        <ToggleButton x:Name="ToggleBloom"
+                            Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleBloom_Checked" Unchecked="ToggleBloom_Unchecked" IsChecked="True" Grid.Row="13"/>
                     </Grid>
                 </Grid>
             </MaterialDesign:ColorZone>
 
         </Grid>
-        <MaterialDesign:ColorPicker HorizontalAlignment="Left" Margin="889,118,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.222,0.14" Color="#FF99CCAB"/>
-        <MaterialDesign:ColorPicker HorizontalAlignment="Left" Margin="889,188,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.222,0.14" Color="#FF99CCAB"/>
-        <MaterialDesign:ColorPicker HorizontalAlignment="Left" Margin="889,257,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.222,0.14" Color="#FF99CCAB"/>
-        <MaterialDesign:ColorPicker HorizontalAlignment="Left" Margin="889,293,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.222,0.14" Color="#FF99CCAB"/>
-        <MaterialDesign:ColorPicker HorizontalAlignment="Left" Margin="889,465,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.222,0.14" Color="#FF99CCAB"/>
-        <MaterialDesign:ColorPicker HorizontalAlignment="Left" Margin="889,501,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.222,0.14" Color="#FF99CCAB"/>
     </Grid>
 
 </MaterialDesignExtensions:MaterialWindow>
