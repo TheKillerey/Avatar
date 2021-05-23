@@ -169,24 +169,64 @@ namespace Avatar
             if (dialogsave.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 //Infos for saving
-                var BasefileCount = Int32.Parse(count_base.Text);
-                var InfernalfileCount = Int32.Parse(count_base.Text);
-                var MountainfileCount = Int32.Parse(count_base.Text);
-                var OceanfileCount = Int32.Parse(count_base.Text);
-                var CloudfileCount = Int32.Parse(count_base.Text);
+                var layern = "";
+                var layers = LayerMode.SelectedIndex;
+                if (layers == 0)
+                {
+                    layern = "All Layers";
+                    var BasefileCount = Int32.Parse(count_base.Text);
+                    
+                    int OBJsToCreate = BasefileCount  + 1;
+                    
+                    OBJFile[] OBJs = new OBJFile[OBJsToCreate];
+                    
+                    for (int i = 1; i < OBJsToCreate; i++)
+                {
+                    
 
-                int OBJsToCreate = BasefileCount;
-                int OBJsToCreate2 = InfernalfileCount;
-                int OBJsToCreate3 = InfernalfileCount;
-                int OBJsToCreate4 = InfernalfileCount;
-                int OBJsToCreate5 = InfernalfileCount;
-                OBJFile[] OBJs = new OBJFile[OBJsToCreate];
-                OBJFile[] OBJ2s = new OBJFile[OBJsToCreate2];
-                OBJFile[] OBJ3s = new OBJFile[OBJsToCreate3];
-                OBJFile[] OBJ4s = new OBJFile[OBJsToCreate4];
-                OBJFile[] OBJ5s = new OBJFile[OBJsToCreate5];
-                
-                for (int i = 1; i < OBJsToCreate; i++)
+                    try
+                    {
+                        var fullpath = Selected_Path.Text + @"\" + $"room{i}{prefix_base.Text}.obj";
+                        
+                        OBJs[i] = new OBJFile(fullpath);
+                        AddModels.AddModels.Add_AllLayers(OBJs[i], $"MapGeo_Instance_room{i}{prefix_base.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{i}{prefix_base.Text}", cleanedmap);
+                        //System.Windows.Forms.MessageBox.Show($"MapGeo_Instance_room{i}{prefix_base.Text}", "Debug:", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                       
+
+                    }
+
+                    catch (Exception)
+                    {
+                        continue;
+                        
+                        //var fullpath = Selected_Path.Text + @"\" + $"room{i}{prefix_base.Text}.obj";
+                        //System.Windows.Forms.MessageBox.Show(Selected_Path.Text + @"\" + $"room{i}{prefix_base.Text}.obj" + " is missing and will be ignored!", "Error: File Missing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                } //Base
+
+                } //All Layers
+                if (layers == 1)
+                {
+                    layern = "Auto Layers";
+                    var BasefileCount = Int32.Parse(count_base.Text);
+                    var InfernalfileCount = Int32.Parse(count_infernal.Text);
+                    var MountainfileCount = Int32.Parse(count_mountain.Text);
+                    var OceanfileCount = Int32.Parse(count_ocean.Text);
+                    var CloudfileCount = Int32.Parse(count_cloud.Text);
+                    
+                    int OBJsToCreate = BasefileCount + 1;
+                    int OBJsToCreate2 = InfernalfileCount + 1;
+                    int OBJsToCreate3 = MountainfileCount + 1;
+                    int OBJsToCreate4 = OceanfileCount + 1;
+                    int OBJsToCreate5 = CloudfileCount + 1;
+                    OBJFile[] OBJs = new OBJFile[OBJsToCreate];
+                    OBJFile[] OBJ2s = new OBJFile[OBJsToCreate2];
+                    OBJFile[] OBJ3s = new OBJFile[OBJsToCreate3];
+                    OBJFile[] OBJ4s = new OBJFile[OBJsToCreate4];
+                    OBJFile[] OBJ5s = new OBJFile[OBJsToCreate5];
+                    
+                    for (int i = 1; i < OBJsToCreate; i++)
                 {
                     
 
@@ -210,8 +250,8 @@ namespace Avatar
                     }
 
                 } //Base
-
-                for (int f = 1; f < OBJsToCreate2; f++) //Fire
+                    
+                    for (int f = 1; f < OBJsToCreate2; f++) //Fire
                 {
                     
 
@@ -234,8 +274,8 @@ namespace Avatar
                     }
 
                 } //Fire
-
-                for (int f = 1; f < OBJsToCreate3; f++) //Mountain
+                    
+                    for (int f = 1; f < OBJsToCreate3; f++) //Mountain
                 {
                     
 
@@ -258,8 +298,8 @@ namespace Avatar
                     }
 
                 } //Mountain
-
-                for (int f = 1; f < OBJsToCreate4; f++) //Ocean
+                    
+                    for (int f = 1; f < OBJsToCreate4; f++) //Ocean
                 {
                     
 
@@ -282,8 +322,8 @@ namespace Avatar
                     }
 
                 } //Ocean
-
-                for (int f = 1; f < OBJsToCreate5; f++) //Cloud
+                    
+                    for (int f = 1; f < OBJsToCreate5; f++) //Cloud
                 {
                     
 
@@ -306,16 +346,49 @@ namespace Avatar
                     }
 
                 } //Cloud
+                    } //Auto Layers
+                if (layers == 2)
+                {
+                    layern = "Layer 1";
+                    var BasefileCount = Int32.Parse(count_base.Text);
 
+                    int OBJsToCreate = BasefileCount + 1;
+                    OBJFile[] OBJs = new OBJFile[OBJsToCreate];
+                    
+                    for (int i = 1; i < OBJsToCreate; i++)
+                {
+                    
+
+                    try
+                    {
+                        var fullpath = Selected_Path.Text + @"\" + $"room{i}{prefix_base.Text}.obj";
+                        
+                        OBJs[i] = new OBJFile(fullpath);
+                        AddModels.AddModels.Add_Layer1(OBJs[i], $"MapGeo_Instance_room{i}{prefix_base.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{i}{prefix_base.Text}", cleanedmap);
+                        //System.Windows.Forms.MessageBox.Show($"MapGeo_Instance_room{i}{prefix_base.Text}", "Debug:", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                       
+
+                    }
+
+                    catch (Exception)
+                    {
+                        continue;
+                        
+                        //var fullpath = Selected_Path.Text + @"\" + $"room{i}{prefix_base.Text}.obj";
+                        //System.Windows.Forms.MessageBox.Show(Selected_Path.Text + @"\" + $"room{i}{prefix_base.Text}.obj" + " is missing and will be ignored!", "Error: File Missing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                } //Base
+                } //1 Layer
+
+                //-----------------------------------------------
                 
                 //Write the mapgeo file and get some infos about it.
                 string namemapgeo = dialogsave.FileName;
                 string pathmapgeo = System.IO.Path.GetFullPath(namemapgeo);
                 cleanedmap.Write(pathmapgeo, 11);
 
-                //MessageBox
-                var layers = AllLayersMode.Content.ToString();
-                System.Windows.Forms.MessageBox.Show($"{pathmapgeo} is saved as {layers}", "Info: Done!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                System.Windows.Forms.MessageBox.Show($"Map Name: bilgewater\nLightMode: Baked Light\nFog: Enabled\nLayers: {layern}\n\nPath: {pathmapgeo}", "Done!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
             }
