@@ -166,6 +166,9 @@ namespace Avatar
             using CommonSaveFileDialog dialogsave = new CommonSaveFileDialog();
             dialogsave.Filters.Add(new CommonFileDialogFilter("MAPGEO File", "*.mapgeo"));
 
+            
+            
+
             if (dialogsave.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 //Infos for saving
@@ -389,7 +392,8 @@ namespace Avatar
                 cleanedmap.Write(pathmapgeo, 11);
 
                 System.Windows.Forms.MessageBox.Show($"Map Name: bilgewater\nLightMode: Baked Light\nFog: Enabled\nLayers: {layern}\n\nPath: {pathmapgeo}", "Done!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                //Cleanes the files to avoid merging
+                cleanedmap.Models.Clear();
 
             }
 

@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:Avatar"
         xmlns:VisualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core" x:Class="Avatar.MainWindow"
         mc:Ignorable="d"
-        Title="Avatar - MapEditor" Height="732" Width="1393" Background="#FF151C27" Icon="/icon_mapeditor.png" WindowStartupLocation="CenterScreen">
+        Title="Avatar - MapEditor" Height="741" Width="1403" Background="#FF151C27" Icon="/icon_mapeditor.png" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
