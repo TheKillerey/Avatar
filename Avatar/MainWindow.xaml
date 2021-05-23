@@ -72,6 +72,31 @@
                     </MenuItem>
 
                 </MenuItem>
+                <MenuItem x:Name="TemplatesButton" Header="Templates" Click="TemplatesButton_Click">
+                    <MenuItem.Icon>
+                        <MaterialDesign:PackIcon Kind="PaletteOutline"/>
+                    </MenuItem.Icon>
+                    <MenuItem x:Name="SummonersRift" Header="SummonersRift">
+                        <MenuItem x:Name="New" Header="New"/>
+                        <MenuItem x:Name="Old" Header="Old"/>
+                    </MenuItem>
+                    <MenuItem x:Name="ARAM" Header="ARAM"/>
+                    <MenuItem x:Name="NexusBlitz" Header="NexusBlitz"/>
+                    <MenuItem x:Name="TFT" Header="TFT">
+                        <MenuItem x:Name="Base" Header="Base"/>
+                        <MenuItem x:Name="Carousel" Header="Carousel"/>
+                        <MenuItem x:Name="Darkstar" Header="Darkstar"/>
+                        <MenuItem x:Name="Freljord" Header="Freljord"/>
+                        <MenuItem x:Name="Galaxy" Header="Galaxy"/>
+                        <MenuItem x:Name="Journeys" Header="Journeys"/>
+                        <MenuItem x:Name="Lunarrevel" Header="Lunarrevel"/>
+                        <MenuItem x:Name="Odyssey" Header="Odyssey"/>
+                        <MenuItem x:Name="Set5" Header="Set5"/>
+                        <MenuItem x:Name="Spiritblossom" Header="Spiritblossom"/>
+                    </MenuItem>
+
+
+                </MenuItem>
 
             </Menu>
         </MaterialDesign:ColorZone>
@@ -154,6 +179,24 @@
                     <TextBox x:Name="count_ocean" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="364,474,0,0" ToolTip="" IsReadOnly="True"/>
                     <TextBox x:Name="count_cloud" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="364,516,0,0" ToolTip="" IsReadOnly="True"/>
                     <Label Content="Count" HorizontalAlignment="Left" Margin="364,299,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label x:Name="Map_Properties_Copy" Content="Loadingscreen:" HorizontalAlignment="Left" Margin="232,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Button x:Name="SelectIMG"
+                      Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                      ToolTip="MaterialDesignFloatingActionMiniAccentButton" Margin="0,8,10,0" RenderTransformOrigin="0.5,0.5" Background="#FFEA002B" BorderBrush="#FFEA0000" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Visible" HorizontalAlignment="Right" VerticalAlignment="Top" Height="28" Width="28" Click="SelectIMG_Click">
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                        <MaterialDesign:PackIcon
+                        Kind="DotsHorizontal"
+                        Height="24"
+                        Width="24" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    </Button>
+                    <Image x:Name="loadingscreenpic" Margin="239,70,7,392"/>
                 </Grid>
             </MaterialDesign:ColorZone>
             <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Center" Width="557" VerticalAlignment="Stretch" Background="#FF151C27" Grid.Column="1">

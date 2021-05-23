@@ -30,6 +30,7 @@ using Xceed.Wpf.Toolkit.Core.Converters;
 using System.Drawing;
 using Egorozh.ColorPicker.Dialog;
 using Egorozh.ColorPicker;
+using System.CodeDom.Compiler;
 
 namespace Avatar
 {
@@ -44,9 +45,95 @@ namespace Avatar
            
             InitializeComponent();
             
+            //Load SR Templates
+            foreach (string srtemp in srfiles)
+            {
+                New.Items.Add(srtemp.Replace("Templates/SR/New/", "").Replace(".materials.py", ""));
+            }
+            foreach (string srtemp2 in srfiles2)
+            {
+                Old.Items.Add(srtemp2.Replace("Templates/SR/Old/", "").Replace(".materials.py", ""));
+            }
+
+            //Load ARAM Templates
+            foreach (string aramtemp in aramfiles)
+            {
+                ARAM.Items.Add(aramtemp.Replace("Templates/ARAM/", "").Replace(".materials.py", ""));
+            }
+
+            //Load NexusBlitz Templates
+            foreach (string nexusblitztemp in nexusblitzfiles)
+            {
+                NexusBlitz.Items.Add(nexusblitztemp.Replace("Templates/NexusBlitz/", "").Replace(".materials.py", ""));
+            }
+
+            //Load TFT Templates
+            foreach (string tft1filestemp in tft1files)
+            {
+                Base.Items.Add(tft1filestemp.Replace("Templates/TFT/base/", "").Replace(".materials.py", ""));
+            }
+            foreach (string tft2filestemp in tft2files)
+            {
+                Carousel.Items.Add(tft2filestemp.Replace("Templates/TFT/carousel/", "").Replace(".materials.py", ""));
+            }
+            foreach (string tft3filestemp in tft3files)
+            {
+                Darkstar.Items.Add(tft3filestemp.Replace("Templates/TFT/darkstar/", "").Replace(".materials.py", ""));
+            }
+            foreach (string tft4filestemp in tft4files)
+            {
+                Freljord.Items.Add(tft4filestemp.Replace("Templates/TFT/freljord/", "").Replace(".materials.py", ""));
+            }
+            foreach (string tft5filestemp in tft5files)
+            {
+                Galaxy.Items.Add(tft5filestemp.Replace("Templates/TFT/galaxy/", "").Replace(".materials.py", ""));
+            }
+            foreach (string tft6filestemp in tft6files)
+            {
+                Journeys.Items.Add(tft6filestemp.Replace("Templates/TFT/journeys/", "").Replace(".materials.py", ""));
+            }
+            foreach (string tft7filestemp in tft7files)
+            {
+                Lunarrevel.Items.Add(tft7filestemp.Replace("Templates/TFT/lunarrevel/", "").Replace(".materials.py", ""));
+            }
+            foreach (string tft8filestemp in tft8files)
+            {
+                Odyssey.Items.Add(tft8filestemp.Replace("Templates/TFT/odyssey/", "").Replace(".materials.py", ""));
+            }
+            foreach (string tft9filestemp in tft9files)
+            {
+                Set5.Items.Add(tft9filestemp.Replace("Templates/TFT/set5/", "").Replace(".materials.py", ""));
+            }
+            foreach (string tft10filestemp in tft10files)
+            {
+                Spiritblossom.Items.Add(tft10filestemp.Replace("Templates/TFT/spiritblossom/", "").Replace(".materials.py", ""));
+            }
+
         }
 
+        
+
         MapGeometry cleanedmap = new MapGeometry("MapFile/base_srx.mapgeo");
+
+        string[] templatefolder = Directory.GetDirectories("Templates/");
+        string[] templatefiles = Directory.GetFiles("Templates/");
+        string[] srfiles = Directory.GetFiles("Templates/SR/New/");
+        string[] srfiles2 = Directory.GetFiles("Templates/SR/Old/");
+        string[] aramfiles = Directory.GetFiles("Templates/ARAM/");
+        string[] nexusblitzfiles = Directory.GetFiles("Templates/NexusBlitz/");
+
+        //TFT Files
+        string[] tft1files = Directory.GetFiles("Templates/TFT/base/");
+        string[] tft2files = Directory.GetFiles("Templates/TFT/carousel/");
+        string[] tft3files = Directory.GetFiles("Templates/TFT/darkstar/");
+        string[] tft4files = Directory.GetFiles("Templates/TFT/freljord/");
+        string[] tft5files = Directory.GetFiles("Templates/TFT/galaxy/");
+        string[] tft6files = Directory.GetFiles("Templates/TFT/journeys/");
+        string[] tft7files = Directory.GetFiles("Templates/TFT/lunarrevel/");
+        string[] tft8files = Directory.GetFiles("Templates/TFT/odyssey/");
+        string[] tft9files = Directory.GetFiles("Templates/TFT/set5/");
+        string[] tft10files = Directory.GetFiles("Templates/TFT/spiritblossom/");
+        
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -821,6 +908,29 @@ namespace Avatar
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void TemplatesButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+            
+            
+        }
+
+        private void SelectIMG_Click(object sender, RoutedEventArgs e)
+        {
+            using CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.Multiselect = true;
+            dialog.Filters.Add(new CommonFileDialogFilter("DDS Files", "*.dds"));
+
+            
+
+
+
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                loadingscreenpic.Source = new BitmapImage(new Uri(dialog.FileName));
+            }
         }
     }
 }
