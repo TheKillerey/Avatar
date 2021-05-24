@@ -114,6 +114,7 @@ namespace Avatar
         
 
         MapGeometry cleanedmap = new MapGeometry("MapFile/base_srx.mapgeo");
+        List<string> cleanedbin = new List<string>();
 
         string[] templatefolder = Directory.GetDirectories("Templates/");
         string[] templatefiles = Directory.GetFiles("Templates/");
@@ -778,17 +779,60 @@ namespace Avatar
                 } //Base
                 } //1 Layer
 
+                
                 //-----------------------------------------------
                 
-                //Write the mapgeo file and get some infos about it.
+                //Writes the mapgeo file and get some infos about it.
                 string namemapgeo = dialogsave.FileName;
                 string pathmapgeo = System.IO.Path.GetFullPath(namemapgeo);
+                string pathmat = pathmapgeo.Replace(".mapgeo", ".materials.py");
+                string pathbin = pathmapgeo.Replace(".mapgeo", ".materials.bin");
                 cleanedmap.Write(pathmapgeo, 11);
+                
 
-                System.Windows.Forms.MessageBox.Show($"Map Name: bilgewater\nLightMode: Baked Light\nFog: Enabled\nLayers: {layern}\n\nPath: {pathmapgeo}", "Done!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //Get Sun Properties
+                var matSunCol = "sunColor: vec4 = { " + $"{SunCR.Text}" + "," + $"{SunCG.Text}" + "," + $"{SunCB.Text}" + "," + $"{SunCA.Text}" + "}";
+                var matSunDir = "sunDirection: vec3 = { " + $"{SunDX.Text}" + "," + $"{SunDY.Text}" + "," + $"{SunDZ.Text}" + "}";
+                var matSkyCol = "skyLightColor: vec4 = { " + $"{SkyCR.Text}" + "," + $"{SkyCG.Text}" + "," + $"{SkyCB.Text}" + "," + $"{SkyCA.Text}" + "}";
+                var matSkyScl = $"skyLightScale: f32 = {SkyS.Text}";
+                var matHorCol = "horizonColor: vec4 = { " + $"{HorCR.Text}" + "," + $"{HorCG.Text}" + "," + $"{HorCB.Text}" + "," + $"{HorCA.Text}" + "}";
+                var matGrdCol = "groundColor: vec4 = { " + $"{GroundCR.Text}" + "," + $"{GroundCG.Text}" + "," + $"{GroundCB.Text}" + "," + $"{GroundCA.Text}" + "}";
+                var matLmpScl = $"lightMapColorScale: f32 = {LMS.Text}";
+                var matFog    = $"fogEnabled: bool = {Fog.Text}";
+                var matFogSuE = "fogStartAndEnd: vec2 = { " + $"{SliderStart.Value}" + "," + $"{SliderEnd.Value}" + "}";
+                var matFogCol = "fogColor: vec4 = { " + $"{FogCR.Text}" + "," + $"{FogCG.Text}" + "," + $"{FogCB.Text}" + "," + $"{FogCA.Text}" + "}";
+                var mataFogCol= "fogAlternateColor: vec4 = { " + $"{aFogCR.Text}" + "," + $"{aFogCG.Text}" + "," + $"{aFogCB.Text}" + "," + $"{aFogCA.Text}" + "}";
+                var matFEmScl = $"fogEmissiveRemap: f32 = {FogEmRe.Text}";
+                var matbloom  = $"useBloom: bool = {Bloom.Text}";
+
+                var matProp   = matSunCol + "\n" + matSunDir + "\n" + matSkyCol + "\n" + matSkyScl + "\n" + matHorCol + "\n" + matGrdCol + "\n" + matLmpScl + "\n" + matFog + "\n" + matFogSuE + "\n" + matFogCol + "\n" + mataFogCol + "\n" + matFEmScl + "\n" + matbloom;
+                File.AppendAllText(@"material_output\"+"sunprop.py", matProp);
+                //Exporting the material bin file
+                string sunprops = File.ReadAllText("material_output/sunprop.py");
+                string matorginal = File.ReadAllText("MapFile/base_srx.materials.py");
+                string matexp = File.ReadAllText("material_output/material.py");
+                string originalmtl = matorginal.Replace("PutMatInHere", matexp);
+                string originalmtl2 = originalmtl.Replace("SetSunProps", sunprops);
+                File.WriteAllText(pathmat, originalmtl2);
+
+                var binfile = System.Diagnostics.Process.Start("ritobin/txt2ritobin.exe", $"{pathmat} {pathbin}");
+                
+
+                System.Windows.Forms.MessageBox.Show($"Map Name: {Map_Name.Text}\nLightMode: {LightMode.SelectedIndex}\nFog: {FogSet.SelectedIndex}\nLayers: {layern}\nPremultiplied Alpha: {AlphaSet.SelectedIndex}\n\nPath: {pathmapgeo}", "Done!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 //Cleanes the files to avoid merging
                 cleanedmap.Models.Clear();
+                binfile.WaitForExit();
+                //Deletes the OUTPUT Folder
+                System.IO.DirectoryInfo di = new DirectoryInfo("material_output");
 
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    file.Delete();
+                }
+                foreach (DirectoryInfo dir in di.GetDirectories())
+                {
+                    dir.Delete(true);
+                }
             }
 
         }

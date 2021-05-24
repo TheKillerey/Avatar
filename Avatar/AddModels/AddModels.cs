@@ -47,6 +47,9 @@ namespace Avatar.AddModels
             var newList4 = newList3.Select(s => s.Replace("NOBAKEDLIGHTINGTEMP", Lightmode)).ToList();
             var newList5 = newList4.Select(s => s.Replace("DISABLEDEPTHFOG", Fogmode)).ToList();
             var newList6 = newList5.Select(s => s.Replace("PREMULTIPLIEDALPHA", Alphamode)).ToList();
+
+            //Sun Properties
+            
             
             //Writes
             Directory.CreateDirectory("material_output");

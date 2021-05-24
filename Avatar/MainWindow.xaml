@@ -127,7 +127,7 @@
                         <ComboBoxItem x:Name="DisableFog" Content="Disable" ToolTip="Disables FOG for your League Map."/>
                     </ComboBox>
                     <Label Content="Layers:" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="LayerMode" HorizontalAlignment="Left" Margin="91,169,0,0" VerticalAlignment="Top" Width="120">
+                    <ComboBox x:Name="LayerMode" HorizontalAlignment="Left" Margin="91,169,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="1">
                         <ComboBoxItem x:Name="AllLayersMode" Content="All Layers" ToolTip="Set all loaded models to All Layers. Perfect for testing on Elemental Rift."/>
                         <ComboBoxItem x:Name="AutoLayersMode" Content="Auto Layers" ToolTip="Set automatically all layers based on their name for Elemental Rift. Perfect for release."/>
                         <ComboBoxItem x:Name="OneLayerMode" Content="1 Layer" ToolTip="Set all loaded models to 1 Layer. Best for TFT or ARAM."/>
@@ -199,8 +199,8 @@
                     <Image x:Name="loadingscreenpic" Margin="239,70,7,392"/>
                     <Label Content="PreMul_Alpha:" HorizontalAlignment="Left" Margin="10,211,0,0" VerticalAlignment="Top" ToolTip="Premultiplied Alpha"/>
                     <ComboBox x:Name="AlphaSet" HorizontalAlignment="Left" Margin="91,211,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
-                        <ComboBoxItem x:Name="EnableAlpha" Content="Enable" ToolTip="Enables FOG for your League Map."/>
-                        <ComboBoxItem x:Name="DisableAlpha" Content="Disable" ToolTip="Disables FOG for your League Map."/>
+                        <ComboBoxItem x:Name="EnableAlpha" Content="Enable" ToolTip=""/>
+                        <ComboBoxItem x:Name="DisableAlpha" Content="Disable" ToolTip=""/>
                     </ComboBox>
                 </Grid>
             </MaterialDesign:ColorZone>
@@ -320,9 +320,9 @@
                         <TextBox x:Name="aFogCA" HorizontalAlignment="Left" Text="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="339,0,0,0" Background="#FF2E2E2E" ToolTip="Alpha" Grid.Row="11" MaxLines="1"/>
                         <TextBox x:Name="SkyS" HorizontalAlignment="Left" Grid.Row="3" Text="1.5" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" MaxLines="1"/>
                         <TextBox x:Name="LMS" HorizontalAlignment="Left" Grid.Row="6" Text="1.6" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" MaxLines="1"/>
-                        <ComboBox x:Name="Fog" HorizontalAlignment="Left" Grid.Row="7" Width="55" Margin="164,0,0,0" SelectedIndex="1">
-                            <ComboBoxItem Content="True"/>
-                            <ComboBoxItem Content="False"/>
+                        <ComboBox x:Name="Fog" HorizontalAlignment="Left" Grid.Row="7" Width="55" Margin="164,0,0,0" SelectedIndex="1" Text="jl">
+                            <ComboBoxItem Content="true"/>
+                            <ComboBoxItem Content="false"/>
                         </ComboBox>
                         <StackPanel x:Name="FogStart"
               Orientation="Horizontal"
@@ -332,7 +332,7 @@
                 Text="50000"
                 Margin="4 0"
                 VerticalAlignment="Bottom" />
-                            <Slider
+                            <Slider x:Name="SliderStart"
                 Value="-1000"
                 Width="280"
                 Minimum="-50000"
@@ -343,8 +343,8 @@
                 TickPlacement="BottomRight" />
                         </StackPanel>
                         <ComboBox x:Name="Bloom" HorizontalAlignment="Left" Grid.Row="13" Width="55" Margin="164,0,0,0" SelectedIndex="0">
-                            <ComboBoxItem Content="True"/>
-                            <ComboBoxItem Content="False"/>
+                            <ComboBoxItem Content="true"/>
+                            <ComboBoxItem Content="false"/>
                         </ComboBox>
                         <StackPanel x:Name="FogEnd"
                             Orientation="Horizontal"
@@ -354,7 +354,7 @@
                                 Text="50000"
                                 Margin="4 0"
                                 VerticalAlignment="Bottom" />
-                            <Slider
+                            <Slider x:Name="SliderEnd"
                                 Value="-20000"
                                 Width="280"
                                 Minimum="-50000"
