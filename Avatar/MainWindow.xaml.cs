@@ -248,7 +248,7 @@ namespace Avatar
         }
 
         //Save the file as MAPGEO
-        private void OnMapgeoFileSave_Click(object sender, RoutedEventArgs e)
+        public void OnMapgeoFileSave_Click(object sender, RoutedEventArgs e)
         {
             using CommonSaveFileDialog dialogsave = new CommonSaveFileDialog();
             dialogsave.Filters.Add(new CommonFileDialogFilter("MAPGEO File", "*.mapgeo"));
@@ -277,9 +277,53 @@ namespace Avatar
                     try
                     {
                         var fullpath = Selected_Path.Text + @"\" + $"room{i}{prefix_base.Text}.obj";
+                        var fullpathmtl = Selected_Path.Text + @"\" + $"room{i}{prefix_base.Text}.mtl";
+                        var mapname = Map_Name.Text.ToString();
+
+                        //Light Mode
+                        //--------------------------------------------------------
+                        var lightmodes = "";
+                        var lightmode = LightMode.SelectedIndex; //1 is baked
+                        if (lightmode == 1)
+                            {
+                                lightmodes = "\"NO_BAKED_LIGHTING\" = \"1\"";
+                            }
+                        if (lightmode == 0)
+                            {
+                                lightmodes = "";
+                            }
+                        //--------------------------------------------------------
+
+                        //FOG
+                        //--------------------------------------------------------
+                        var fogmodes = "";
+                        var fogmode = FogSet.SelectedIndex; //1 is disable
+                        if (fogmode == 1)
+                            {
+                                fogmodes = "";
+                            }
+                        if (fogmode == 0)
+                            {
+                                fogmodes = "\"DISABLE_DEPTH_FOG\" = \"1\"";
+                            }
+                        //--------------------------------------------------------
+
+                        //Premuliplied Alpha
+                        //--------------------------------------------------------
+                        var alphamodes = "";
+                        var alphamode = AlphaSet.SelectedIndex; //1 is disable
+                        if (alphamode == 1)
+                            {
+                                alphamodes = "";
+                            }
+                        if (alphamode == 0)
+                            {
+                                alphamodes = "\"PREMULTIPLIED_ALPHA\" = \"1\"";
+                            }
+                        //--------------------------------------------------------
                         
                         OBJs[i] = new OBJFile(fullpath);
-                        AddModels.AddModels.Add_AllLayers(OBJs[i], $"MapGeo_Instance_room{i}{prefix_base.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{i}{prefix_base.Text}", cleanedmap);
+                        AddModels.AddModels.Add_AllLayers(OBJs[i], $"MapGeo_Instance_room{i}{prefix_base.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{i}{prefix_base.Text}", cleanedmap, i, fullpathmtl, mapname, lightmodes, fogmodes, alphamodes);
                         //System.Windows.Forms.MessageBox.Show($"MapGeo_Instance_room{i}{prefix_base.Text}", "Debug:", MessageBoxButtons.OK, MessageBoxIcon.Information);
                        
 
@@ -323,9 +367,52 @@ namespace Avatar
                     try
                     {
                         var fullpath = Selected_Path.Text + @"\" + $"room{i}{prefix_base.Text}.obj";
+                        var fullpathmtl = Selected_Path.Text + @"\" + $"room{i}{prefix_base.Text}.mtl";
+                        var mapname = Map_Name.Text.ToString();
+                        //Light Mode
+                        //--------------------------------------------------------
+                        var lightmodes = "";
+                        var lightmode = LightMode.SelectedIndex; //1 is baked
+                        if (lightmode == 1)
+                            {
+                                lightmodes = "\"NO_BAKED_LIGHTING\" = \"1\"";
+                            }
+                        if (lightmode == 0)
+                            {
+                                lightmodes = "";
+                            }
+                        //--------------------------------------------------------
+
+                        //FOG
+                        //--------------------------------------------------------
+                        var fogmodes = "";
+                        var fogmode = FogSet.SelectedIndex; //1 is disable
+                        if (fogmode == 1)
+                            {
+                                fogmodes = "";
+                            }
+                        if (fogmode == 0)
+                            {
+                                fogmodes = "\"DISABLE_DEPTH_FOG\" = \"1\"";
+                            }
+                        //--------------------------------------------------------
+
+                        //Premuliplied Alpha
+                        //--------------------------------------------------------
+                        var alphamodes = "";
+                        var alphamode = AlphaSet.SelectedIndex; //1 is disable
+                        if (alphamode == 1)
+                            {
+                                alphamodes = "";
+                            }
+                        if (alphamode == 0)
+                            {
+                                alphamodes = "\"PREMULTIPLIED_ALPHA\" = \"1\"";
+                            }
+                        //--------------------------------------------------------
                         
                         OBJs[i] = new OBJFile(fullpath);
-                        AddModels.AddModels.Add_Layer1(OBJs[i], $"MapGeo_Instance_room{i}{prefix_base.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{i}{prefix_base.Text}", cleanedmap);
+                        AddModels.AddModels.Add_Layer1(OBJs[i], $"MapGeo_Instance_room{i}{prefix_base.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{i}{prefix_base.Text}", cleanedmap, i, fullpathmtl, mapname, lightmodes, fogmodes, alphamodes);
                         //System.Windows.Forms.MessageBox.Show($"MapGeo_Instance_room{i}{prefix_base.Text}", "Debug:", MessageBoxButtons.OK, MessageBoxIcon.Information);
                        
 
@@ -348,9 +435,53 @@ namespace Avatar
                     try
                     {
                         var fullpath = Selected_Path.Text + @"\" + $"room{f}{prefix_infernal.Text}.obj";
+                            var fullpathmtl = Selected_Path.Text + @"\" + $"room{f}{prefix_infernal.Text}.mtl";
+                        var mapname = Map_Name.Text.ToString();
+
+                        //Light Mode
+                        //--------------------------------------------------------
+                        var lightmodes = "";
+                        var lightmode = LightMode.SelectedIndex; //1 is baked
+                        if (lightmode == 1)
+                            {
+                                lightmodes = "\"NO_BAKED_LIGHTING\" = \"1\"";
+                            }
+                        if (lightmode == 0)
+                            {
+                                lightmodes = "";
+                            }
+                        //--------------------------------------------------------
+
+                        //FOG
+                        //--------------------------------------------------------
+                        var fogmodes = "";
+                        var fogmode = FogSet.SelectedIndex; //1 is disable
+                        if (fogmode == 1)
+                            {
+                                fogmodes = "";
+                            }
+                        if (fogmode == 0)
+                            {
+                                fogmodes = "\"DISABLE_DEPTH_FOG\" = \"1\"";
+                            }
+                        //--------------------------------------------------------
+
+                        //Premuliplied Alpha
+                        //--------------------------------------------------------
+                        var alphamodes = "";
+                        var alphamode = AlphaSet.SelectedIndex; //1 is disable
+                        if (alphamode == 1)
+                            {
+                                alphamodes = "";
+                            }
+                        if (alphamode == 0)
+                            {
+                                alphamodes = "\"PREMULTIPLIED_ALPHA\" = \"1\"";
+                            }
+                        //--------------------------------------------------------
                         
                         OBJ2s[f] = new OBJFile(fullpath);
-                        AddModels.AddModels.Add_Layer2(OBJ2s[f], $"MapGeo_Instance_room{f}{prefix_infernal.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{f}{prefix_infernal.Text}", cleanedmap);
+                        AddModels.AddModels.Add_Layer2(OBJ2s[f], $"MapGeo_Instance_room{f}{prefix_infernal.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{f}{prefix_infernal.Text}", cleanedmap, f, fullpathmtl, mapname, lightmodes, fogmodes, alphamodes);
                         //System.Windows.Forms.MessageBox.Show($"MapGeo_Instance_room{f}{prefix_infernal.Text}", "Debug:", MessageBoxButtons.OK, MessageBoxIcon.Information);
                        
 
@@ -372,9 +503,53 @@ namespace Avatar
                     try
                     {
                         var fullpath = Selected_Path.Text + @"\" + $"room{f}{prefix_mountain.Text}.obj";
+                        var fullpathmtl = Selected_Path.Text + @"\" + $"room{f}{prefix_mountain.Text}.mtl";
+                        var mapname = Map_Name.Text.ToString();
+
+                        //Light Mode
+                        //--------------------------------------------------------
+                        var lightmodes = "";
+                        var lightmode = LightMode.SelectedIndex; //1 is baked
+                        if (lightmode == 1)
+                            {
+                                lightmodes = "\"NO_BAKED_LIGHTING\" = \"1\"";
+                            }
+                        if (lightmode == 0)
+                            {
+                                lightmodes = "";
+                            }
+                        //--------------------------------------------------------
+
+                        //FOG
+                        //--------------------------------------------------------
+                        var fogmodes = "";
+                        var fogmode = FogSet.SelectedIndex; //1 is disable
+                        if (fogmode == 1)
+                            {
+                                fogmodes = "";
+                            }
+                        if (fogmode == 0)
+                            {
+                                fogmodes = "\"DISABLE_DEPTH_FOG\" = \"1\"";
+                            }
+                        //--------------------------------------------------------
+
+                        //Premuliplied Alpha
+                        //--------------------------------------------------------
+                        var alphamodes = "";
+                        var alphamode = AlphaSet.SelectedIndex; //1 is disable
+                        if (alphamode == 1)
+                            {
+                                alphamodes = "";
+                            }
+                        if (alphamode == 0)
+                            {
+                                alphamodes = "\"PREMULTIPLIED_ALPHA\" = \"1\"";
+                            }
+                        //--------------------------------------------------------
                         
                         OBJ3s[f] = new OBJFile(fullpath);
-                        AddModels.AddModels.Add_Layer3(OBJ3s[f], $"MapGeo_Instance_room{f}{prefix_mountain.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{f}{prefix_mountain.Text}", cleanedmap);
+                        AddModels.AddModels.Add_Layer3(OBJ3s[f], $"MapGeo_Instance_room{f}{prefix_mountain.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{f}{prefix_mountain.Text}", cleanedmap, f, fullpathmtl, mapname, lightmodes, fogmodes, alphamodes);
                         //System.Windows.Forms.MessageBox.Show($"MapGeo_Instance_room{f}{prefix_mountain.Text}", "Debug:", MessageBoxButtons.OK, MessageBoxIcon.Information);
                        
 
@@ -396,9 +571,53 @@ namespace Avatar
                     try
                     {
                         var fullpath = Selected_Path.Text + @"\" + $"room{f}{prefix_ocean.Text}.obj";
+                        var fullpathmtl = Selected_Path.Text + @"\" + $"room{f}{prefix_ocean.Text}.mtl";
+                        var mapname = Map_Name.Text.ToString();
+
+                        //Light Mode
+                        //--------------------------------------------------------
+                        var lightmodes = "";
+                        var lightmode = LightMode.SelectedIndex; //1 is baked
+                        if (lightmode == 1)
+                            {
+                                lightmodes = "\"NO_BAKED_LIGHTING\" = \"1\"";
+                            }
+                        if (lightmode == 0)
+                            {
+                                lightmodes = "";
+                            }
+                        //--------------------------------------------------------
+
+                        //FOG
+                        //--------------------------------------------------------
+                        var fogmodes = "";
+                        var fogmode = FogSet.SelectedIndex; //1 is disable
+                        if (fogmode == 1)
+                            {
+                                fogmodes = "";
+                            }
+                        if (fogmode == 0)
+                            {
+                                fogmodes = "\"DISABLE_DEPTH_FOG\" = \"1\"";
+                            }
+                        //--------------------------------------------------------
+
+                        //Premuliplied Alpha
+                        //--------------------------------------------------------
+                        var alphamodes = "";
+                        var alphamode = AlphaSet.SelectedIndex; //1 is disable
+                        if (alphamode == 1)
+                            {
+                                alphamodes = "";
+                            }
+                        if (alphamode == 0)
+                            {
+                                alphamodes = "\"PREMULTIPLIED_ALPHA\" = \"1\"";
+                            }
+                        //--------------------------------------------------------
                         
                         OBJ4s[f] = new OBJFile(fullpath);
-                        AddModels.AddModels.Add_Layer4(OBJ4s[f], $"MapGeo_Instance_room{f}{prefix_ocean.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{f}{prefix_ocean.Text}", cleanedmap);
+                        AddModels.AddModels.Add_Layer4(OBJ4s[f], $"MapGeo_Instance_room{f}{prefix_ocean.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{f}{prefix_ocean.Text}", cleanedmap, f, fullpathmtl, mapname, lightmodes, fogmodes, alphamodes);
                         //System.Windows.Forms.MessageBox.Show($"MapGeo_Instance_room{f}{prefix_ocean.Text}", "Debug:", MessageBoxButtons.OK, MessageBoxIcon.Information);
                        
 
@@ -420,9 +639,53 @@ namespace Avatar
                     try
                     {
                         var fullpath = Selected_Path.Text + @"\" + $"room{f}{prefix_cloud.Text}.obj";
+                        var fullpathmtl = Selected_Path.Text + @"\" + $"room{f}{prefix_cloud.Text}.mtl";
+                        var mapname = Map_Name.Text.ToString();
+
+                        //Light Mode
+                        //--------------------------------------------------------
+                        var lightmodes = "";
+                        var lightmode = LightMode.SelectedIndex; //1 is baked
+                        if (lightmode == 1)
+                            {
+                                lightmodes = "\"NO_BAKED_LIGHTING\" = \"1\"";
+                            }
+                        if (lightmode == 0)
+                            {
+                                lightmodes = "";
+                            }
+                        //--------------------------------------------------------
+
+                        //FOG
+                        //--------------------------------------------------------
+                        var fogmodes = "";
+                        var fogmode = FogSet.SelectedIndex; //1 is disable
+                        if (fogmode == 1)
+                            {
+                                fogmodes = "";
+                            }
+                        if (fogmode == 0)
+                            {
+                                fogmodes = "\"DISABLE_DEPTH_FOG\" = \"1\"";
+                            }
+                        //--------------------------------------------------------
+
+                        //Premuliplied Alpha
+                        //--------------------------------------------------------
+                        var alphamodes = "";
+                        var alphamode = AlphaSet.SelectedIndex; //1 is disable
+                        if (alphamode == 1)
+                            {
+                                alphamodes = "";
+                            }
+                        if (alphamode == 0)
+                            {
+                                alphamodes = "\"PREMULTIPLIED_ALPHA\" = \"1\"";
+                            }
+                        //--------------------------------------------------------
                         
                         OBJ5s[f] = new OBJFile(fullpath);
-                        AddModels.AddModels.Add_Layer5(OBJ5s[f], $"MapGeo_Instance_room{f}{prefix_cloud.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{f}{prefix_cloud.Text}", cleanedmap);
+                        AddModels.AddModels.Add_Layer5(OBJ5s[f], $"MapGeo_Instance_room{f}{prefix_cloud.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{f}{prefix_cloud.Text}", cleanedmap, f, fullpathmtl, mapname, lightmodes, fogmodes, alphamodes);
                         //System.Windows.Forms.MessageBox.Show($"MapGeo_Instance_room{f}{prefix_cloud.Text}", "Debug:", MessageBoxButtons.OK, MessageBoxIcon.Information);
                        
 
@@ -452,9 +715,53 @@ namespace Avatar
                     try
                     {
                         var fullpath = Selected_Path.Text + @"\" + $"room{i}{prefix_base.Text}.obj";
+                        var fullpathmtl = Selected_Path.Text + @"\" + $"room{i}{prefix_base.Text}.mtl";
+                        var mapname = Map_Name.Text.ToString();
+
+                        //Light Mode
+                        //--------------------------------------------------------
+                        var lightmodes = "";
+                        var lightmode = LightMode.SelectedIndex; //1 is baked
+                        if (lightmode == 1)
+                            {
+                                lightmodes = "\"NO_BAKED_LIGHTING\" = \"1\"";
+                            }
+                        if (lightmode == 0)
+                            {
+                                lightmodes = "";
+                            }
+                        //--------------------------------------------------------
+
+                        //FOG
+                        //--------------------------------------------------------
+                        var fogmodes = "";
+                        var fogmode = FogSet.SelectedIndex; //1 is disable
+                        if (fogmode == 1)
+                            {
+                                fogmodes = "";
+                            }
+                        if (fogmode == 0)
+                            {
+                                fogmodes = "\"DISABLE_DEPTH_FOG\" = \"1\"";
+                            }
+                        //--------------------------------------------------------
+
+                        //Premuliplied Alpha
+                        //--------------------------------------------------------
+                        var alphamodes = "";
+                        var alphamode = AlphaSet.SelectedIndex; //1 is disable
+                        if (alphamode == 1)
+                            {
+                                alphamodes = "";
+                            }
+                        if (alphamode == 0)
+                            {
+                                alphamodes = "\"PREMULTIPLIED_ALPHA\" = \"1\"";
+                            }
+                        //--------------------------------------------------------
                         
                         OBJs[i] = new OBJFile(fullpath);
-                        AddModels.AddModels.Add_Layer1(OBJs[i], $"MapGeo_Instance_room{i}{prefix_base.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{i}{prefix_base.Text}", cleanedmap);
+                        AddModels.AddModels.Add_Layer1(OBJs[i], $"MapGeo_Instance_room{i}{prefix_base.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{i}{prefix_base.Text}", cleanedmap, i, fullpathmtl, mapname, lightmodes, fogmodes, alphamodes);
                         //System.Windows.Forms.MessageBox.Show($"MapGeo_Instance_room{i}{prefix_base.Text}", "Debug:", MessageBoxButtons.OK, MessageBoxIcon.Information);
                        
 

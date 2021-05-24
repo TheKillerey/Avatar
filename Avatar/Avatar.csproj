@@ -71,6 +71,9 @@
     <None Update="MapFile\base_srx.mapgeo">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="MapFile\ShaderTemp\DefaultEnv_Flat_AlphaTest.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Templates\ARAM\base.materials.py">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

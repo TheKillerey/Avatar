@@ -114,20 +114,20 @@
             <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Center" Width="468" VerticalAlignment="Stretch" Background="#FF151C27">
                 <Grid Margin="0,0,5,0">
                     <Label x:Name="Map_Properties" Content="Map Properties:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <TextBox x:Name="Map_Name" HorizontalAlignment="Left" Margin="85,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Sets the name of your Map texture folder. Example: [assets\maps\kitpieces\srx\&quot;bildgewater&quot; ]"/>
+                    <TextBox x:Name="Map_Name" HorizontalAlignment="Left" Margin="91,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Sets the name of your Map texture folder. Example: [assets\maps\kitpieces\srx\&quot;bildgewater&quot; ]"/>
                     <Label Content="Map Name:" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top"/>
                     <Label Content="Light Mode:" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="LightMode" HorizontalAlignment="Left" Margin="85,90,0,0" VerticalAlignment="Top" Width="120">
+                    <ComboBox x:Name="LightMode" HorizontalAlignment="Left" Margin="91,90,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="1">
                         <ComboBoxItem x:Name="DynamicLight" Content="Dynamic Light" ToolTip="Disables the bake mode and enables League Dynamic Sun Light. Set Lightmap Color Scale to a low number or 0."/>
                         <ComboBoxItem x:Name="BakedLight" Content="Baked Light" ToolTip="Uses the baked textures only. Sun Properties is not needed! "/>
                     </ComboBox>
                     <Label Content="FOG:" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="FogSet" HorizontalAlignment="Left" Margin="85,130,0,0" VerticalAlignment="Top" Width="120">
+                    <ComboBox x:Name="FogSet" HorizontalAlignment="Left" Margin="91,130,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
                         <ComboBoxItem x:Name="EnableFog" Content="Enable" ToolTip="Enables FOG for your League Map."/>
                         <ComboBoxItem x:Name="DisableFog" Content="Disable" ToolTip="Disables FOG for your League Map."/>
                     </ComboBox>
                     <Label Content="Layers:" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="LayerMode" HorizontalAlignment="Left" Margin="85,169,0,0" VerticalAlignment="Top" Width="120">
+                    <ComboBox x:Name="LayerMode" HorizontalAlignment="Left" Margin="91,169,0,0" VerticalAlignment="Top" Width="120">
                         <ComboBoxItem x:Name="AllLayersMode" Content="All Layers" ToolTip="Set all loaded models to All Layers. Perfect for testing on Elemental Rift."/>
                         <ComboBoxItem x:Name="AutoLayersMode" Content="Auto Layers" ToolTip="Set automatically all layers based on their name for Elemental Rift. Perfect for release."/>
                         <ComboBoxItem x:Name="OneLayerMode" Content="1 Layer" ToolTip="Set all loaded models to 1 Layer. Best for TFT or ARAM."/>
@@ -197,6 +197,11 @@
                         Width="24" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </Button>
                     <Image x:Name="loadingscreenpic" Margin="239,70,7,392"/>
+                    <Label Content="PreMul_Alpha:" HorizontalAlignment="Left" Margin="10,211,0,0" VerticalAlignment="Top" ToolTip="Premultiplied Alpha"/>
+                    <ComboBox x:Name="AlphaSet" HorizontalAlignment="Left" Margin="91,211,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
+                        <ComboBoxItem x:Name="EnableAlpha" Content="Enable" ToolTip="Enables FOG for your League Map."/>
+                        <ComboBoxItem x:Name="DisableAlpha" Content="Disable" ToolTip="Disables FOG for your League Map."/>
+                    </ComboBox>
                 </Grid>
             </MaterialDesign:ColorZone>
             <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Center" Width="557" VerticalAlignment="Stretch" Background="#FF151C27" Grid.Column="1">
