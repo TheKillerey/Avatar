@@ -807,13 +807,23 @@ namespace Avatar
 
                 var matProp   = matSunCol + "\n" + matSunDir + "\n" + matSkyCol + "\n" + matSkyScl + "\n" + matHorCol + "\n" + matGrdCol + "\n" + matLmpScl + "\n" + matFog + "\n" + matFogSuE + "\n" + matFogCol + "\n" + mataFogCol + "\n" + matFEmScl + "\n" + matbloom;
                 File.AppendAllText(@"material_output\"+"sunprop.py", matProp);
+
+                string particleplace = "";
+                //Load Map Particles and check if they are available
+                if (File.Exists("material_output/particles.py"))
+                {
+                    particleplace = File.ReadAllText("material_output/particles.py");
+                }
+                
+
                 //Exporting the material bin file
                 string sunprops = File.ReadAllText("material_output/sunprop.py");
                 string matorginal = File.ReadAllText("MapFile/base_srx.materials.py");
                 string matexp = File.ReadAllText("material_output/material.py");
                 string originalmtl = matorginal.Replace("PutMatInHere", matexp);
                 string originalmtl2 = originalmtl.Replace("SetSunProps", sunprops);
-                File.WriteAllText(pathmat, originalmtl2);
+                string originalmtl3 = originalmtl2.Replace("SetParticle", particleplace);
+                File.WriteAllText(pathmat, originalmtl3);
 
                 var binfile = System.Diagnostics.Process.Start("ritobin/txt2ritobin.exe", $"{pathmat} {pathbin}");
                 

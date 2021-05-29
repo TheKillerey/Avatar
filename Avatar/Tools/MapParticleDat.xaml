@@ -21,7 +21,7 @@
                             <MaterialDesign:PackIcon Kind="FileCodeOutline"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem x:Name="ParticleSave" Header="Save to Project" Click="ParticleSave_Click">
+                    <MenuItem x:Name="ParticleSave" Header="Save to Project" Click="ParticleSave_Click" IsEnabled="False">
                         <MenuItem.Icon>
                             <MaterialDesign:PackIcon Kind="ContentSave"/>
                         </MenuItem.Icon>
@@ -42,9 +42,10 @@
             <TreeViewItem x:Name="Root"
           Header="Particle System"/>
         </TreeView>
-        <MaterialDesign:ColorZone HorizontalAlignment="Left" Margin="600,53,0,0" Height="631" Width="600" MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Background="#FF151C27">
-            <TextBox x:Name="ShowJSON" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="580" Height="611" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True"/>
+        <MaterialDesign:ColorZone HorizontalAlignment="Left" Margin="605,99,0,0" Height="575" Width="595" MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Background="#FF151C27">
+            <TextBox x:Name="ShowJSON" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="574" Height="585" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True"/>
         </MaterialDesign:ColorZone>
+        <Label Content="RITOBIN format:" HorizontalAlignment="Left" Margin="605,57,0,0" VerticalAlignment="Top"/>
 
 
 

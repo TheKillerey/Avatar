@@ -1,7 +1,6 @@
 ﻿"ParticleNameHere" = MapParticle {
-                system: link = "Maps/Particles/SRX/ParticleNameHere"
+                system: link = "DATA/Particles/ParticleNameHere"
                 eyeCandy: bool = Eyecandytrue
-                quality: i32 = QualityName
                 transform: mtx44 = {
                     1, 0, 0, 0
                     0, 1, 0, 0

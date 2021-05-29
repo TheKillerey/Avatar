@@ -175,12 +175,11 @@ namespace Avatar.Tools
                         var newList = jsons.Select(s => s.Replace("ParticleNameHere", ParticleName)).ToList();
                         var newList2 = newList.Select(s => s.Replace("PosXYZ", PPos)).ToList();
                         var newList3 = newList2.Select(s => s.Replace("MapParticleName", $"{ParticleName}_{n}")).ToList();
-                        var newList4 = newList3.Select(s => s.Replace("QualityName", PQuality)).ToList();
-                        var newList5 = newList4.Select(s => s.Replace("Eyecandytrue", TagsTrue)).ToList();
+                        var newList4 = newList3.Select(s => s.Replace("Eyecandytrue", TagsTrue)).ToList();
                         
                         
                         //Write output
-                        File.AppendAllLines("Tools/Templates/particleoutput.py", newList5);
+                        File.AppendAllLines("Tools/Templates/particleoutput.py", newList4);
 
                         
 
@@ -199,6 +198,7 @@ namespace Avatar.Tools
                     
                 ShowJSON.Text = File.ReadAllText("Tools/Templates/particleoutput.py");
             }
+            ParticleSave.IsEnabled = true;
         }
 
         private void ParticleSave_Click(object sender, RoutedEventArgs e)

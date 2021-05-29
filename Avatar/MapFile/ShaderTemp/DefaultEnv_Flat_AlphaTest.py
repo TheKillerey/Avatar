@@ -26,6 +26,7 @@
                 passes: list[embed] = {
                     StaticMaterialPassDef {
                         shader: link = "Shaders/Environment/DefaultEnv_Flat_AlphaTest"
+                        cullEnable: bool = false
                         blendEnable: bool = true
                         dstColorBlendFactor: u32 = 7
                         dstAlphaBlendFactor: u32 = 7
