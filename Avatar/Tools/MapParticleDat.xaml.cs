@@ -56,6 +56,10 @@ namespace Avatar.Tools
                 {
                     Root.Items.Clear();
                 }
+                if (File.Exists("Tools/Templates/particleoutput.py"))
+                {
+                    File.Delete("Tools/Templates/particleoutput.py");
+                }
 
                 try
                 {
@@ -66,7 +70,7 @@ namespace Avatar.Tools
                     List<string> Qualitys = new List<string>();
                     List<string> Rotations = new List<string>();
                     List<string> Tags = new List<string>();
-
+                    List<string> jsons = new List<string>();
 
                     using (StreamReader r = new StreamReader(fullpath))
                     {
@@ -82,14 +86,14 @@ namespace Avatar.Tools
                             string XPoslines = line.Split(' ')[1];
                             string YPoslines = line.Split(' ')[2];
                             string ZPoslines = line.Split(' ')[3];
-                            string XYZPoslines = $"X={XPoslines} | Y={YPoslines} | Z={ZPoslines}";
+                            string XYZPoslines = $"{XPoslines}, {YPoslines}, {ZPoslines}";
                             //Filter out Particle Qualitys
                             string Qualitylines = line.Split(' ')[4];
                             //Filter out Particle Rotations
                             string XRotlines = line.Split(' ')[5];
                             string YRotlines = line.Split(' ')[6];
                             string ZRotlines = line.Split(' ')[7];
-                            string XYZRotlines = $"X={XRotlines} | Y={YRotlines} | Z={ZRotlines}";
+                            string XYZRotlines = $"{XRotlines}, {YRotlines}, {ZRotlines}";
                             //Filter out Particle Tags
 
                             string TagMissing = "";
@@ -153,17 +157,37 @@ namespace Avatar.Tools
                         TreeViewItem SubChild5Item = new TreeViewItem();
                         SubChild5Item.Header = $"Tags: {PTag}";
                         Child2Item.Items.Add(SubChild5Item);
+
+                        //Convert to JSON format
+                        string pathtemp = "Tools/Templates/placeparticle.py";
                         
+                        jsons = File.ReadAllLines(pathtemp).ToList();
+                        string ParticleName = PName.Replace(".troy", "");
+
+                        string TagsTrue = "false";
+
+                        if (PTag.Contains("EyeCandy"))
+                        {
+                            TagsTrue = "true";
+                        }
+
+                        //Replace all settings in list
+                        var newList = jsons.Select(s => s.Replace("ParticleNameHere", ParticleName)).ToList();
+                        var newList2 = newList.Select(s => s.Replace("PosXYZ", PPos)).ToList();
+                        var newList3 = newList2.Select(s => s.Replace("MapParticleName", $"{ParticleName}_{n}")).ToList();
+                        var newList4 = newList3.Select(s => s.Replace("QualityName", PQuality)).ToList();
+                        var newList5 = newList4.Select(s => s.Replace("Eyecandytrue", TagsTrue)).ToList();
+                        
+                        
+                        //Write output
+                        File.AppendAllLines("Tools/Templates/particleoutput.py", newList5);
+
+                        
+
                     }
 
                     
                         
-                        
-                        
-
-
-
-
 
                 }
                 catch (Exception)
@@ -171,8 +195,21 @@ namespace Avatar.Tools
 
                 }
 
-
+                //Load json format to textbox
+                    
+                ShowJSON.Text = File.ReadAllText("Tools/Templates/particleoutput.py");
             }
+        }
+
+        private void ParticleSave_Click(object sender, RoutedEventArgs e)
+        {
+            //Save to Project
+            if (ShowJSON.Text != null)
+            {
+                File.WriteAllText("material_output/particles.py", ShowJSON.Text);
+                System.Windows.Forms.MessageBox.Show($"Map Particles will be added to your Map! \nMake sure your linked particle exist in materials.bin or as .troy in the path!" , "Done!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
         }
     }
 }

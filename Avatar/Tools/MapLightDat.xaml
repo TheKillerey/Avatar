@@ -28,7 +28,9 @@
                 </MenuItem>
             </Menu>
         </MaterialDesign:ColorZone>
-        <TreeView x:Name="LightTreeView" Margin="0,53,600,0">
+        <TreeView x:Name="LightTreeView" Margin="0,53,600,0"
+                 VirtualizingStackPanel.IsVirtualizing="True"
+                 VirtualizingStackPanel.VirtualizationMode="Recycling">
             <MaterialDesign:TreeViewAssist.AdditionalTemplate>
                 <DataTemplate>
                     <MaterialDesign:ColorZone
@@ -39,6 +41,7 @@
             </MaterialDesign:TreeViewAssist.AdditionalTemplate>
             <TreeViewItem x:Name="Root"
           Header="Light System"/>
+            
         </TreeView>
 
 

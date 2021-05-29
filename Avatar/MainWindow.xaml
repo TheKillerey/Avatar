@@ -102,7 +102,9 @@
         </MaterialDesign:ColorZone>
         <Grid x:Name="AssetFilesGrid" Margin="0,80,10,63" HorizontalAlignment="Right" Width="297">
             <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Center" Width="297" VerticalAlignment="Stretch" Background="#FF151C27">
-                <TreeView x:Name="AssetBox_Map"/>
+                <TreeView x:Name="AssetBox_Map"
+                 VirtualizingStackPanel.IsVirtualizing="True"
+                 VirtualizingStackPanel.VirtualizationMode="Recycling"/>
 
             </MaterialDesign:ColorZone>
         </Grid>

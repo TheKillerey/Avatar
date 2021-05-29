@@ -1,4 +1,4 @@
-﻿<MaterialDesignExtensions:MaterialWindow x:Name="DatParticleWindow" x:Class="Avatar.Tools.MapParticleDat"
+﻿<MaterialDesignExtensions:MaterialWindow
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,8 +6,9 @@
         xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:MaterialDesignExtensions="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
         xmlns:local="clr-namespace:Avatar.Tools"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Name="DatParticleWindow" x:Class="Avatar.Tools.MapParticleDat"
         mc:Ignorable="d"
-        Title="Avatar - DAT Particle Converter" Height="700" Width="1200" Background="#FF151C27" WindowStartupLocation="CenterScreen" Icon="/icon_mapeditor.png" WindowStyle="SingleBorderWindow" Topmost="True">
+        Title="Avatar - DAT Particle Converter" Height="700" Width="1200" Background="#FF151C27" WindowStartupLocation="CenterScreen" Icon="/icon_mapeditor.png" WindowStyle="SingleBorderWindow">
     <Grid>
         <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3">
             <Menu Background="#FF151C27">
@@ -20,7 +21,7 @@
                             <MaterialDesign:PackIcon Kind="FileCodeOutline"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem x:Name="ParticleSave" Header="Save as JSON">
+                    <MenuItem x:Name="ParticleSave" Header="Save to Project" Click="ParticleSave_Click">
                         <MenuItem.Icon>
                             <MaterialDesign:PackIcon Kind="ContentSave"/>
                         </MenuItem.Icon>
@@ -28,18 +29,22 @@
                 </MenuItem>
             </Menu>
         </MaterialDesign:ColorZone>
-        <TreeView x:Name="ParticleTreeView" Margin="0,53,600,0">
+        <TreeView x:Name="ParticleTreeView" Margin="0,53,600,0"
+                 VirtualizingPanel.IsVirtualizing="True"
+                 VirtualizingPanel.VirtualizationMode="Recycling">
             <MaterialDesign:TreeViewAssist.AdditionalTemplate>
                 <DataTemplate>
                     <MaterialDesign:ColorZone
               Mode="PrimaryLight"
-              CornerRadius="6">
-                    </MaterialDesign:ColorZone>
+              CornerRadius="6"/>
                 </DataTemplate>
             </MaterialDesign:TreeViewAssist.AdditionalTemplate>
             <TreeViewItem x:Name="Root"
           Header="Particle System"/>
         </TreeView>
+        <MaterialDesign:ColorZone HorizontalAlignment="Left" Margin="600,53,0,0" Height="631" Width="600" MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Background="#FF151C27">
+            <TextBox x:Name="ShowJSON" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="580" Height="611" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True"/>
+        </MaterialDesign:ColorZone>
 
 
 
