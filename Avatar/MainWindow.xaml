@@ -8,16 +8,16 @@
         xmlns:local="clr-namespace:Avatar"
         xmlns:VisualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core" x:Class="Avatar.MainWindow"
         mc:Ignorable="d"
-        Title="Avatar - MapEditor" Height="741" Width="1403" Background="#FF151C27" Icon="/icon_mapeditor.png" WindowStartupLocation="CenterScreen">
+        Title="Avatar - MapEditor" Height="778" Width="1409" Background="#FF151C27" Icon="/icon_mapeditor.png" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="33,658,10,0" Background="#FF151C27" Height="48">
-            <DockPanel Margin="23,0,0,0">
-                <Image Source="/icon_mapeditor.png" DockPanel.Dock="Right" RenderTransformOrigin="0.5,0.521" Width="48" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-                <TextBox x:Name="Selected_Path" TextWrapping="Wrap" Width="1200" IsReadOnly="True"/>
+        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="10,670,10,0" Background="#FF151C27" Height="48" VerticalAlignment="Bottom">
+            <DockPanel VerticalAlignment="Bottom">
+                <Image Source="/icon_mapeditor.png" DockPanel.Dock="Right" RenderTransformOrigin="0.5,0.521" Width="48" HorizontalAlignment="Right" VerticalAlignment="Bottom" Stretch="Fill" StretchDirection="Both"/>
+                <TextBox x:Name="Selected_Path" TextWrapping="Wrap" Width="1355" IsReadOnly="True" Height="46"/>
             </DockPanel>
         </MaterialDesign:ColorZone>
         <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Height="48">
@@ -101,20 +101,20 @@
             </Menu>
         </MaterialDesign:ColorZone>
         <Grid x:Name="AssetFilesGrid" Margin="0,80,10,63" HorizontalAlignment="Right" Width="297">
-            <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Center" Width="297" VerticalAlignment="Stretch" Background="#FF151C27">
+            <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Left" Width="297" VerticalAlignment="Stretch" Background="#FF151C27">
                 <TreeView x:Name="AssetBox_Map"
                  VirtualizingStackPanel.IsVirtualizing="True"
-                 VirtualizingStackPanel.VirtualizationMode="Recycling"/>
+                 VirtualizingStackPanel.VirtualizationMode="Recycling" HorizontalAlignment="Right"/>
 
             </MaterialDesign:ColorZone>
         </Grid>
-        <Grid x:Name="MapEditorGrid" Margin="10,80,312,63" RenderTransformOrigin="0.502,0.504">
+        <Grid x:Name="MapEditorGrid" Margin="10,80,335,63" RenderTransformOrigin="0.502,0.504">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="470*"/>
                 <ColumnDefinition Width="509*"/>
             </Grid.ColumnDefinitions>
-            <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Center" Width="468" VerticalAlignment="Stretch" Background="#FF151C27">
-                <Grid Margin="0,0,5,0">
+            <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" VerticalAlignment="Stretch" Background="#FF151C27" Margin="0,0,550,0" Grid.ColumnSpan="2">
+                <Grid HorizontalAlignment="Center" Width="512">
                     <Label x:Name="Map_Properties" Content="Map Properties:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                     <TextBox x:Name="Map_Name" HorizontalAlignment="Left" Margin="91,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Sets the name of your Map texture folder. Example: [assets\maps\kitpieces\srx\&quot;bildgewater&quot; ]"/>
                     <Label Content="Map Name:" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top"/>
@@ -206,10 +206,10 @@
                     </ComboBox>
                 </Grid>
             </MaterialDesign:ColorZone>
-            <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Center" Width="557" VerticalAlignment="Stretch" Background="#FF151C27" Grid.Column="1">
+            <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" VerticalAlignment="Stretch" Background="#FF151C27" Margin="512,0,0,0" Grid.ColumnSpan="2">
                 <Grid HorizontalAlignment="Center" Width="446">
                     <Label x:Name="Sun_Properties" Content="Sun Properties:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <Grid Margin="0,39,-51,0">
+                    <Grid Margin="-26,39,-26,0" HorizontalAlignment="Left">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>

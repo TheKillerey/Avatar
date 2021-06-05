@@ -30,7 +30,7 @@ using Xceed.Wpf.Toolkit.Core.Converters;
 using System.Drawing;
 using Egorozh.ColorPicker.Dialog;
 using Egorozh.ColorPicker;
-using System.CodeDom.Compiler;
+using System.Threading;
 
 namespace Avatar
 {
@@ -39,12 +39,13 @@ namespace Avatar
     /// </summary>
     public partial class MainWindow : MaterialWindow
     {
-
+        
         public MainWindow()
         {
-           
+
             InitializeComponent();
             
+
             //Load SR Templates
             foreach (string srtemp in srfiles)
             {
@@ -301,11 +302,11 @@ namespace Avatar
                         var fogmode = FogSet.SelectedIndex; //1 is disable
                         if (fogmode == 1)
                             {
-                                fogmodes = "";
+                                fogmodes = "\"DISABLE_DEPTH_FOG\" = \"1\"";
                             }
                         if (fogmode == 0)
                             {
-                                fogmodes = "\"DISABLE_DEPTH_FOG\" = \"1\"";
+                                fogmodes = "";
                             }
                         //--------------------------------------------------------
 
