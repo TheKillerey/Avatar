@@ -177,7 +177,11 @@ namespace Avatar
                 CloudFile.Header = "Cloud Map";
                 AssetBox_Map.Items.Add(CloudFile);
 
-                
+                TreeViewItem AllLayerFile = new TreeViewItem();
+                AllLayerFile.Header = "All Layer";
+                AssetBox_Map.Items.Add(AllLayerFile);
+
+
 
                 foreach (string FileName in dialog.FileNames)
                 {
@@ -220,7 +224,14 @@ namespace Avatar
                         CloudFile.Items.Add(file5);
                         //var rootcloud = AssetBox_Map.Items.Add(System.IO.Path.GetFileName(FileName));
                     }
-                   
+                    if (FileName.Contains(prefix_alllayers.Text))
+                    {
+                        TreeViewItem file6 = new TreeViewItem();
+                        file6.Header = System.IO.Path.GetFileName(FileName);
+                        AllLayerFile.Items.Add(file6);
+                        //var rootcloud = AssetBox_Map.Items.Add(System.IO.Path.GetFileName(FileName));
+                    }
+
 
                     //Get Path for visualization
                     var folderpath = System.IO.Path.GetDirectoryName(FileName);
@@ -233,8 +244,9 @@ namespace Avatar
                 count_mountain.Text = MountainFile.Items.Count.ToString();
                 count_ocean.Text = OceanFile.Items.Count.ToString();
                 count_cloud.Text = CloudFile.Items.Count.ToString();
+                count_alllayers.Text = AllLayerFile.Items.Count.ToString();
 
-                var totalfiles = BaseFile.Items.Count + InfernalFile.Items.Count + MountainFile.Items.Count + OceanFile.Items.Count + CloudFile.Items.Count;
+                var totalfiles = BaseFile.Items.Count + InfernalFile.Items.Count + MountainFile.Items.Count + OceanFile.Items.Count + AllLayerFile.Items.Count;
 
                 if (AssetBox_Map.Items.Count == 1)
                 {
@@ -350,18 +362,22 @@ namespace Avatar
                     var MountainfileCount = Int32.Parse(count_mountain.Text);
                     var OceanfileCount = Int32.Parse(count_ocean.Text);
                     var CloudfileCount = Int32.Parse(count_cloud.Text);
-                    
+                    var AllLayerfileCount = Int32.Parse(count_alllayers.Text);
+
                     int OBJsToCreate = BasefileCount + 1;
                     int OBJsToCreate2 = InfernalfileCount + 1;
                     int OBJsToCreate3 = MountainfileCount + 1;
                     int OBJsToCreate4 = OceanfileCount + 1;
                     int OBJsToCreate5 = CloudfileCount + 1;
+                    int OBJsToCreate6 = AllLayerfileCount + 1;
+
                     OBJFile[] OBJs = new OBJFile[OBJsToCreate];
                     OBJFile[] OBJ2s = new OBJFile[OBJsToCreate2];
                     OBJFile[] OBJ3s = new OBJFile[OBJsToCreate3];
                     OBJFile[] OBJ4s = new OBJFile[OBJsToCreate4];
                     OBJFile[] OBJ5s = new OBJFile[OBJsToCreate5];
-                    
+                    OBJFile[] OBJ6s = new OBJFile[OBJsToCreate6];
+
                     for (int i = 1; i < OBJsToCreate; i++)
                 {
                     
@@ -635,73 +651,141 @@ namespace Avatar
                 } //Ocean
                     
                     for (int f = 1; f < OBJsToCreate5; f++) //Cloud
-                {
+                    {
                     
 
-                    try
-                    {
-                        var fullpath = Selected_Path.Text + @"\" + $"room{f}{prefix_cloud.Text}.obj";
-                        var fullpathmtl = Selected_Path.Text + @"\" + $"room{f}{prefix_cloud.Text}.mtl";
-                        var mapname = Map_Name.Text.ToString();
+                        try
+                        {
+                            var fullpath = Selected_Path.Text + @"\" + $"room{f}{prefix_cloud.Text}.obj";
+                            var fullpathmtl = Selected_Path.Text + @"\" + $"room{f}{prefix_cloud.Text}.mtl";
+                            var mapname = Map_Name.Text.ToString();
+                        
+                            //Light Mode
+                            //--------------------------------------------------------
+                            var lightmodes = "";
+                            var lightmode = LightMode.SelectedIndex; //1 is baked
+                            if (lightmode == 1)
+                                {
+                                    lightmodes = "\"NO_BAKED_LIGHTING\" = \"1\"";
+                                }
+                            if (lightmode == 0)
+                                {
+                                    lightmodes = "";
+                                }
+                            //--------------------------------------------------------
+                        
+                            //FOG
+                            //--------------------------------------------------------
+                            var fogmodes = "";
+                            var fogmode = FogSet.SelectedIndex; //1 is disable
+                            if (fogmode == 1)
+                                {
+                                    fogmodes = "";
+                                }
+                            if (fogmode == 0)
+                                {
+                                    fogmodes = "\"DISABLE_DEPTH_FOG\" = \"1\"";
+                                }
+                            //--------------------------------------------------------
+                        
+                            //Premuliplied Alpha
+                            //--------------------------------------------------------
+                            var alphamodes = "";
+                            var alphamode = AlphaSet.SelectedIndex; //1 is disable
+                            if (alphamode == 1)
+                                {
+                                    alphamodes = "";
+                                }
+                            if (alphamode == 0)
+                                {
+                                    alphamodes = "\"PREMULTIPLIED_ALPHA\" = \"1\"";
+                                }
+                            //--------------------------------------------------------
+                            
+                            OBJ5s[f] = new OBJFile(fullpath);
+                            AddModels.AddModels.Add_Layer5(OBJ5s[f], $"MapGeo_Instance_room{f}{prefix_cloud.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{f}{prefix_cloud.Text}", cleanedmap, f, fullpathmtl, mapname, lightmodes, fogmodes, alphamodes);
+                            //System.Windows.Forms.MessageBox.Show($"MapGeo_Instance_room{f}{prefix_cloud.Text}", "Debug:", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                           
+                        
+                        }
+                        
+                        catch (Exception)
+                        {
+                            continue;
+                            //var fullpath = Selected_Path.Text + @"\" + $"room{f}{prefix_cloud.Text}.obj";
+                           // System.Windows.Forms.MessageBox.Show(Selected_Path.Text + @"\" + $"room{f}{prefix_cloud.Text}.obj" + " is missing and will be ignored!", "Error: File Missing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
 
-                        //Light Mode
-                        //--------------------------------------------------------
-                        var lightmodes = "";
-                        var lightmode = LightMode.SelectedIndex; //1 is baked
-                        if (lightmode == 1)
+                    } //Cloud
+
+                    for (int f = 1; f < OBJsToCreate6; f++) //AllLayers
+                    {
+
+
+                        try
+                        {
+                            var fullpath = Selected_Path.Text + @"\" + $"room{f}{prefix_alllayers.Text}.obj";
+                            var fullpathmtl = Selected_Path.Text + @"\" + $"room{f}{prefix_alllayers.Text}.mtl";
+                            var mapname = Map_Name.Text.ToString();
+
+                            //Light Mode
+                            //--------------------------------------------------------
+                            var lightmodes = "";
+                            var lightmode = LightMode.SelectedIndex; //1 is baked
+                            if (lightmode == 1)
                             {
                                 lightmodes = "\"NO_BAKED_LIGHTING\" = \"1\"";
                             }
-                        if (lightmode == 0)
+                            if (lightmode == 0)
                             {
                                 lightmodes = "";
                             }
-                        //--------------------------------------------------------
+                            //--------------------------------------------------------
 
-                        //FOG
-                        //--------------------------------------------------------
-                        var fogmodes = "";
-                        var fogmode = FogSet.SelectedIndex; //1 is disable
-                        if (fogmode == 1)
+                            //FOG
+                            //--------------------------------------------------------
+                            var fogmodes = "";
+                            var fogmode = FogSet.SelectedIndex; //1 is disable
+                            if (fogmode == 1)
                             {
                                 fogmodes = "";
                             }
-                        if (fogmode == 0)
+                            if (fogmode == 0)
                             {
                                 fogmodes = "\"DISABLE_DEPTH_FOG\" = \"1\"";
                             }
-                        //--------------------------------------------------------
+                            //--------------------------------------------------------
 
-                        //Premuliplied Alpha
-                        //--------------------------------------------------------
-                        var alphamodes = "";
-                        var alphamode = AlphaSet.SelectedIndex; //1 is disable
-                        if (alphamode == 1)
+                            //Premuliplied Alpha
+                            //--------------------------------------------------------
+                            var alphamodes = "";
+                            var alphamode = AlphaSet.SelectedIndex; //1 is disable
+                            if (alphamode == 1)
                             {
                                 alphamodes = "";
                             }
-                        if (alphamode == 0)
+                            if (alphamode == 0)
                             {
                                 alphamodes = "\"PREMULTIPLIED_ALPHA\" = \"1\"";
                             }
-                        //--------------------------------------------------------
-                        
-                        OBJ5s[f] = new OBJFile(fullpath);
-                        AddModels.AddModels.Add_Layer5(OBJ5s[f], $"MapGeo_Instance_room{f}{prefix_cloud.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{f}{prefix_cloud.Text}", cleanedmap, f, fullpathmtl, mapname, lightmodes, fogmodes, alphamodes);
-                        //System.Windows.Forms.MessageBox.Show($"MapGeo_Instance_room{f}{prefix_cloud.Text}", "Debug:", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                       
+                            //--------------------------------------------------------
 
-                    }
+                            OBJ6s[f] = new OBJFile(fullpath);
+                            AddModels.AddModels.Add_Layer5(OBJ6s[f], $"MapGeo_Instance_room{f}{prefix_alllayers.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{f}{prefix_alllayers.Text}", cleanedmap, f, fullpathmtl, mapname, lightmodes, fogmodes, alphamodes);
+                            //System.Windows.Forms.MessageBox.Show($"MapGeo_Instance_room{f}{prefix_cloud.Text}", "Debug:", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    catch (Exception)
-                    {
-                        continue;
-                        //var fullpath = Selected_Path.Text + @"\" + $"room{f}{prefix_cloud.Text}.obj";
-                       // System.Windows.Forms.MessageBox.Show(Selected_Path.Text + @"\" + $"room{f}{prefix_cloud.Text}.obj" + " is missing and will be ignored!", "Error: File Missing", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
 
-                } //Cloud
-                    } //Auto Layers
+                        }
+
+                        catch (Exception)
+                        {
+                            continue;
+                            //var fullpath = Selected_Path.Text + @"\" + $"room{f}{prefix_cloud.Text}.obj";
+                            // System.Windows.Forms.MessageBox.Show(Selected_Path.Text + @"\" + $"room{f}{prefix_cloud.Text}.obj" + " is missing and will be ignored!", "Error: File Missing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+
+                    } //AllLayers
+                } //Auto Layers
                 if (layers == 2)
                 {
                     layern = "Layer 1";
@@ -1293,6 +1377,11 @@ namespace Avatar
             {
                 loadingscreenpic.Source = new BitmapImage(new Uri(dialog.FileName));
             }
+        }
+
+        private void SliderEnd_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
         }
     }
 }

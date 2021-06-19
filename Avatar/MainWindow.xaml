@@ -104,7 +104,7 @@
             <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Left" Width="297" VerticalAlignment="Stretch" Background="#FF151C27">
                 <TreeView x:Name="AssetBox_Map"
                  VirtualizingStackPanel.IsVirtualizing="True"
-                 VirtualizingStackPanel.VirtualizationMode="Recycling" HorizontalAlignment="Right"/>
+                 VirtualizingStackPanel.VirtualizationMode="Recycling" HorizontalAlignment="Left"/>
 
             </MaterialDesign:ColorZone>
         </Grid>
@@ -148,7 +148,7 @@
                     <TextBox x:Name="prefix_ocean" HorizontalAlignment="Left" Margin="190,474,0,0" Text="_ocean" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <Label Content="Layer 5" HorizontalAlignment="Left" Margin="10,516,0,0" VerticalAlignment="Top"/>
                     <TextBox x:Name="prefix_cloud" HorizontalAlignment="Left" Margin="190,516,0,0" Text="_cloud" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Separator HorizontalAlignment="Left" Margin="53,418,0,0" VerticalAlignment="Top" Height="13" Width="240" RenderTransformOrigin="0.5,0.5">
+                    <Separator HorizontalAlignment="Left" Margin="22,449,0,0" VerticalAlignment="Top" Height="13" Width="302" RenderTransformOrigin="0.5,0.5">
                         <Separator.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -158,7 +158,7 @@
                             </TransformGroup>
                         </Separator.RenderTransform>
                     </Separator>
-                    <Separator HorizontalAlignment="Left" Margin="-49,418,0,0" VerticalAlignment="Top" Height="13" Width="240" RenderTransformOrigin="0.5,0.5">
+                    <Separator HorizontalAlignment="Left" Margin="-80,449,0,0" VerticalAlignment="Top" Height="13" Width="302" RenderTransformOrigin="0.5,0.5">
                         <Separator.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -168,12 +168,13 @@
                             </TransformGroup>
                         </Separator.RenderTransform>
                     </Separator>
-                    <Grid Margin="72,328,289,4">
+                    <Grid Margin="72,328,339,4">
                         <Image Source="/Images/dragon_square.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center" Height="35" Width="35" Margin="0,14,0,0" ToolTip="Basic Map"/>
                         <Image Source="/Images/dragon_square_fire.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center" Height="35" Width="35" Margin="0,56,0,0" ToolTip="Infernal Map"/>
                         <Image Source="/Images/dragon_square_earth.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center" Height="35" Width="35" Margin="0,99,0,0" ToolTip="Mountain Map"/>
                         <Image Source="/Images/dragon_square_water.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center" Height="35" Width="35" Margin="0,142,0,0" ToolTip="Ocean Map"/>
                         <Image Source="/Images/dragon_air_square.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center" Height="35" Width="35" Margin="0,185,0,0" ToolTip="Cloud Map"/>
+                        <Image Source="/Images/dragon_square_elder.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center" Height="35" Width="35" Margin="0,230,0,0" ToolTip="Cloud Map"/>
                     </Grid>
                     <TextBox x:Name="count_base" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="364,344,0,0" ToolTip="" IsReadOnly="True"/>
                     <TextBox x:Name="count_infernal" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="364,388,0,0" ToolTip="" IsReadOnly="True"/>
@@ -204,6 +205,9 @@
                         <ComboBoxItem x:Name="EnableAlpha" Content="Enable" ToolTip=""/>
                         <ComboBoxItem x:Name="DisableAlpha" Content="Disable" ToolTip=""/>
                     </ComboBox>
+                    <Label Content="All Layers" HorizontalAlignment="Left" Margin="10,565,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="prefix_alllayers" HorizontalAlignment="Left" Margin="190,564,0,0" Text="_alllayers" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="count_alllayers" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="364,565,0,0" ToolTip="" IsReadOnly="True"/>
                 </Grid>
             </MaterialDesign:ColorZone>
             <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" VerticalAlignment="Stretch" Background="#FF151C27" Margin="512,0,0,0" Grid.ColumnSpan="2">
@@ -331,17 +335,17 @@
               Margin="102,0,0,4" Grid.RowSpan="2" Grid.Row="7">
                             <TextBox
                 x:Name="sliderMaxH"
-                Text="50000"
+                Text="10000"
                 Margin="4 0"
                 VerticalAlignment="Bottom" />
                             <Slider x:Name="SliderStart"
-                Value="-1000"
+                Value="-600"
                 Width="280"
-                Minimum="-50000"
+                Minimum="-10000"
                 Maximum="{Binding Text, ElementName=sliderMaxH, Mode=OneWay}"
                 Style="{StaticResource MaterialDesignDiscreteSlider}"
-                ToolTip="MaterialDesignDiscreteSlider"
-                TickFrequency="5000"
+                ToolTip=""
+                TickFrequency="100"
                 TickPlacement="BottomRight" />
                         </StackPanel>
                         <ComboBox x:Name="Bloom" HorizontalAlignment="Left" Grid.Row="13" Width="55" Margin="164,0,0,0" SelectedIndex="0">
@@ -353,18 +357,18 @@
                             Margin="102,32,0,6" Grid.RowSpan="3" Grid.Row="7">
                             <TextBox
                                 x:Name="sliderMaxH1"
-                                Text="50000"
+                                Text="10000"
                                 Margin="4 0"
                                 VerticalAlignment="Bottom" />
                             <Slider x:Name="SliderEnd"
-                                Value="-20000"
+                                Value="800"
                                 Width="280"
-                                Minimum="-50000"
+                                Minimum="-10000"
                                 Maximum="{Binding Text, ElementName=sliderMaxH, Mode=OneWay}"
                                 Style="{StaticResource MaterialDesignDiscreteSlider}"
-                                ToolTip="MaterialDesignDiscreteSlider"
-                                TickFrequency="5000"
-                                TickPlacement="BottomRight" SmallChange="0" />
+                                ToolTip=""
+                                TickFrequency="100"
+                                TickPlacement="BottomRight" SmallChange="0" ValueChanged="SliderEnd_ValueChanged" />
                         </StackPanel>
                         <Label Content="Fog End:" HorizontalAlignment="Left" Margin="8,0,0,0" VerticalAlignment="Center" Grid.Row="9"/>
                         <Button x:Name="CPSun" Content="" HorizontalAlignment="Left" Margin="408,0,0,0" VerticalAlignment="Center" Height="25" Width="24" Click="Button_Click" RenderTransformOrigin="50.646,30.632" Background="#FF8C816C" MaterialDesign:ShadowAssist.ShadowDepth="Depth3"

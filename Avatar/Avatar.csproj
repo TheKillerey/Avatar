@@ -17,6 +17,7 @@
     <None Remove="Images\dragon_air_square.png" />
     <None Remove="Images\dragon_square.png" />
     <None Remove="Images\dragon_square_earth.png" />
+    <None Remove="Images\dragon_square_elder.png" />
     <None Remove="Images\dragon_square_fire.png" />
     <None Remove="Images\dragon_square_water.png" />
     <None Remove="Tools\Template_AvatarSplash.png" />
@@ -53,6 +54,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\dragon_square_earth.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\dragon_square_elder.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\dragon_square_fire.png">
