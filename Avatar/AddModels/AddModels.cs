@@ -64,11 +64,11 @@ namespace Avatar.AddModels
             mgeo.AddModel(room);
 
             //Porting material file to league format
-            string ShaderPath = "MapFile/ShaderTemp/DefaultEnv_Flat_AlphaTest.py";
+            string ShaderPath = "MapFile/ShaderTemp/SRX_Blend_Infernal_Ground.py";
             List<string> materials = new List<string>();
             materials = File.ReadAllLines(ShaderPath).ToList();
             
-            
+            //Read Material File
             string number = $"{i}";
             string readfile = File.ReadLines($@"{fullpath}").Skip(12).Take(1).First();
             
@@ -104,7 +104,7 @@ namespace Avatar.AddModels
             mgeo.AddModel(room);
 
             //Porting material file to league format
-            string ShaderPath = "MapFile/ShaderTemp/DefaultEnv_Flat_AlphaTest.py";
+            string ShaderPath = "MapFile/ShaderTemp/SRX_Blend_Earth_Ground.py";
             List<string> materials = new List<string>();
             materials = File.ReadAllLines(ShaderPath).ToList();
             
@@ -144,7 +144,7 @@ namespace Avatar.AddModels
             mgeo.AddModel(room);
 
             //Porting material file to league format
-            string ShaderPath = "MapFile/ShaderTemp/DefaultEnv_Flat_AlphaTest.py";
+            string ShaderPath = "MapFile/ShaderTemp/SRX_Blend_Ocean.py";
             List<string> materials = new List<string>();
             materials = File.ReadAllLines(ShaderPath).ToList();
             
@@ -184,7 +184,7 @@ namespace Avatar.AddModels
             mgeo.AddModel(room);
 
             //Porting material file to league format
-            string ShaderPath = "MapFile/ShaderTemp/DefaultEnv_Flat_AlphaTest.py";
+            string ShaderPath = "MapFile/ShaderTemp/SRX_Blend_Cloud_Ground.py";
             List<string> materials = new List<string>();
             materials = File.ReadAllLines(ShaderPath).ToList();
             

@@ -84,6 +84,18 @@
     <None Update="MapFile\ShaderTemp\DefaultEnv_Flat_AlphaTest.py">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="MapFile\ShaderTemp\SRX_Blend_Cloud_Ground.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="MapFile\ShaderTemp\SRX_Blend_Earth_Ground.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="MapFile\ShaderTemp\SRX_Blend_Infernal_Ground.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="MapFile\ShaderTemp\SRX_Blend_Ocean.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="ritobin\hashes\hashes.binentries.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

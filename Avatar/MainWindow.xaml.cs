@@ -771,7 +771,7 @@ namespace Avatar
                             //--------------------------------------------------------
 
                             OBJ6s[f] = new OBJFile(fullpath);
-                            AddModels.AddModels.Add_Layer5(OBJ6s[f], $"MapGeo_Instance_room{f}{prefix_alllayers.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{f}{prefix_alllayers.Text}", cleanedmap, f, fullpathmtl, mapname, lightmodes, fogmodes, alphamodes);
+                            AddModels.AddModels.Add_AllLayers(OBJ6s[f], $"MapGeo_Instance_room{f}{prefix_alllayers.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{f}{prefix_alllayers.Text}", cleanedmap, f, fullpathmtl, mapname, lightmodes, fogmodes, alphamodes);
                             //System.Windows.Forms.MessageBox.Show($"MapGeo_Instance_room{f}{prefix_cloud.Text}", "Debug:", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
