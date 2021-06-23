@@ -18,26 +18,27 @@
         paramValues: list[embed] = {
             StaticMaterialShaderParamDef {
                 name: string = "Tint_Color"
-                value: vec4 = { -0.075000003, -0.0399999991, -0.0299999993, 0 }
+                value: vec4 = { -0.0700000003, -0.0399999991, -0.0199999996, 0 }
             }
             StaticMaterialShaderParamDef {
                 name: string = "Spec_Color"
-                value: vec4 = { 0.650980413, 0.666666687, 0.807843149, 1 }
+                value: vec4 = { 0.486274511, 0.839215696, 1, 1 }
             }
             StaticMaterialShaderParamDef {
                 name: string = "Specular_Min_Max"
-                value: vec4 = { 0.100000001, 0.649999976, 0, 0 }
+                value: vec4 = { 0.219999999, 0.620000005, 0, 0 }
             }
             StaticMaterialShaderParamDef {
                 name: string = "Specular_Intensity"
-                value: vec4 = { 0.349999994, 0, 0, 0 }
+                value: vec4 = { 0.600000024, 0, 0, 0 }
             }
             StaticMaterialShaderParamDef {
                 name: string = "Specular_Mask_Distance"
+                value: vec4 = { 0.200000003, 0, 0, 0 }
             }
             StaticMaterialShaderParamDef {
                 name: string = "Transition_Opacity"
-                value: vec4 = { 0.600000024, 0, 0, 0 }
+                value: vec4 = { 1, 0, 0, 0 }
             }
         }
         switches: list[embed] = {
@@ -47,6 +48,7 @@
             }
             StaticMaterialSwitchDef {
                 name: string = "ENABLE_TRANSITION_FADE"
+                on: bool = false
             }
         }
         shaderMacros: map[string,string] = {

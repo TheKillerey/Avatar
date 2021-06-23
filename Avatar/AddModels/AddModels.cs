@@ -21,7 +21,7 @@ namespace Avatar.AddModels
             mgeo.AddModel(room);
 
             //Porting material file to league format
-            string ShaderPath = "MapFile/ShaderTemp/DefaultEnv_Flat_AlphaTest.py";
+            string ShaderPath = "MapFile/ShaderTemp/SRX_Blend_Master.py";
             List<string> materials = new List<string>();
             materials = File.ReadAllLines(ShaderPath).ToList();
             
@@ -64,7 +64,7 @@ namespace Avatar.AddModels
             mgeo.AddModel(room);
 
             //Porting material file to league format
-            string ShaderPath = "MapFile/ShaderTemp/SRX_Blend_Infernal_Ground.py";
+            string ShaderPath = "MapFile/ShaderTemp/SRX_Blend_Master.py";
             List<string> materials = new List<string>();
             materials = File.ReadAllLines(ShaderPath).ToList();
             
@@ -104,7 +104,7 @@ namespace Avatar.AddModels
             mgeo.AddModel(room);
 
             //Porting material file to league format
-            string ShaderPath = "MapFile/ShaderTemp/SRX_Blend_Earth_Ground.py";
+            string ShaderPath = "MapFile/ShaderTemp/SRX_Blend_Master.py";
             List<string> materials = new List<string>();
             materials = File.ReadAllLines(ShaderPath).ToList();
             
@@ -144,7 +144,7 @@ namespace Avatar.AddModels
             mgeo.AddModel(room);
 
             //Porting material file to league format
-            string ShaderPath = "MapFile/ShaderTemp/SRX_Blend_Ocean.py";
+            string ShaderPath = "MapFile/ShaderTemp/SRX_Blend_Master.py";
             List<string> materials = new List<string>();
             materials = File.ReadAllLines(ShaderPath).ToList();
             
@@ -184,7 +184,7 @@ namespace Avatar.AddModels
             mgeo.AddModel(room);
 
             //Porting material file to league format
-            string ShaderPath = "MapFile/ShaderTemp/SRX_Blend_Cloud_Ground.py";
+            string ShaderPath = "MapFile/ShaderTemp/SRX_Blend_Master.py";
             List<string> materials = new List<string>();
             materials = File.ReadAllLines(ShaderPath).ToList();
             

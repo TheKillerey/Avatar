@@ -81,6 +81,9 @@
     <None Update="MapFile\base_srx.materials.py">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="MapFile\ShaderTemp\SRX_Blend_Master.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="MapFile\ShaderTemp\DefaultEnv_Flat_AlphaTest.py">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
