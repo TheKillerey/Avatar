@@ -19,6 +19,25 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/MaterialDesignDarkTheme.xaml" />
                 
             </ResourceDictionary.MergedDictionaries>
+            <!-- primary -->
+            <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#dd163b"/>
+            <SolidColorBrush x:Key="Background" Color="#dd163b"/>
+            <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="#FFFFFF"/>
+            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#dd163b"/>
+            <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#FFFFFF"/>
+            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#dd163b"/>
+            <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="#FFFFFF"/>
+            
+            <!-- accent -->
+            <SolidColorBrush x:Key="SecondaryHueMidBrush" Color="#151c27"/>
+            <SolidColorBrush x:Key="SecondaryHueMidForegroundBrush" Color="#FFFFFF"/>
+            
+            <!-- Others -->
+
+            <SolidColorBrush x:Key="MaterialDesignPaper" Color="#151c27"/>
+
+            <SolidColorBrush x:Key="MaterialDesignToolTipBackground" Color="Gainsboro"/>
+            
         </ResourceDictionary>
     </Application.Resources>
     

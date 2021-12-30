@@ -13,6 +13,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="avatar_background.png" />
+    <None Remove="dragon_square_chemtech.png" />
+    <None Remove="dragon_square_hextech.png" />
     <None Remove="icon_mapeditor.png" />
     <None Remove="Images\dragon_air_square.png" />
     <None Remove="Images\dragon_square.png" />
@@ -21,6 +24,11 @@
     <None Remove="Images\dragon_square_fire.png" />
     <None Remove="Images\dragon_square_water.png" />
     <None Remove="Tools\Template_AvatarSplash.png" />
+    <Resource Include="avatar_background.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="dragon_square_chemtech.png" />
+    <Resource Include="dragon_square_hextech.png" />
     <Resource Include="Images\dragon_air_square.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -37,6 +45,7 @@
     <PackageReference Include="HelixToolkit.Wpf" Version="2.16.1" />
     <PackageReference Include="LeagueToolkit" Version="2.4.2" />
     <PackageReference Include="LeagueToolkit.Meta.Classes" Version="11.10.374.3777" />
+    <PackageReference Include="LiveSearchTextBoxControl" Version="0.1.1" />
     <PackageReference Include="MaterialDesignColors" Version="2.0.0" />
     <PackageReference Include="MaterialDesignExtensions" Version="3.3.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
@@ -75,10 +84,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="MapConvert\room.wgeo">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="MapFile\base_srx.mapgeo">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="MapFile\base_srx.materials.py">
+    <None Update="MapFile\ShaderTemp\DefaultEnv_Flat_AlphaTest_Decal.py">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="MapFile\ShaderTemp\SRX_Blend_Master.py">
@@ -100,28 +112,31 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ritobin\hashes\hashes.binentries.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ritobin\hashes\hashes.binfields.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ritobin\hashes\hashes.binhashes.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ritobin\hashes\hashes.bintypes.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ritobin\hashes\hashes.game.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ritobin\hashes\hashes.lcu.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ritobin\ritobin2txt.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ritobin\ritobin_cli.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ritobin\txt2ritobin.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Templates\ARAM\base.materials.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -1,27 +1,35 @@
 ﻿<MaterialDesignExtensions:MaterialWindow
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:MaterialDesignExtensions="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"                                 
         xmlns:local="clr-namespace:Avatar"
-        xmlns:VisualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core" x:Class="Avatar.MainWindow"
+        xmlns:VisualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core" xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" xmlns:liveSearchTextBoxControl="clr-namespace:LiveSearchTextBoxControl;assembly=LiveSearchTextBoxControl" x:Class="Avatar.MainWindow"
         mc:Ignorable="d"
-        Title="Avatar - MapEditor" Height="778" Width="1409" Background="#FF151C27" Icon="/icon_mapeditor.png" WindowStartupLocation="CenterScreen">
+        Title="Avatar - MapEditor" Height="778" Width="1409" Background="#FF151C27" Icon="/icon_mapeditor.png" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
+        <Border>
+            <Border.Effect>
+                <BlurEffect Radius="10" RenderingBias="Performance" KernelType="Gaussian"/>
+            </Border.Effect>
+            <Image Source="/avatar_background.png"/>
+        </Border>
+
         <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="10,670,10,0" Background="#FF151C27" Height="48" VerticalAlignment="Bottom">
             <DockPanel VerticalAlignment="Bottom">
                 <Image Source="/icon_mapeditor.png" DockPanel.Dock="Right" RenderTransformOrigin="0.5,0.521" Width="48" HorizontalAlignment="Right" VerticalAlignment="Bottom" Stretch="Fill" StretchDirection="Both"/>
-                <TextBox x:Name="Selected_Path" TextWrapping="Wrap" Width="1355" IsReadOnly="True" Height="46"/>
+                <TextBox x:Name="Selected_Path" TextWrapping="Wrap" Width="1355" IsReadOnly="True" Height="46" CaretBrush="#FFDD163B"/>
             </DockPanel>
         </MaterialDesign:ColorZone>
-        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Height="48">
-            <Menu Background="#FF151C27">
+        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Height="48" Background="#FFDD163B">
+            <Menu Background="#FF151C27" Margin="0,0,0,4">
                 <MenuItem x:Name="FileButton" Header="File" Click="MenuItem_Click">
                     <MenuItem.Icon>
                         <MaterialDesign:PackIcon Kind="File"/>
@@ -32,6 +40,16 @@
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem x:Name="MAPGEOSaveButton" Header="Save MAPGEO" Click="OnMapgeoFileSave_Click">
+                        <MenuItem.Icon>
+                            <MaterialDesign:PackIcon Kind="ContentSave"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="MAPGEOOpenButton" Header="Open MAPGEO File" Click="MAPGEOOpenButton_Click">
+                        <MenuItem.Icon>
+                            <MaterialDesign:PackIcon Kind="FileCodeOutline"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="MAPGEOAddSaveButton" Header="Save loaded MAPGEO File" Click="MAPGEOAddSaveButton_Click">
                         <MenuItem.Icon>
                             <MaterialDesign:PackIcon Kind="ContentSave"/>
                         </MenuItem.Icon>
@@ -70,9 +88,41 @@
                         </MenuItem>
 
                     </MenuItem>
+                    <MenuItem x:Name="MapConvertButton" Header="Map Convert">
+                        <MenuItem.Icon>
+                            <MaterialDesign:PackIcon Kind="Sitemap"/>
+                        </MenuItem.Icon>
+                        <MenuItem x:Name="NVRConvertButton" Header="Convert NVR Files" Click="NVRConvertButton_Click">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="Map"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem x:Name="WGEOConvertButton" Header="Convert WGEO Files" Click="WGEOConvertButton_Click">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="Map"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem x:Name="MGEOConvertButton" Header="Convert MGEO Files" Click="MGEOConvertButton_Click">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="Map"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+
+                    </MenuItem>
+                    <MenuItem x:Name="MapEditorButton" Header="Map Editor">
+                        <MenuItem.Icon>
+                            <MaterialDesign:PackIcon Kind="MapAdd"/>
+                        </MenuItem.Icon>
+                        <MenuItem x:Name="MATEditorButton" Header="Map Material Editor" Click="MATEditorButton_Click">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="MaterialDesign"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+
+                    </MenuItem>
 
                 </MenuItem>
-                <MenuItem x:Name="TemplatesButton" Header="Templates" Click="TemplatesButton_Click">
+                <MenuItem x:Name="TemplatesButton" Header="Templates" Click="TemplatesButton_Click" IsEnabled="False">
                     <MenuItem.Icon>
                         <MaterialDesign:PackIcon Kind="PaletteOutline"/>
                     </MenuItem.Icon>
@@ -100,120 +150,125 @@
 
             </Menu>
         </MaterialDesign:ColorZone>
-        <Grid x:Name="AssetFilesGrid" Margin="0,80,10,63" HorizontalAlignment="Right" Width="297">
-            <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Left" Width="297" VerticalAlignment="Stretch" Background="#FF151C27">
+        <Grid x:Name="AssetFilesGrid" Margin="0,80,10,63" HorizontalAlignment="Right" Width="297" Background="#FFDD163B">
+            <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Center" Width="288" VerticalAlignment="Stretch" Background="#FF151C27" Margin="0,4,0,4">
                 <TreeView x:Name="AssetBox_Map"
-                 VirtualizingStackPanel.IsVirtualizing="True"
-                 VirtualizingStackPanel.VirtualizationMode="Recycling" HorizontalAlignment="Left"/>
+                 VirtualizingPanel.IsVirtualizing="True"
+                 VirtualizingPanel.VirtualizationMode="Recycling" HorizontalAlignment="Center" Width="297"/>
 
             </MaterialDesign:ColorZone>
         </Grid>
-        <Grid x:Name="MapEditorGrid" Margin="10,80,335,63" RenderTransformOrigin="0.502,0.504">
+        <Grid x:Name="MapEditorGrid" Margin="10,80,335,63" RenderTransformOrigin="0.502,0.504" Background="#FFDD163B">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="470*"/>
-                <ColumnDefinition Width="509*"/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" VerticalAlignment="Stretch" Background="#FF151C27" Margin="0,0,550,0" Grid.ColumnSpan="2">
-                <Grid HorizontalAlignment="Center" Width="512">
+            <MaterialDesign:ColorZone x:Name="MapProp" MaterialDesign:ShadowAssist.ShadowDepth="Depth3" VerticalAlignment="Stretch" Background="#FF151C27" Margin="4,4,4,4">
+                <Grid HorizontalAlignment="Center" Width="1064">
                     <Label x:Name="Map_Properties" Content="Map Properties:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <TextBox x:Name="Map_Name" HorizontalAlignment="Left" Margin="91,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Sets the name of your Map texture folder. Example: [assets\maps\kitpieces\srx\&quot;bildgewater&quot; ]"/>
-                    <Label Content="Map Name:" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Light Mode:" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="LightMode" HorizontalAlignment="Left" Margin="91,90,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="1">
+                    <TextBox x:Name="Map_Name" HorizontalAlignment="Left" Margin="151,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Sets the name of your Map texture folder. Example: [assets\maps\kitpieces\srx\&quot;bildgewater&quot; ]" CaretBrush="#FFDD163B"/>
+                    <Label Content="Map Name:" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Light Mode:" HorizontalAlignment="Left" Margin="290,48,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="LightMode" HorizontalAlignment="Left" Margin="371,47,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="1">
                         <ComboBoxItem x:Name="DynamicLight" Content="Dynamic Light" ToolTip="Disables the bake mode and enables League Dynamic Sun Light. Set Lightmap Color Scale to a low number or 0."/>
                         <ComboBoxItem x:Name="BakedLight" Content="Baked Light" ToolTip="Uses the baked textures only. Sun Properties is not needed! "/>
                     </ComboBox>
-                    <Label Content="FOG:" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="FogSet" HorizontalAlignment="Left" Margin="91,130,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
+                    <Label Content="FOG:" HorizontalAlignment="Left" Margin="290,76,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="FogSet" HorizontalAlignment="Left" Margin="371,76,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
                         <ComboBoxItem x:Name="EnableFog" Content="Enable" ToolTip="Enables FOG for your League Map."/>
                         <ComboBoxItem x:Name="DisableFog" Content="Disable" ToolTip="Disables FOG for your League Map."/>
                     </ComboBox>
-                    <Label Content="Layers:" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="LayerMode" HorizontalAlignment="Left" Margin="91,169,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="1">
+                    <Label Content="Layers:" HorizontalAlignment="Left" Margin="290,104,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="LayerMode" HorizontalAlignment="Left" Margin="371,103,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="1">
                         <ComboBoxItem x:Name="AllLayersMode" Content="All Layers" ToolTip="Set all loaded models to All Layers. Perfect for testing on Elemental Rift."/>
                         <ComboBoxItem x:Name="AutoLayersMode" Content="Auto Layers" ToolTip="Set automatically all layers based on their name for Elemental Rift. Perfect for release."/>
                         <ComboBoxItem x:Name="OneLayerMode" Content="1 Layer" ToolTip="Set all loaded models to 1 Layer. Best for TFT or ARAM."/>
                     </ComboBox>
-                    <Separator HorizontalAlignment="Center" Margin="0,281,0,0" VerticalAlignment="Top" Height="13" Width="462"/>
-                    <Label Content="Layer" HorizontalAlignment="Left" Margin="10,299,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <Label Content="Dragon" HorizontalAlignment="Left" Margin="97,299,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <Label Content="_prefix" HorizontalAlignment="Left" Margin="190,299,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <Label Content="Layer 1" HorizontalAlignment="Left" Margin="10,345,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="prefix_base" HorizontalAlignment="Left" Margin="190,344,0,0" Text="_base" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="Layer 2" HorizontalAlignment="Left" Margin="10,389,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="prefix_infernal" HorizontalAlignment="Left" Margin="190,388,0,0" Text="_infernal" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="Layer 3" HorizontalAlignment="Left" Margin="10,432,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="prefix_mountain" HorizontalAlignment="Left" Margin="190,431,0,0" Text="_mountain" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="Layer 4" HorizontalAlignment="Left" Margin="10,474,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="prefix_ocean" HorizontalAlignment="Left" Margin="190,474,0,0" Text="_ocean" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="Layer 5" HorizontalAlignment="Left" Margin="10,516,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="prefix_cloud" HorizontalAlignment="Left" Margin="190,516,0,0" Text="_cloud" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Separator HorizontalAlignment="Left" Margin="22,449,0,0" VerticalAlignment="Top" Height="13" Width="302" RenderTransformOrigin="0.5,0.5">
-                        <Separator.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="90"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Separator.RenderTransform>
-                    </Separator>
-                    <Separator HorizontalAlignment="Left" Margin="-80,449,0,0" VerticalAlignment="Top" Height="13" Width="302" RenderTransformOrigin="0.5,0.5">
-                        <Separator.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="90"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Separator.RenderTransform>
-                    </Separator>
-                    <Grid Margin="72,328,339,4">
+                    <Label Content="Layer" HorizontalAlignment="Left" Margin="532,50,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Content="Dragon" HorizontalAlignment="Left" Margin="600,50,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Content="_prefix" HorizontalAlignment="Left" Margin="694,51,0,0" VerticalAlignment="Top" FontWeight="Bold" RenderTransformOrigin="0.484,0.523"/>
+                    <Label Content="Layer 1" HorizontalAlignment="Left" Margin="532,91,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="prefix_base" HorizontalAlignment="Left" Margin="655,91,0,0" Text="_base" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Layer 2" HorizontalAlignment="Left" Margin="532,135,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="prefix_infernal" HorizontalAlignment="Left" Margin="655,135,0,0" Text="_infernal" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Layer 3" HorizontalAlignment="Left" Margin="532,178,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="prefix_mountain" HorizontalAlignment="Left" Margin="655,178,0,0" Text="_mountain" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Layer 4" HorizontalAlignment="Left" Margin="532,220,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="prefix_ocean" HorizontalAlignment="Left" Margin="655,221,0,0" Text="_ocean" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Layer 5" HorizontalAlignment="Left" Margin="532,262,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="prefix_cloud" HorizontalAlignment="Left" Margin="655,263,0,0" Text="_cloud" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Grid Margin="578,74,392,162">
                         <Image Source="/Images/dragon_square.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center" Height="35" Width="35" Margin="0,14,0,0" ToolTip="Basic Map"/>
                         <Image Source="/Images/dragon_square_fire.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center" Height="35" Width="35" Margin="0,56,0,0" ToolTip="Infernal Map"/>
                         <Image Source="/Images/dragon_square_earth.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center" Height="35" Width="35" Margin="0,99,0,0" ToolTip="Mountain Map"/>
                         <Image Source="/Images/dragon_square_water.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center" Height="35" Width="35" Margin="0,142,0,0" ToolTip="Ocean Map"/>
                         <Image Source="/Images/dragon_air_square.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center" Height="35" Width="35" Margin="0,185,0,0" ToolTip="Cloud Map"/>
-                        <Image Source="/Images/dragon_square_elder.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center" Height="35" Width="35" Margin="0,230,0,0" ToolTip="Cloud Map"/>
+                        <Image Source="/dragon_square_hextech.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center" Height="35" Width="35" Margin="0,230,0,0" ToolTip="Cloud Map"/>
+                        <Image Source="/dragon_square_chemtech.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center" Height="35" Width="34" Margin="0,275,0,0" ToolTip="Cloud Map"/>
+                        <Image Source="/Images/dragon_square_elder.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center" Height="35" Width="34" Margin="0,320,0,0" ToolTip="Cloud Map"/>
                     </Grid>
-                    <TextBox x:Name="count_base" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="364,344,0,0" ToolTip="" IsReadOnly="True"/>
-                    <TextBox x:Name="count_infernal" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="364,388,0,0" ToolTip="" IsReadOnly="True"/>
-                    <TextBox x:Name="count_mountain" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="364,431,0,0" ToolTip="" IsReadOnly="True"/>
-                    <TextBox x:Name="count_ocean" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="364,474,0,0" ToolTip="" IsReadOnly="True"/>
-                    <TextBox x:Name="count_cloud" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="364,516,0,0" ToolTip="" IsReadOnly="True"/>
-                    <Label Content="Count" HorizontalAlignment="Left" Margin="364,299,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <Label x:Name="Map_Properties_Copy" Content="Loadingscreen:" HorizontalAlignment="Left" Margin="232,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <Button x:Name="SelectIMG"
-                      Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-                      ToolTip="MaterialDesignFloatingActionMiniAccentButton" Margin="0,8,10,0" RenderTransformOrigin="0.5,0.5" Background="#FFEA002B" BorderBrush="#FFEA0000" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Visible" HorizontalAlignment="Right" VerticalAlignment="Top" Height="28" Width="28" Click="SelectIMG_Click">
-                        <Button.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform ScaleX="1" ScaleY="1"/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Button.RenderTransform>
-                        <MaterialDesign:PackIcon
-                        Kind="DotsHorizontal"
-                        Height="24"
-                        Width="24" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                    </Button>
-                    <Image x:Name="loadingscreenpic" Margin="239,70,7,392"/>
-                    <Label Content="PreMul_Alpha:" HorizontalAlignment="Left" Margin="10,211,0,0" VerticalAlignment="Top" ToolTip="Premultiplied Alpha"/>
-                    <ComboBox x:Name="AlphaSet" HorizontalAlignment="Left" Margin="91,211,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
+                    <TextBox x:Name="count_base" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="944,90,0,0" ToolTip="" IsReadOnly="True"/>
+                    <TextBox x:Name="count_infernal" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="944,134,0,0" ToolTip="" IsReadOnly="True"/>
+                    <TextBox x:Name="count_mountain" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="944,177,0,0" ToolTip="" IsReadOnly="True"/>
+                    <TextBox x:Name="count_ocean" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="944,220,0,0" ToolTip="" IsReadOnly="True"/>
+                    <TextBox x:Name="count_cloud" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="944,262,0,0" ToolTip="" IsReadOnly="True"/>
+                    <Label Content="Count" HorizontalAlignment="Left" Margin="950,50,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Content="PreMul_Alpha:" HorizontalAlignment="Left" Margin="290,131,0,0" VerticalAlignment="Top" ToolTip="Premultiplied Alpha"/>
+                    <ComboBox x:Name="AlphaSet" HorizontalAlignment="Left" Margin="371,129,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
                         <ComboBoxItem x:Name="EnableAlpha" Content="Enable" ToolTip=""/>
                         <ComboBoxItem x:Name="DisableAlpha" Content="Disable" ToolTip=""/>
                     </ComboBox>
-                    <Label Content="All Layers" HorizontalAlignment="Left" Margin="10,565,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="prefix_alllayers" HorizontalAlignment="Left" Margin="190,564,0,0" Text="_alllayers" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <TextBox x:Name="count_alllayers" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="364,565,0,0" ToolTip="" IsReadOnly="True"/>
+                    <Label Content="All Layers" HorizontalAlignment="Left" Margin="532,400,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="prefix_alllayers" HorizontalAlignment="Left" Margin="655,399,0,0" Text="_alllayers" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="count_alllayers" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="944,399,0,0" ToolTip="" IsReadOnly="True"/>
+                    <Label Content="Level:" HorizontalAlignment="Left" Margin="10,74,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Support Gamemodes:" HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Material Preset:" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="LvlSelect" HorizontalAlignment="Left" Margin="151,76,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="1" IsEnabled="False">
+                        <ComboBoxItem x:Name="SRX" Content="Summoners Rift" ToolTip="Set the map to Summoners Rift."/>
+                        <ComboBoxItem x:Name="HA" Content="Howling Abyss" ToolTip="Set the map to Howling Abyss."/>
+                        <ComboBoxItem Content="TFT" x:Name="TFTMaps" ToolTip="Set the map to TFT."/>
+                    </ComboBox>
+                    <ComboBox x:Name="MaterialPreset" HorizontalAlignment="Left" Margin="151,129,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="1" IsEnabled="False">
+                        <ComboBoxItem x:Name="Defaultenv" Content="Defaultenv" ToolTip="Support for Map models. NO ALPHA Channel"/>
+                        <ComboBoxItem x:Name="Defaultenv_Flat_Alphatest" Content="Defaultenv_Flat_Alphatest" ToolTip="Support for Map models. ALPHA Channel Support" FontSize="9"/>
+                        <ComboBoxItem x:Name="Defaultenv_Metal" Content="Defaultenv_Metal" ToolTip="Support for Map models. NO ALPHA Channel"/>
+                        <ComboBoxItem x:Name="Srx_Blend_Master" Content="Srx_Blend_Master" ToolTip="Support for Map models which switch Map Models [Elemental Dragons]. ALPHA Channel Support"/>
+                    </ComboBox>
+                    <ComboBox x:Name="GamemodeSel" HorizontalAlignment="Left" Margin="151,103,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" IsEnabled="False">
+                        <ComboBoxItem x:Name="EnableGM" Content="Enable" ToolTip="Enables Support for Gamemodes"/>
+                        <ComboBoxItem x:Name="DisableGM" Content="Disable" ToolTip="Disables Support for Gamemodes"/>
+                    </ComboBox>
+                    <Label x:Name="Map_Dragons" Content="Dragon Settings:" HorizontalAlignment="Left" Margin="532,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Content="Layer 6" HorizontalAlignment="Left" Margin="532,310,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Layer 7" HorizontalAlignment="Left" Margin="532,356,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="prefix_hextech" HorizontalAlignment="Left" Margin="655,310,0,0" Text="_hextech" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Cursor="IBeam"/>
+                    <TextBox x:Name="count_hextech" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="944,309,0,0" ToolTip="" IsReadOnly="True"/>
+                    <TextBox x:Name="prefix_chemtech" HorizontalAlignment="Left" Margin="655,357,0,0" Text="_chemtech" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="count_chemtech" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="944,356,0,0" ToolTip="" IsReadOnly="True"/>
+                    <Label x:Name="Map_Properties_Copy" Content="Material Settings:" HorizontalAlignment="Left" Margin="290,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Content="Dragon Feature" HorizontalAlignment="Left" Margin="806,53,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="100"/>
+                    <CheckBox Content="Add Infernal" HorizontalAlignment="Left" Margin="806,140,0,0" VerticalAlignment="Top" IsEnabled="False" Background="#FFDD163B" BorderBrush="#FFDD163B"/>
+                    <CheckBox Content="Add Mountain" HorizontalAlignment="Left" Margin="806,184,0,0" VerticalAlignment="Top" IsEnabled="False" Background="#FFDD163B" BorderBrush="#FFDD163B"/>
+                    <CheckBox Content="Add Ocean" HorizontalAlignment="Left" Margin="806,224,0,0" VerticalAlignment="Top" IsEnabled="False" Background="#FFDD163B" BorderBrush="#FFDD163B"/>
+                    <CheckBox Content="Add Cloud" HorizontalAlignment="Left" Margin="806,266,0,0" VerticalAlignment="Top" IsEnabled="False" Background="#FFDD163B" BorderBrush="#FFDD163B"/>
+                    <CheckBox Content="Add Chemtech" HorizontalAlignment="Left" Margin="806,362,0,0" VerticalAlignment="Top" ToolTip="Add the fogged Jungle from Chemtech Map into your Custom Map." Background="#FFDD163B" BorderBrush="#FFDD163B" IsEnabled="False"/>
+                    <CheckBox Content="Add Hextech" HorizontalAlignment="Left" Margin="806,313,0,0" VerticalAlignment="Top" IsEnabled="False" Background="#FFDD163B" BorderBrush="#FFDD163B"/>
+                    <Button Content="Sun Properties" HorizontalAlignment="Right" Margin="0,0,10,7" VerticalAlignment="Bottom" Width="119" Click="Button_Click_1" Cursor="Hand" Background="#FFDD163B" BorderBrush="#FFDD163B" FontSize="12"/>
+                    <Label x:Name="Map_Properties_Copy1" Content="Loaded Mapgeo Settings:" HorizontalAlignment="Left" Margin="17,0,0,108" VerticalAlignment="Bottom" FontWeight="Bold"/>
+                    <Label Content="Map Name:" HorizontalAlignment="Left" Margin="20,0,0,78" VerticalAlignment="Bottom"/>
+                    <Label Content="Model Count:" HorizontalAlignment="Left" Margin="20,0,0,48" VerticalAlignment="Bottom"/>
+                    <Button x:Name="AddModelsButton" Content="Add Models" HorizontalAlignment="Left" Margin="17,0,0,7" VerticalAlignment="Bottom" Width="128" Click="AddModels_Click"/>
+                    <TextBox x:Name="MapNameTextBox" HorizontalAlignment="Left" Margin="151,0,0,78" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="120"/>
+                    <TextBox x:Name="LayerNumberTextBox" HorizontalAlignment="Left" Margin="151,0,0,47" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="120"/>
+                    <Label Content="Decals" HorizontalAlignment="Left" Margin="10,222,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="prefix_decals" HorizontalAlignment="Left" Margin="151,221,0,0" Text="_decal" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="count_decals" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="436,221,0,0" ToolTip="" IsReadOnly="True"/>
                 </Grid>
             </MaterialDesign:ColorZone>
-            <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" VerticalAlignment="Stretch" Background="#FF151C27" Margin="512,0,0,0" Grid.ColumnSpan="2">
-                <Grid HorizontalAlignment="Center" Width="446">
+            <MaterialDesign:ColorZone x:Name="SunProp" VerticalAlignment="Stretch" Background="#FF151C27" Margin="512,4,4,4" d:IsHidden="True">
+                <Grid HorizontalAlignment="Center" Width="532">
                     <Label x:Name="Sun_Properties" Content="Sun Properties:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <Grid Margin="-26,39,-26,0" HorizontalAlignment="Left">
+                    <Grid Margin="0,39,0,0" HorizontalAlignment="Left">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
@@ -346,7 +401,7 @@
                 Style="{StaticResource MaterialDesignDiscreteSlider}"
                 ToolTip=""
                 TickFrequency="100"
-                TickPlacement="BottomRight" />
+                TickPlacement="BottomRight" Foreground="#FFDD163B" />
                         </StackPanel>
                         <ComboBox x:Name="Bloom" HorizontalAlignment="Left" Grid.Row="13" Width="55" Margin="164,0,0,0" SelectedIndex="0">
                             <ComboBoxItem Content="true"/>
@@ -368,7 +423,7 @@
                                 Style="{StaticResource MaterialDesignDiscreteSlider}"
                                 ToolTip=""
                                 TickFrequency="100"
-                                TickPlacement="BottomRight" SmallChange="0" ValueChanged="SliderEnd_ValueChanged" />
+                                TickPlacement="BottomRight" SmallChange="0" ValueChanged="SliderEnd_ValueChanged" Foreground="#FFDD163B" />
                         </StackPanel>
                         <Label Content="Fog End:" HorizontalAlignment="Left" Margin="8,0,0,0" VerticalAlignment="Center" Grid.Row="9"/>
                         <Button x:Name="CPSun" Content="" HorizontalAlignment="Left" Margin="408,0,0,0" VerticalAlignment="Center" Height="25" Width="24" Click="Button_Click" RenderTransformOrigin="50.646,30.632" Background="#FF8C816C" MaterialDesign:ShadowAssist.ShadowDepth="Depth3"
@@ -393,47 +448,98 @@
                         <TextBox x:Name="FogEmRe" HorizontalAlignment="Left" Grid.Row="12" Text="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="55" Margin="164,0,0,0" MaxLines="1"/>
                         <ToggleButton x:Name="ToggleSunC"
                           Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                          ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleSunC_Checked" Unchecked="ToggleSunC_Unchecked" IsChecked="True"/>
+                          ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleSunC_Checked" Unchecked="ToggleSunC_Unchecked" IsChecked="True" Background="#FFDD163B"/>
                         <ToggleButton x:Name="ToggleSunD"
                             Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleSunD_Checked" Unchecked="ToggleSunD_Unchecked" IsChecked="True" Grid.Row="1"/>
+                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleSunD_Checked" Unchecked="ToggleSunD_Unchecked" IsChecked="True" Grid.Row="1" Background="#FFDD163B"/>
                         <ToggleButton x:Name="ToggleSkyC"
                             Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleSkyC_Checked" Unchecked="ToggleSkyC_Unchecked" IsChecked="True" Grid.Row="2"/>
+                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleSkyC_Checked" Unchecked="ToggleSkyC_Unchecked" IsChecked="True" Grid.Row="2" Background="#FFDD163B"/>
                         <ToggleButton x:Name="ToogleSkyS"
                             Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToogleSkyS_Checked" Unchecked="ToogleSkyS_Unchecked" IsChecked="True" Grid.Row="3"/>
+                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToogleSkyS_Checked" Unchecked="ToogleSkyS_Unchecked" IsChecked="True" Grid.Row="3" Background="#FFDD163B"/>
                         <ToggleButton x:Name="ToggleHorC"
                             Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleHorC_Checked" Unchecked="ToggleHorC_Unchecked" IsChecked="True" Grid.Row="4"/>
+                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleHorC_Checked" Unchecked="ToggleHorC_Unchecked" IsChecked="True" Grid.Row="4" Background="#FFDD163B"/>
                         <ToggleButton x:Name="ToggleGroundC"
                             Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleGroundC_Checked" Unchecked="ToggleGroundC_Unchecked" IsChecked="True" Grid.Row="5"/>
+                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleGroundC_Checked" Unchecked="ToggleGroundC_Unchecked" IsChecked="True" Grid.Row="5" Background="#FFDD163B"/>
                         <ToggleButton x:Name="ToggleLMS"
                             Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleLMS_Checked" Unchecked="ToggleLMS_Unchecked" IsChecked="True" Grid.Row="6"/>
+                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleLMS_Checked" Unchecked="ToggleLMS_Unchecked" IsChecked="True" Grid.Row="6" Background="#FFDD163B"/>
                         <ToggleButton x:Name="ToggleFog"
                             Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleFog_Checked" Unchecked="ToggleFog_Unchecked" IsChecked="True" Grid.Row="7"/>
+                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleFog_Checked" Unchecked="ToggleFog_Unchecked" IsChecked="True" Grid.Row="7" Background="#FFDD163B"/>
                         <ToggleButton x:Name="ToggleFogStartEnd"
                             Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="69" VerticalAlignment="Top" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.499,0.56" Checked="ToggleFogStartEnd_Checked" Unchecked="ToggleFogStartEnd_Unchecked" Grid.Row="8" Grid.RowSpan="2" IsChecked="True"/>
+                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="69" VerticalAlignment="Top" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.499,0.56" Checked="ToggleFogStartEnd_Checked" Unchecked="ToggleFogStartEnd_Unchecked" Grid.Row="8" Grid.RowSpan="2" IsChecked="True" Background="#FFDD163B"/>
                         <ToggleButton x:Name="ToggleFogC"
                             Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleFogC_Checked" Unchecked="ToggleFogC_Unchecked" IsChecked="True" Grid.Row="10"/>
+                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleFogC_Checked" Unchecked="ToggleFogC_Unchecked" IsChecked="True" Grid.Row="10" Background="#FFDD163B"/>
                         <ToggleButton x:Name="ToggleFogaC"
                             Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleFogaC_Checked" Unchecked="ToggleFogaC_Unchecked" IsChecked="True" Grid.Row="11"/>
+                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleFogaC_Checked" Unchecked="ToggleFogaC_Unchecked" IsChecked="True" Grid.Row="11" Background="#FFDD163B"/>
                         <ToggleButton x:Name="ToggleFogEmRe"
                             Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleFogEmRe_Checked" Unchecked="ToggleFogEmRe_Unchecked" IsChecked="True" Grid.Row="12"/>
+                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleFogEmRe_Checked" Unchecked="ToggleFogEmRe_Unchecked" IsChecked="True" Grid.Row="12" Background="#FFDD163B"/>
                         <ToggleButton x:Name="ToggleBloom"
                             Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleBloom_Checked" Unchecked="ToggleBloom_Unchecked" IsChecked="True" Grid.Row="13"/>
+                            ToolTip="" MaterialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" MaterialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red" Margin="437,0,0,0" ClickMode="Release" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" RenderTransformOrigin="0.52,0.507" Checked="ToggleBloom_Checked" Unchecked="ToggleBloom_Unchecked" IsChecked="True" Grid.Row="13" Background="#FFDD163B"/>
+                    </Grid>
+                    <Grid x:Name="ExitButtonGrid" Margin="0,4,-4,0" Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Top">
+                        <Button x:Name="ExitButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="32" FontWeight="Bold" FontSize="11" FontStretch="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="ExitButton_Click" Cursor="Hand" Background="#FFDD163B" BorderBrush="#FFDD163B"/>
+                        <MaterialDesign:PackIcon Height="32" Width="32" Kind="Close" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Visible" IsHitTestVisible="False">
+                            <MaterialDesign:PackIcon.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="-1"/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </MaterialDesign:PackIcon.RenderTransform>
+                        </MaterialDesign:PackIcon>
                     </Grid>
                 </Grid>
             </MaterialDesign:ColorZone>
 
+        </Grid>
+        <Grid x:Name="MaterialEditorGrid" Margin="10,80,335,63" Background="#FFDD163B" d:IsHidden="True">
+            <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Background="#FF151C27" VerticalAlignment="Stretch" Margin="4,4,4,4"/>
+            <Grid>
+                <ListBox Margin="0,35,0,0" ItemsSource="{Binding Collection}" />
+                <Button x:Name="OpenMatButton" Content="Open Mat" HorizontalAlignment="Right" Margin="0,0,163,10" VerticalAlignment="Bottom" Width="135" Click="OpenMatButton_Click_1" Cursor="Hand"/>
+                <Grid x:Name="ExitButtonGrid_Copy" Margin="0,10,10,0" Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Top">
+                    <Button x:Name="ExitButton1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="32" FontWeight="Bold" FontSize="11" FontStretch="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="ExitButton1_Click" Cursor="Hand" Background="#FFDD163B" BorderBrush="#FFDD163B"/>
+                    <MaterialDesign:PackIcon Height="32" Width="32" Kind="Close" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Visible" IsHitTestVisible="False">
+                        <MaterialDesign:PackIcon.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="-1"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </MaterialDesign:PackIcon.RenderTransform>
+                    </MaterialDesign:PackIcon>
+                </Grid>
+                <Button x:Name="SaveMatButton" Content="Save Mat" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="135" Click="SaveMatButton_Click" Cursor="Hand" IsEnabled="False"/>
+                <TextBox x:Name="TextMat" Margin="10,10,47,47" TextWrapping="Wrap" mah:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" mah:TextBoxHelper.HasText="True" Cursor="IBeam" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"/>
+            </Grid>
+        </Grid>
+        <Grid x:Name="AssetFilesMatGrid" Margin="0,80,10,63" HorizontalAlignment="Right" Width="297" Background="#FFDD163B" d:IsHidden="True">
+            <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Center" Width="288" VerticalAlignment="Stretch" Background="#FF151C27" Margin="0,4,0,4">
+                <Grid>
+                    <Label Content="Material Name:" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top" Height="24"/>
+                    <Label Content="Version:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Height="24"/>
+                    <Label Content="Material Count:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Height="25"/>
+                    <Label Content="Particle Count:" HorizontalAlignment="Left" Margin="10,101,0,0" VerticalAlignment="Top" Height="24"/>
+                    <Label Content="Light Count:" HorizontalAlignment="Left" Margin="10,131,0,0" VerticalAlignment="Top" Height="24"/>
+                    <TextBox x:Name="MatNameTB" HorizontalAlignment="Left" Margin="158,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                    <TextBox x:Name="VersionTB" HorizontalAlignment="Left" Margin="158,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                    <TextBox x:Name="MatCountTB" HorizontalAlignment="Left" Margin="158,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                    <TextBox x:Name="PartCountTB" HorizontalAlignment="Left" Margin="158,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                    <TextBox x:Name="LightCountTB" HorizontalAlignment="Left" Margin="158,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                </Grid>
+            </MaterialDesign:ColorZone>
         </Grid>
     </Grid>
 
