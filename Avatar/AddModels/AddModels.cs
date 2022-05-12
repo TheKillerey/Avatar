@@ -18,7 +18,14 @@ namespace Avatar.AddModels
             (List<ushort> indices, List<MapGeometryVertex> vertices) = obj.GetMGEOData();
             MapGeometrySubmesh submesh = new MapGeometrySubmesh(path, 0, (uint)indices.Count, 0, (uint)vertices.Count);
             MapGeometryModel room = new MapGeometryModel(name, vertices, indices, new List<MapGeometrySubmesh>() { submesh }, MapGeometryLayer.Layer1);
-            mgeo.AddModel(room);
+            if (room.Vertices.Count > 0)
+            {
+                mgeo.AddModel(room);
+            }
+            else
+            {
+                return;
+            }
 
             //Porting material file to league format
             string ShaderPath = "MapFile/ShaderTemp/SRX_Blend_Master.py";

@@ -2,13 +2,14 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>icon_mapeditor.ico</ApplicationIcon>
     <Company>KillerSkins</Company>
     <Authors>TheKillerey</Authors>
     <Version>0.0.1</Version>
     <PackageIcon>icon_mapeditor.png</PackageIcon>
+	 <CsWinRTEnabled >false</CsWinRTEnabled>
     <PackageIconUrl />
   </PropertyGroup>
 
@@ -41,17 +42,17 @@
   <ItemGroup>
     <PackageReference Include="CSharpImageLibrary" Version="4.2.0" />
     <PackageReference Include="Egorozh.ColorPicker.WPF.Dialog.MahApps" Version="2.4.3.2" />
-    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.1.0" />
-    <PackageReference Include="HelixToolkit.Wpf" Version="2.16.1" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.3.0" />
+    <PackageReference Include="HelixToolkit.Wpf" Version="2.20.2" />
     <PackageReference Include="LeagueToolkit" Version="2.4.2" />
     <PackageReference Include="LeagueToolkit.Meta.Classes" Version="11.10.374.3777" />
     <PackageReference Include="LiveSearchTextBoxControl" Version="0.1.1" />
-    <PackageReference Include="MaterialDesignColors" Version="2.0.0" />
-    <PackageReference Include="MaterialDesignExtensions" Version="3.3.0" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
+    <PackageReference Include="MaterialDesignColors" Version="2.0.6-ci147" />
+    <PackageReference Include="MaterialDesignExtensions" Version="4.0.0-a02" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.5.0-ci147" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-Core" Version="1.1.4" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.4" />
-    <PackageReference Include="Microsoft.Windows.CsWinRT" Version="1.2.6" />
+    <PackageReference Include="Microsoft.Windows.CsWinRT" Version="1.4.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Octokit" Version="0.50.0" />
     <PackageReference Include="OpenCvSharp3-AnyCPU" Version="4.0.0.20181129" />

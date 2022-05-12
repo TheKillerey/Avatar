@@ -523,6 +523,7 @@
                 </Grid>
                 <Button x:Name="SaveMatButton" Content="Save Mat" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="135" Click="SaveMatButton_Click" Cursor="Hand" IsEnabled="False"/>
                 <TextBox x:Name="TextMat" Margin="10,10,47,47" TextWrapping="Wrap" mah:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" mah:TextBoxHelper.HasText="True" Cursor="IBeam" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"/>
+                <Button x:Name="UpdateMat" Content="Update Material" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="135" Cursor="Hand" Click="UpdateMat_Click"/>
             </Grid>
         </Grid>
         <Grid x:Name="AssetFilesMatGrid" Margin="0,80,10,63" HorizontalAlignment="Right" Width="297" Background="#FFDD163B" d:IsHidden="True">

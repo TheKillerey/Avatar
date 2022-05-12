@@ -593,7 +593,7 @@ namespace Avatar
                     OBJFile[] OBJ9s = new OBJFile[OBJsToCreate9];
 
                     for (int i = 1; i < OBJsToCreate; i++)
-                {
+                    {
                     
 
                     try
@@ -1293,8 +1293,11 @@ namespace Avatar
                 string pathmapgeo = System.IO.Path.GetFullPath(namemapgeo);
                 string pathmat = pathmapgeo.Replace(".mapgeo", ".materials.py");
                 string pathbin = pathmapgeo.Replace(".mapgeo", ".materials.bin");
+                
+
                 cleanedmap.Write(pathmapgeo, 11);
                 
+
                 if (File.Exists("ritobin/exported_file.bin"))
                 {
                     File.Delete("ritobin/exported_file.bin");
@@ -1364,6 +1367,9 @@ namespace Avatar
                 string originalmtl2 = originalmtl.Replace("SetSunProps", sunprops);
                 string originalmtl3 = originalmtl2.Replace("SetParticle", particleplace);
                 File.WriteAllText(pathmat, originalmtl3);
+                File.WriteAllText(pathmat.Replace("materials.py", "custommats.py"), matexp);
+                File.WriteAllText(pathmat.Replace("materials.py", "sunprops.py"), sunprops);
+                File.WriteAllText(pathmat.Replace("materials.py", "customparticle.py"), matexp);
                 File.Copy(pathmat, $"ritobin/exported_file.py");
                 //Old Convertion
                 //var binfile = System.Diagnostics.Process.Start("ritobin/txt2ritobin.exe", $"{pathmat} {pathbin}");
@@ -2067,7 +2073,7 @@ namespace Avatar
 
         private void MAPGEOOpenButton_Click(object sender, RoutedEventArgs e)
         {
-            //Opens a Custom Map to added more models to the Map
+            //Opens a Custom Map to add more models to the Map
             using CommonOpenFileDialog dialog = new CommonOpenFileDialog();
             dialog.Multiselect = false;
             dialog.Filters.Add(new CommonFileDialogFilter("Map Geometry File", "*.mapgeo"));
@@ -2078,8 +2084,11 @@ namespace Avatar
             {
                 var MapPath = dialog.FileName;
                 MapNameTextBox.Text = System.IO.Path.GetFileName(MapPath);
+                Selected_Path.Text = MapPath;
                 MapGeometry map = new MapGeometry(MapPath);
                 fullmap = map;
+                //I will clear it for PROJECT Rift so I can make sure that it will work!
+                //fullmap.Models.Clear();
                 LayerNumberTextBox.Text = map.Models.Count.ToString(); //Will be replaced later with Layer Number if we know how to do it.
                 MaterialPath = dialog.FileName.Replace(".mapgeo", ".materials.bin");
             }
@@ -2104,6 +2113,7 @@ namespace Avatar
                 CountAddModels = count + 1;
                 OBJFile[] OBJs = new OBJFile[CountAddModels];
                 var DirectoryPath = System.IO.Path.GetDirectoryName(dialog.FileNames.First());
+                
                 
 
                 //Convert Material BIN
@@ -2169,7 +2179,7 @@ namespace Avatar
                         }
                         if (fogmode == 0)
                         {
-                            fogmodes = "";
+                            fogmodes = "\"DISABLE_DEPTH_FOG\" = \"1\"";
                         }
                         //--------------------------------------------------------
 
@@ -2203,6 +2213,21 @@ namespace Avatar
                     }
 
                 } //Base
+
+
+                //Temporary make the option to save automatically for PROJECT: Rift
+                //Export Mapgeo File
+                fullmap.Write(Selected_Path.Text, 11);
+
+                //Export Material File
+                var matconv = "ritobin/output_solo.py";
+                var matset = "material_output/material_solo.py";
+                var search = "entries: map[hash,embed] = {";
+
+                var matinput = File.ReadAllText(matset);
+                var input = File.ReadAllText(matconv).Replace($"{search}", $"{search}\n {matinput}");
+                File.WriteAllText(Selected_Path.Text.Replace(".mapgeo", ".materials.py"), input);
+                File.WriteAllText(Selected_Path.Text.Replace(".mapgeo", ".custommats.py"), matinput);
             }
         }
 
@@ -2232,6 +2257,40 @@ namespace Avatar
             }
         }
 
-        
+        private void UpdateMat_Click(object sender, RoutedEventArgs e)
+        {
+            using CommonOpenFileDialog dialogopen = new CommonOpenFileDialog();
+            dialogopen.Filters.Add(new CommonFileDialogFilter("Python only Materials File", "*.custommats.py"));
+
+            if (dialogopen.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                //Get all path from old and new material
+                var oldmat = dialogopen.FileName;
+
+
+                //Get custom materials
+                var matconv = "MapFile/base_srx.materials.py"; //The latest SR bin file
+                var matset = oldmat;
+                var search = "entries: map[hash,embed] = {";
+
+                //Read and write into new material file
+                var matinput = File.ReadAllText(matset);
+
+                //Fixes outdated structures
+                //Patch 12.8 --> list to list2 in materials
+                var matfix12_8 = matinput.Replace("samplerValues: list", "samplerValues: list2").Replace("switches: list", "switches: list2").Replace("paramValues: list", "paramValues: list2") ;
+
+                var input = File.ReadAllText(matconv).Replace($"{search}", $"{search}\n {matfix12_8}");
+
+                //Export to python or .bin
+                using CommonSaveFileDialog dialogsave = new CommonSaveFileDialog();
+                dialogsave.Filters.Add(new CommonFileDialogFilter("Materials File", "*.materials.py"));
+
+                if (dialogsave.ShowDialog() == CommonFileDialogResult.Ok)
+                {
+                    File.WriteAllText(dialogsave.FileName, input);
+                }
+            }
+        }
     }
 }

@@ -2,14 +2,14 @@
         name: string = "Material_Name"
         type: u32 = 0
         defaultTechnique: string = "normal"
-        samplerValues: list[embed] = {
+        samplerValues: list2[embed] = {
             StaticMaterialShaderSamplerDef {
                 samplerName: string = "DiffuseTexture"
                 textureName: string = "ASSETS/Maps/KitPieces/SRX/Map_Name/Texture_Name"
                 addressW: u32 = 1
             }
         }
-        switches: list[embed] = {
+        switches: list2[embed] = {
             StaticMaterialSwitchDef {
                 name: string = "MASK_FX_IN_MAP_CENTER"
                 on: bool = false
