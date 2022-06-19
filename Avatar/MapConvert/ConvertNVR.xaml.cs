@@ -107,6 +107,7 @@ namespace Avatar.MapConvert
                     }
                 }
             }
+                wgeo.Write(savepath + "//roomwgeo.wgeo");
             }
         }
     }

@@ -7,9 +7,9 @@
     <ApplicationIcon>icon_mapeditor.ico</ApplicationIcon>
     <Company>KillerSkins</Company>
     <Authors>TheKillerey</Authors>
-    <Version>0.0.1</Version>
+    <Version>0.0.3</Version>
     <PackageIcon>icon_mapeditor.png</PackageIcon>
-	 <CsWinRTEnabled >false</CsWinRTEnabled>
+	 <CsWinRTEnabled>false</CsWinRTEnabled>
     <PackageIconUrl />
   </PropertyGroup>
 
@@ -43,18 +43,19 @@
     <PackageReference Include="CSharpImageLibrary" Version="4.2.0" />
     <PackageReference Include="Egorozh.ColorPicker.WPF.Dialog.MahApps" Version="2.4.3.2" />
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.3.0" />
+    <PackageReference Include="HelixToolkit" Version="2.20.2" />
     <PackageReference Include="HelixToolkit.Wpf" Version="2.20.2" />
     <PackageReference Include="LeagueToolkit" Version="2.4.2" />
     <PackageReference Include="LeagueToolkit.Meta.Classes" Version="11.10.374.3777" />
     <PackageReference Include="LiveSearchTextBoxControl" Version="0.1.1" />
-    <PackageReference Include="MaterialDesignColors" Version="2.0.6-ci147" />
+    <PackageReference Include="MaterialDesignColors" Version="2.0.6" />
     <PackageReference Include="MaterialDesignExtensions" Version="4.0.0-a02" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.5.0-ci147" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-Core" Version="1.1.4" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.4" />
-    <PackageReference Include="Microsoft.Windows.CsWinRT" Version="1.4.1" />
+    <PackageReference Include="Microsoft.Windows.CsWinRT" Version="1.6.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Octokit" Version="0.50.0" />
+    <PackageReference Include="Octokit" Version="0.51.0" />
     <PackageReference Include="OpenCvSharp3-AnyCPU" Version="4.0.0.20181129" />
   </ItemGroup>
 
@@ -79,6 +80,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Tools\MapMaterial.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Tools\MapLightDat.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -92,25 +96,43 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="MapFile\ShaderTemp\DefaultEnv_Flat_AlphaTest_Decal.py">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="MapFile\ShaderTemp\Default_Emissive.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="MapFile\ShaderTemp\Emissive_Basic.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="MapFile\ShaderTemp\FlickerAlpha_FlipBook.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="MapFile\ShaderTemp\Hologram.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="MapFile\ShaderTemp\Hologram_Rotate.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="MapFile\ShaderTemp\SinFade_Alpha.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="MapFile\ShaderTemp\SRX_Blend_Master.py">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="MapFile\ShaderTemp\DefaultEnv_Flat_AlphaTest.py">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="MapFile\ShaderTemp\SRX_Blend_Cloud_Ground.py">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="MapFile\ShaderTemp\SRX_Blend_Earth_Ground.py">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="MapFile\ShaderTemp\SRX_Blend_Infernal_Ground.py">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="MapFile\ShaderTemp\SRX_Blend_Ocean.py">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ritobin\hashes\hashes.binentries.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -316,6 +338,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Tools\MapMaterial.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Tools\MapLightDat.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>

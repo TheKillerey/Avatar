@@ -287,6 +287,18 @@ namespace Avatar
                 DecalsFile.Header = "Decals";
                 AssetBox_Map.Items.Add(DecalsFile);
 
+                TreeViewItem EmissiveFile = new TreeViewItem();
+                EmissiveFile.Header = "Emissive";
+                AssetBox_Map.Items.Add(EmissiveFile);
+
+                TreeViewItem HologramFile = new TreeViewItem();
+                HologramFile.Header = "Hologram";
+                AssetBox_Map.Items.Add(HologramFile);
+
+                TreeViewItem FlipbookFile = new TreeViewItem();
+                FlipbookFile.Header = "Flipbook";
+                AssetBox_Map.Items.Add(FlipbookFile);
+
                 foreach (string FileName in dialogmgeo.FileNames)
                 {
                     
@@ -299,56 +311,48 @@ namespace Avatar
                         file1.Header = System.IO.Path.GetFileName(FileName);
                         BaseFile.Items.Add(file1);
                         
-                        //var rootbase = AssetBox_Map.Items.Add(System.IO.Path.GetFileName(FileName));
                     }
                     if (FileName.Contains(prefix_infernal.Text))
                     {
                         TreeViewItem file2 = new TreeViewItem();
                         file2.Header = System.IO.Path.GetFileName(FileName);
                         InfernalFile.Items.Add(file2);
-                        //var rootinfernal = AssetBox_Map.Items.Add(System.IO.Path.GetFileName(FileName));
                     }
                     if (FileName.Contains(prefix_mountain.Text))
                     {
                         TreeViewItem file3 = new TreeViewItem();
                         file3.Header = System.IO.Path.GetFileName(FileName);
                         MountainFile.Items.Add(file3);
-                        //var rootmountain = AssetBox_Map.Items.Add(System.IO.Path.GetFileName(FileName));
                     }
                     if (FileName.Contains(prefix_ocean.Text))
                     {
                         TreeViewItem file4 = new TreeViewItem();
                         file4.Header = System.IO.Path.GetFileName(FileName);
                         OceanFile.Items.Add(file4);
-                        //var rootocean = AssetBox_Map.Items.Add(System.IO.Path.GetFileName(FileName));
                     }
                     if (FileName.Contains(prefix_cloud.Text))
                     {
                         TreeViewItem file5 = new TreeViewItem();
                         file5.Header = System.IO.Path.GetFileName(FileName);
                         CloudFile.Items.Add(file5);
-                        //var rootcloud = AssetBox_Map.Items.Add(System.IO.Path.GetFileName(FileName));
                     }
                     if (FileName.Contains(prefix_hextech.Text))
                     {
                         TreeViewItem file7 = new TreeViewItem();
                         file7.Header = System.IO.Path.GetFileName(FileName);
                         HextechFile.Items.Add(file7);
-                        //var rootcloud = AssetBox_Map.Items.Add(System.IO.Path.GetFileName(FileName));
                     }
                     if (FileName.Contains(prefix_chemtech.Text))
                     {
                         TreeViewItem file8 = new TreeViewItem();
                         file8.Header = System.IO.Path.GetFileName(FileName);
                         ChemtechFile.Items.Add(file8);
-                        //var rootcloud = AssetBox_Map.Items.Add(System.IO.Path.GetFileName(FileName));
                     }
                     if (FileName.Contains(prefix_alllayers.Text))
                     {
                         TreeViewItem file6 = new TreeViewItem();
                         file6.Header = System.IO.Path.GetFileName(FileName);
                         AllLayerFile.Items.Add(file6);
-                        //var rootcloud = AssetBox_Map.Items.Add(System.IO.Path.GetFileName(FileName));
                     }
                     if (FileName.Contains(prefix_decals.Text))
                     {
@@ -357,6 +361,26 @@ namespace Avatar
                         DecalsFile.Items.Add(file1_decal);
                     }
 
+                    if (FileName.Contains(prefix_emissive.Text))
+                    {
+                        TreeViewItem file1_emissive = new TreeViewItem();
+                        file1_emissive.Header = System.IO.Path.GetFileName(FileName);
+                        EmissiveFile.Items.Add(file1_emissive);
+                    }
+
+                    if (FileName.Contains(prefix_flipbook.Text))
+                    {
+                        TreeViewItem file1_flipbook = new TreeViewItem();
+                        file1_flipbook.Header = System.IO.Path.GetFileName(FileName);
+                        FlipbookFile.Items.Add(file1_flipbook);
+                    }
+
+                    if (FileName.Contains(prefix_hologram.Text))
+                    {
+                        TreeViewItem file1_hologram = new TreeViewItem();
+                        file1_hologram.Header = System.IO.Path.GetFileName(FileName);
+                        HologramFile.Items.Add(file1_hologram);
+                    }
 
                     //Get Path for visualization
                     var folderpath = System.IO.Path.GetDirectoryName(FileName);
@@ -373,8 +397,11 @@ namespace Avatar
                 count_chemtech.Text = ChemtechFile.Items.Count.ToString();
                 count_alllayers.Text = AllLayerFile.Items.Count.ToString();
                 count_decals.Text = DecalsFile.Items.Count.ToString();
+                count_emissive.Text = EmissiveFile.Items.Count.ToString();
+                count_flipbook.Text = FlipbookFile.Items.Count.ToString();
+                count_hologram.Text = HologramFile.Items.Count.ToString();
 
-                var totalfiles = BaseFile.Items.Count + InfernalFile.Items.Count + MountainFile.Items.Count + OceanFile.Items.Count + HextechFile.Items.Count + ChemtechFile.Items.Count + AllLayerFile.Items.Count + DecalsFile.Items.Count;
+                var totalfiles = BaseFile.Items.Count + InfernalFile.Items.Count + MountainFile.Items.Count + OceanFile.Items.Count + HextechFile.Items.Count + ChemtechFile.Items.Count + AllLayerFile.Items.Count + DecalsFile.Items.Count + EmissiveFile.Items.Count + FlipbookFile.Items.Count + HologramFile.Items.Count;
 
                 if (AssetBox_Map.Items.Count == 1)
                 {
@@ -408,155 +435,173 @@ namespace Avatar
                     layern = "All Layers";
                     var BasefileCount = Int32.Parse(count_base.Text);
                     var DecalfileCount = Int32.Parse(count_decals.Text);
-                    
+                    var EmissivefileCount = Int32.Parse(count_emissive.Text);
+                    var FlipbookfileCount = Int32.Parse(count_flipbook.Text);
+                    var HologramfileCount = Int32.Parse(count_hologram.Text);
+
                     int OBJsToCreate = BasefileCount  + 1;
                     int OBJsToCreateDecal = DecalfileCount + 1;
+                    int OBJsToCreateEmissive = EmissivefileCount + 1;
+                    int OBJsToCreateFlipbook = FlipbookfileCount + 1;
+                    int OBJsToCreateHologram = HologramfileCount + 1;
                     
                     OBJFile[] OBJs = new OBJFile[OBJsToCreate];
                     OBJFile[] OBJsD = new OBJFile[OBJsToCreateDecal];
-                    
+                    OBJFile[] OBJsEmissive = new OBJFile[OBJsToCreateEmissive];
+                    OBJFile[] OBJsFlipbook = new OBJFile[OBJsToCreateFlipbook];
+                    OBJFile[] OBJsHologram = new OBJFile[OBJsToCreateHologram];
 
+
+                    
                     for (int i = 1; i < OBJsToCreate; i++)
                     {
-                    
-
-                        try
+                     
+                        if (BasefileCount == 0)
                         {
+                            break;
+                        }
+
+                        else
+                        {
+                            try
+                            {
+
+                                var fullpath = Selected_Path.Text + @"\" + $"room{i}{prefix_base.Text}.obj";
+                                var fullpathmtl = Selected_Path.Text + @"\" + $"room{i}{prefix_base.Text}.mtl";
+                                var mapname = Map_Name.Text.ToString();
+
+                                //Light Mode
+                                //--------------------------------------------------------
+                                var lightmodes = "";
+                                var lightmode = LightMode.SelectedIndex; //1 is baked
+                                if (lightmode == 1)
+                                {
+                                    lightmodes = "\"NO_BAKED_LIGHTING\" = \"1\"";
+                                }
+                                if (lightmode == 0)
+                                {
+                                    lightmodes = "";
+                                }
+                                //--------------------------------------------------------
+
+                                //FOG
+                                //--------------------------------------------------------
+                                var fogmodes = "";
+                                var fogmode = FogSet.SelectedIndex; //1 is disable
+                                if (fogmode == 1)
+                                {
+                                    fogmodes = "\"DISABLE_DEPTH_FOG\" = \"1\"";
+                                }
+                                if (fogmode == 0)
+                                {
+                                    fogmodes = "";
+                                }
+                                //--------------------------------------------------------
+
+                                //Premuliplied Alpha
+                                //--------------------------------------------------------
+                                var alphamodes = "";
+                                var alphamode = AlphaSet.SelectedIndex; //1 is disable
+                                if (alphamode == 1)
+                                {
+                                    alphamodes = "";
+                                }
+                                if (alphamode == 0)
+                                {
+                                    alphamodes = "\"PREMULTIPLIED_ALPHA\" = \"1\"";
+
+                                }
+                                //--------------------------------------------------------
+
+                                OBJs[i] = new OBJFile(fullpath);
+                                AddModels.AddModels.Add_AllLayers(OBJs[i], $"MapGeo_Instance_room{i}{prefix_base.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{i}{prefix_base.Text}", cleanedmap, i, fullpathmtl, mapname, lightmodes, fogmodes, alphamodes);
+
+
+
+                            }
+
+                            catch (Exception)
+                            {
+                                continue;
+                            }
+                        }
                         
-                            var fullpath = Selected_Path.Text + @"\" + $"room{i}{prefix_base.Text}.obj";
-                            var fullpathmtl = Selected_Path.Text + @"\" + $"room{i}{prefix_base.Text}.mtl";
-                            var mapname = Map_Name.Text.ToString();
-
-                        //Light Mode
-                        //--------------------------------------------------------
-                        var lightmodes = "";
-                        var lightmode = LightMode.SelectedIndex; //1 is baked
-                        if (lightmode == 1)
-                            {
-                                lightmodes = "\"NO_BAKED_LIGHTING\" = \"1\"";
-                            }
-                        if (lightmode == 0)
-                            {
-                                lightmodes = "";
-                            }
-                        //--------------------------------------------------------
-
-                        //FOG
-                        //--------------------------------------------------------
-                        var fogmodes = "";
-                        var fogmode = FogSet.SelectedIndex; //1 is disable
-                        if (fogmode == 1)
-                            {
-                                fogmodes = "\"DISABLE_DEPTH_FOG\" = \"1\"";
-                            }
-                        if (fogmode == 0)
-                            {
-                                fogmodes = "";
-                            }
-                        //--------------------------------------------------------
-
-                        //Premuliplied Alpha
-                        //--------------------------------------------------------
-                        var alphamodes = "";
-                        var alphamode = AlphaSet.SelectedIndex; //1 is disable
-                        if (alphamode == 1)
-                            {
-                                alphamodes = "";
-                            }
-                        if (alphamode == 0)
-                            {
-                                alphamodes = "\"PREMULTIPLIED_ALPHA\" = \"1\"";
-
-                            }
-                        //--------------------------------------------------------
-                        
-                        OBJs[i] = new OBJFile(fullpath);
-                        AddModels.AddModels.Add_AllLayers(OBJs[i], $"MapGeo_Instance_room{i}{prefix_base.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{i}{prefix_base.Text}", cleanedmap, i, fullpathmtl, mapname, lightmodes, fogmodes, alphamodes);
-                        //System.Windows.Forms.MessageBox.Show($"MapGeo_Instance_room{i}{prefix_base.Text}", "Debug:", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                       
-
-                    }
-
-                    catch (Exception)
-                    {
-                        continue;
-                        
-                        //var fullpath = Selected_Path.Text + @"\" + $"room{i}{prefix_base.Text}.obj";
-                        //System.Windows.Forms.MessageBox.Show(Selected_Path.Text + @"\" + $"room{i}{prefix_base.Text}.obj" + " is missing and will be ignored!", "Error: File Missing", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
 
                 } //Base
 
-                    for (int k = 1; k < OBJsToCreateDecal; k++)
+                    for (int i = 1; i < OBJsToCreateEmissive; i++)
                     {
-
-
-                        try
+                        if (EmissivefileCount == 0)
                         {
 
-                            var fullpath = Selected_Path.Text + @"\" + $"room{k}{prefix_decals.Text}.obj";
-                            var fullpathmtl = Selected_Path.Text + @"\" + $"room{k}{prefix_decals.Text}.mtl";
-                            var mapname = Map_Name.Text.ToString();
-
-                            //Light Mode
-                            //--------------------------------------------------------
-                            var lightmodes = "";
-                            var lightmode = LightMode.SelectedIndex; //1 is baked
-                            if (lightmode == 1)
-                            {
-                                lightmodes = "\"NO_BAKED_LIGHTING\" = \"1\"";
-                            }
-                            if (lightmode == 0)
-                            {
-                                lightmodes = "";
-                            }
-                            //--------------------------------------------------------
-
-                            //FOG
-                            //--------------------------------------------------------
-                            var fogmodes = "";
-                            var fogmode = FogSet.SelectedIndex; //1 is disable
-                            if (fogmode == 1)
-                            {
-                                fogmodes = "\"DISABLE_DEPTH_FOG\" = \"1\"";
-                            }
-                            if (fogmode == 0)
-                            {
-                                fogmodes = "";
-                            }
-                            //--------------------------------------------------------
-
-                            //Premuliplied Alpha
-                            //--------------------------------------------------------
-                            var alphamodes = "";
-                            var alphamode = AlphaSet.SelectedIndex; //1 is disable
-                            if (alphamode == 1)
-                            {
-                                alphamodes = "";
-                            }
-                            if (alphamode == 0)
-                            {
-                                alphamodes = "\"PREMULTIPLIED_ALPHA\" = \"1\"";
-
-                            }
-                            //--------------------------------------------------------
-
-                            OBJsD[k] = new OBJFile(fullpath);
-                            AddModels.AddModels.Add_AllLayersDecal(OBJsD[k], $"MapGeo_Instance_room{k}{prefix_decals.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{k}{prefix_decals.Text}", cleanedmap, k, fullpathmtl, mapname, lightmodes, fogmodes, alphamodes);
-                            //System.Windows.Forms.MessageBox.Show($"MapGeo_Instance_room{i}{prefix_base.Text}", "Debug:", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-
                         }
-
-                        catch (Exception)
+                        
+                        else
                         {
-                            continue;
+                            try
+                            {
 
-                            //var fullpath = Selected_Path.Text + @"\" + $"room{i}{prefix_base.Text}.obj";
-                            //System.Windows.Forms.MessageBox.Show(Selected_Path.Text + @"\" + $"room{i}{prefix_base.Text}.obj" + " is missing and will be ignored!", "Error: File Missing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                var fullpath = Selected_Path.Text + @"\" + $"room{i}{prefix_emissive.Text}.obj";
+                                var fullpathmtl = Selected_Path.Text + @"\" + $"room{i}{prefix_emissive.Text}.mtl";
+                                var mapname = Map_Name.Text.ToString();
+
+                                //Light Mode
+                                //--------------------------------------------------------
+                                var lightmodes = "";
+                                var lightmode = LightMode.SelectedIndex; //1 is baked
+                                if (lightmode == 1)
+                                {
+                                    lightmodes = "\"NO_BAKED_LIGHTING\" = \"1\"";
+                                }
+                                if (lightmode == 0)
+                                {
+                                    lightmodes = "";
+                                }
+                                //--------------------------------------------------------
+
+                                //FOG
+                                //--------------------------------------------------------
+                                var fogmodes = "";
+                                var fogmode = FogSet.SelectedIndex; //1 is disable
+                                if (fogmode == 1)
+                                {
+                                    fogmodes = "\"DISABLE_DEPTH_FOG\" = \"1\"";
+                                }
+                                if (fogmode == 0)
+                                {
+                                    fogmodes = "";
+                                }
+                                //--------------------------------------------------------
+
+                                //Premuliplied Alpha
+                                //--------------------------------------------------------
+                                var alphamodes = "";
+                                var alphamode = AlphaSet.SelectedIndex; //1 is disable
+                                if (alphamode == 1)
+                                {
+                                    alphamodes = "";
+                                }
+                                if (alphamode == 0)
+                                {
+                                    alphamodes = "\"PREMULTIPLIED_ALPHA\" = \"1\"";
+
+                                }
+                                //--------------------------------------------------------
+
+                                OBJsEmissive[i] = new OBJFile(fullpath);
+                                AddModels.AddModels.Add_AllLayersEmissive(OBJsEmissive[i], $"MapGeo_Instance_room{i}{prefix_emissive.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{i}{prefix_emissive.Text}", cleanedmap, i, fullpathmtl, mapname, lightmodes, fogmodes, alphamodes);
+
+                            }
+
+                            catch (Exception)
+                            {
+                                continue;
+                            }
                         }
 
-                    } //Decals
+                        
+
+                    } //Emissive
 
                 } //All Layers
                 if (layers == 1)
@@ -571,6 +616,7 @@ namespace Avatar
                     var ChemtechfileCount = Int32.Parse(count_chemtech.Text);
                     var AllLayerfileCount = Int32.Parse(count_alllayers.Text);
                     var DecalfileCount = Int32.Parse(count_decals.Text);
+                    var EmissivefileCount = Int32.Parse(count_emissive.Text);
 
                     int OBJsToCreate = BasefileCount + 1;
                     int OBJsToCreate2 = InfernalfileCount + 1;
@@ -581,6 +627,7 @@ namespace Avatar
                     int OBJsToCreate8 = ChemtechfileCount + 1;
                     int OBJsToCreate6 = AllLayerfileCount + 1;
                     int OBJsToCreate9 = DecalfileCount + 1;
+                    int OBJsToCreate10 = EmissivefileCount + 1;
 
                     OBJFile[] OBJs = new OBJFile[OBJsToCreate];
                     OBJFile[] OBJ2s = new OBJFile[OBJsToCreate2];
@@ -591,6 +638,7 @@ namespace Avatar
                     OBJFile[] OBJ7s = new OBJFile[OBJsToCreate7];
                     OBJFile[] OBJ8s = new OBJFile[OBJsToCreate8];
                     OBJFile[] OBJ9s = new OBJFile[OBJsToCreate9];
+                    OBJFile[] OBJ10s = new OBJFile[OBJsToCreate10];
 
                     for (int i = 1; i < OBJsToCreate; i++)
                     {
@@ -1206,6 +1254,77 @@ namespace Avatar
                         }
 
                     } //Decals
+
+                    for (int k = 1; k < OBJsToCreate10; k++)
+                    {
+
+
+                        try
+                        {
+
+                            var fullpath = Selected_Path.Text + @"\" + $"room{k}{prefix_emissive.Text}.obj";
+                            var fullpathmtl = Selected_Path.Text + @"\" + $"room{k}{prefix_emissive.Text}.mtl";
+                            var mapname = Map_Name.Text.ToString();
+
+                            //Light Mode
+                            //--------------------------------------------------------
+                            var lightmodes = "";
+                            var lightmode = LightMode.SelectedIndex; //1 is baked
+                            if (lightmode == 1)
+                            {
+                                lightmodes = "\"NO_BAKED_LIGHTING\" = \"1\"";
+                            }
+                            if (lightmode == 0)
+                            {
+                                lightmodes = "";
+                            }
+                            //--------------------------------------------------------
+
+                            //FOG
+                            //--------------------------------------------------------
+                            var fogmodes = "";
+                            var fogmode = FogSet.SelectedIndex; //1 is disable
+                            if (fogmode == 1)
+                            {
+                                fogmodes = "\"DISABLE_DEPTH_FOG\" = \"1\"";
+                            }
+                            if (fogmode == 0)
+                            {
+                                fogmodes = "";
+                            }
+                            //--------------------------------------------------------
+
+                            //Premuliplied Alpha
+                            //--------------------------------------------------------
+                            var alphamodes = "";
+                            var alphamode = AlphaSet.SelectedIndex; //1 is disable
+                            if (alphamode == 1)
+                            {
+                                alphamodes = "";
+                            }
+                            if (alphamode == 0)
+                            {
+                                alphamodes = "\"PREMULTIPLIED_ALPHA\" = \"1\"";
+
+                            }
+                            //--------------------------------------------------------
+
+                            OBJ10s[k] = new OBJFile(fullpath);
+                            AddModels.AddModels.Add_AllLayersEmissive(OBJ10s[k], $"MapGeo_Instance_room{k}{prefix_emissive.Text}", $"Maps/KitPieces/Summoners_Rift/Materials/room{k}{prefix_emissive.Text}", cleanedmap, k, fullpathmtl, mapname, lightmodes, fogmodes, alphamodes);
+                            
+
+
+                        }
+
+                        catch (Exception)
+                        {
+                            continue;
+
+                            //var fullpath = Selected_Path.Text + @"\" + $"room{i}{prefix_base.Text}.obj";
+                            //System.Windows.Forms.MessageBox.Show(Selected_Path.Text + @"\" + $"room{i}{prefix_base.Text}.obj" + " is missing and will be ignored!", "Error: File Missing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+
+                    } //Emissive
                 } //Auto Layers
                 if (layers == 2)
                 {
@@ -1371,8 +1490,6 @@ namespace Avatar
                 File.WriteAllText(pathmat.Replace("materials.py", "sunprops.py"), sunprops);
                 File.WriteAllText(pathmat.Replace("materials.py", "customparticle.py"), matexp);
                 File.Copy(pathmat, $"ritobin/exported_file.py");
-                //Old Convertion
-                //var binfile = System.Diagnostics.Process.Start("ritobin/txt2ritobin.exe", $"{pathmat} {pathbin}");
                 System.Diagnostics.Process process = new System.Diagnostics.Process();
                 System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
@@ -2291,6 +2408,12 @@ namespace Avatar
                     File.WriteAllText(dialogsave.FileName, input);
                 }
             }
+        }
+
+        private void BinButton_Click(object sender, RoutedEventArgs e)
+        {
+            MapMaterial mapMat = new MapMaterial();
+            mapMat.Show();
         }
     }
 }

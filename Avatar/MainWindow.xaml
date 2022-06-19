@@ -120,6 +120,17 @@
                         </MenuItem>
 
                     </MenuItem>
+                    <MenuItem x:Name="BinEditorButton" Header="Bin Editor">
+                        <MenuItem.Icon>
+                            <MaterialDesign:PackIcon Kind="Lightbulb"/>
+                        </MenuItem.Icon>
+                        <MenuItem x:Name="BinButton" Header="Edit LOL BIN Files" Click="BinButton_Click">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="LightbulbGroup"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+
+                    </MenuItem>
 
                 </MenuItem>
                 <MenuItem x:Name="TemplatesButton" Header="Templates" Click="TemplatesButton_Click" IsEnabled="False">
@@ -223,10 +234,10 @@
                     <Label Content="Level:" HorizontalAlignment="Left" Margin="10,74,0,0" VerticalAlignment="Top"/>
                     <Label Content="Support Gamemodes:" HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top"/>
                     <Label Content="Material Preset:" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="LvlSelect" HorizontalAlignment="Left" Margin="151,76,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="1" IsEnabled="False">
+                    <ComboBox x:Name="LvlSelect" HorizontalAlignment="Left" Margin="151,76,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
                         <ComboBoxItem x:Name="SRX" Content="Summoners Rift" ToolTip="Set the map to Summoners Rift."/>
                         <ComboBoxItem x:Name="HA" Content="Howling Abyss" ToolTip="Set the map to Howling Abyss."/>
-                        <ComboBoxItem Content="TFT" x:Name="TFTMaps" ToolTip="Set the map to TFT."/>
+                        <ComboBoxItem x:Name="TFTMaps" Content="TFT"  ToolTip="Set the map to TFT."/>
                     </ComboBox>
                     <ComboBox x:Name="MaterialPreset" HorizontalAlignment="Left" Margin="151,129,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="1" IsEnabled="False">
                         <ComboBoxItem x:Name="Defaultenv" Content="Defaultenv" ToolTip="Support for Map models. NO ALPHA Channel"/>
@@ -260,9 +271,34 @@
                     <Button x:Name="AddModelsButton" Content="Add Models" HorizontalAlignment="Left" Margin="17,0,0,7" VerticalAlignment="Bottom" Width="128" Click="AddModels_Click"/>
                     <TextBox x:Name="MapNameTextBox" HorizontalAlignment="Left" Margin="151,0,0,78" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="120"/>
                     <TextBox x:Name="LayerNumberTextBox" HorizontalAlignment="Left" Margin="151,0,0,47" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="120"/>
-                    <Label Content="Decals" HorizontalAlignment="Left" Margin="10,222,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="prefix_decals" HorizontalAlignment="Left" Margin="151,221,0,0" Text="_decal" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Decals" HorizontalAlignment="Left" Margin="10,225,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="prefix_decals" HorizontalAlignment="Left" Margin="81,222,0,0" Text="_decal" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <TextBox x:Name="count_decals" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="436,221,0,0" ToolTip="" IsReadOnly="True"/>
+                    <Label Content="Emissive" HorizontalAlignment="Left" Margin="10,264,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="prefix_emissive" HorizontalAlignment="Left" Margin="81,267,0,0" Text="_emissive" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Cursor="Arrow"/>
+                    <Label Content="Flipbook" HorizontalAlignment="Left" Margin="10,309,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="prefix_flipbook" HorizontalAlignment="Left" Margin="81,311,0,0" Text="_flipbook" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Cursor="Arrow"/>
+                    <Label Content="Hologram" HorizontalAlignment="Left" Margin="10,352,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="prefix_hologram" HorizontalAlignment="Left" Margin="81,356,0,0" Text="_hologram" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Cursor="Arrow"/>
+                    <ComboBox x:Name="ShaderMode_decal" HorizontalAlignment="Left" Margin="218,224,0,0" VerticalAlignment="Top" Width="202" SelectedIndex="0">
+                        <ComboBoxItem x:Name="Decal_Select" Content="DefaultEnv_Flat_AlphaTest_Decal"/>
+                        <ComboBoxItem x:Name="Decal_Select2" Content="SinFade_Alpha"/>
+                    </ComboBox>
+                    <ComboBox x:Name="ShaderMode_emissive" HorizontalAlignment="Left" Margin="218,268,0,0" VerticalAlignment="Top" Width="202" SelectedIndex="0">
+                        <ComboBoxItem x:Name="Emissive_Select" Content="Default_Emissive" />
+                        <ComboBoxItem x:Name="Emissive_Select2" Content="Emissive_Basic" />
+                    </ComboBox>
+                    <ComboBox x:Name="ShaderMode_flipbook" HorizontalAlignment="Left" Margin="218,310,0,0" VerticalAlignment="Top" Width="202" SelectedIndex="0">
+                        <ComboBoxItem x:Name="Flipbook_Select" Content="FlickerAlpha_FlipBook" />
+                    </ComboBox>
+                    <ComboBox x:Name="ShaderMode_hologram" HorizontalAlignment="Left" Margin="218,356,0,0" VerticalAlignment="Top" Width="202" SelectedIndex="0">
+                        <ComboBoxItem x:Name="Hologram_Select" Content="Hologram" />
+                        <ComboBoxItem x:Name="Hologram_Select2" Content="Hologram_Rotate" />
+                    </ComboBox>
+                    <TextBox x:Name="count_emissive" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="436,268,0,0" ToolTip="" IsReadOnly="True"/>
+                    <TextBox x:Name="count_flipbook" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="436,310,0,0" ToolTip="" IsReadOnly="True"/>
+                    <TextBox x:Name="count_hologram" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Margin="436,355,0,0" ToolTip="" IsReadOnly="True"/>
+                    <Label x:Name="Special_Props" Content="Special Properties:" HorizontalAlignment="Left" Margin="10,182,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 </Grid>
             </MaterialDesign:ColorZone>
             <MaterialDesign:ColorZone x:Name="SunProp" VerticalAlignment="Stretch" Background="#FF151C27" Margin="512,4,4,4" d:IsHidden="True">
